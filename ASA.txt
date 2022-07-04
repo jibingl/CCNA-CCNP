@@ -1,0 +1,64 @@
+ASA dual WAN links configuration
+-----------------------
+  ASA# show running-config
+
+  ASA Version 9.1(5)
+  !
+  hostname ASA
+  !
+  object network Inside_Network
+   subnet 192.168.10.0 255.255.255.0
+  object network inside_network
+   subnet 192.168.10.0 255.255.255.0
+  !
+  object network Inside_Network
+   nat (inside,outside) dynamic interface
+  object network inside_network
+   nat (inside,backup) dynamic interface
+
+  !--- NAT Configuration for Outside and Backup
+
+  route outside 0.0.0.0 0.0.0.0 203.0.113.2 1 track 1
+
+  !--- Enter this command in order to track a static route.
+  !--- This is the static route to be installed in the routing 
+  !--- table while the tracked object is reachable.  The value after
+  !--- the keyword "track" is a tracking ID you specify. 
+
+  route backup 0.0.0.0 0.0.0.0 198.51.100.2 254
+
+  !--- Define the backup route to use when the tracked object is unavailable. 
+  !--- The administrative distance of the backup route must be greater than 
+  !--- the administrative distance of the tracked route.
+  !--- If the primary gateway is unreachable, that route is removed
+  !--- and the backup route is installed in the routing table
+  !--- instead of the tracked route. 
+  
+  sla monitor 123
+   type echo protocol ipIcmpEcho 4.2.2.2 interface outside
+   num-packets 3
+   frequency 10
+
+  !--- Configure a new monitoring process with the ID 123.  Specify the
+  !--- monitoring protocol and the target network object whose availability the tracking
+  !--- process monitors.  Specify the number of packets to be sent with each poll.
+  !--- Specify the rate at which the monitor process repeats (in seconds).
+
+  sla monitor schedule 123 life forever start-time now
+
+  !--- Schedule the monitoring process.  In this case the lifetime
+  !--- of the process is specified to be forever.  The process is scheduled to begin
+  !--- at the time this command is entered.  As configured, this command allows the
+  !--- monitoring configuration specified above to determine how often the testing
+  !--- occurs.  However, you can schedule this monitoring process to begin in the
+  !--- future and to only occur at specified times.
+  
+  !
+  track 1 rtr 123 reachability
+
+  !--- Associate a tracked static route with the SLA monitoring process.
+  !--- The track ID corresponds to the track ID given to the static route to monitor:
+  !--- route outside 0.0.0.0 0.0.0.0 10.0.0.2 1 track 1
+  !--- "rtr" = Response Time Reporter entry.  123 is the ID of the SLA process
+  !--- defined above.
+-------------------
