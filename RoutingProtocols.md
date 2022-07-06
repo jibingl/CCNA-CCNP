@@ -54,8 +54,15 @@ R1(config-router)#defualt-information originate     //Ad default gateway out to 
 ```
 *******
 ## OSPF (Open Shortest Path First)
-ABR - Area boarder router. ASBR - Autonomous system boundary router (it connects to external network, normally Internet).
+ABR - Area border router. ASBR - Autonomous system boundary router (it connects to external network, normally Internet).
 LSA - Link state advertisement. LSDB - Link state database.
+
+Steps to form LSDBs:
+1. **Become neighbors** with other routers connected to the same segment;
+2. **Exchange** LSAs with neighbor routers;
+3. **Calculate** the best routes to each destination, and insert them into the routing table.
+
+_Single-area_ topology:
 ```
 .-------------------------------------AREA 0--.
 | 172.16.1.0/28                192.168.2.0/24 |    .---------------------------------.        
@@ -71,33 +78,55 @@ LSA - Link state advertisement. LSDB - Link state database.
 | 192.168.3.0/25               192.168.4.0/24 |
 `---------------------------------------------` 
 ```
-Steps to form LSDBs:
-1. **Become neighbors** with other routers connected to the same segment;
-2. **Exchange** LSAs with neighbor routers;
-3. **Calculate** the best routes to each destination, and insert them into the routing table.
-
+CLI configuration example:
+```
+R1(config)#router ospf 1                                 //Process ID is locally significant, so routers with different process IDs can become neighbors.
+R1(config-router)#network 10.0.12.0 0.0.0.3 area 0
+R1(config-router)#network 10.0.13.0 0.0.0.3 area 0
+R1(config-router)#network 172.16.1.14 0.0.0.0 area 0
+R1(config-router)#passive-interface g2/0
+R1(config-router)#default-information originate
+R1(config-router)#router-id 1.1.1.1
+R1(config-router)#maximum-path 8                          //Change load-balancing pathes from 4 to 8
+R1(config-router)#distance 85                             //Change administrative distance from 110 to 85
+```
 Cost calculation formula
 ```
 cost = reference bandwith(bw) / exit-interface bw        #default reference bw is 100Mbits/s
 ```
-
-Facts for OSPF
+Facts for OSPF:
 1. An OSPF area is a set of routers and links that share the same LSDB.
-2. All areas must have **at least one ABR** connect to the backbone area. (Best-practice for design)
-3. OSPF interfaces in the same subnet must be in the same area. (Best-practice for design)
-4. OSPF area should be contigous.
-5. The OSPF _process ID_ is **locally significant**, so routers with different _process IDs_ can become neighbors.
-6. _Cost_ to a destination is the total cost of the **outgoing/exit interfaces' costs**.
+2. The _backbone area (area 0)_ is an area that all other areas **must directly connect to**.
+3. All areas must have **at least one ABR** connect to the _backbone area_. (Best-practice for design)
+4. An ABR connnect maximum of 2 areas. (Best-practice for design)
+5. OSPF interfaces in the same subnet must be in the same area. (Best-practice for design)
+6. OSPF area should be contigous.
+7. _Cost_ to a destination is the total cost of the **outgoing/exit interfaces' costs**.
 
-CLI configuration example:
+Wrong OSPF topology designs:
 ```
-.---------------------------------.        
-| LSDB                            |
-| .-----. .-----. .-----. .-----. |            .-------------------------------.
-| | LSA | | LSA | | LSA | | LSA |-|----------> | LSA                           |
-| `-----` `-----` `-----` `-----` |            | RID:<router-id>               |
-| .-----. .-----. .-----.         |            | Subnet:<ad-interface-ip/mask> |
-| | LSA | | LSA | | LSA |         |            | Cost:<to-destination-cost>    |
-| `-----` `-----` `-----`         |            `-------------------------------`
-`---------------------------------` 
+.-------------------------------------area 0 (backbone)-.
+|-------(+)---------------[=] ---------------[=]        |
+`--------------------------|------------------|---------`
+   .------area 1-. .-------|-area 2-. .-------|-area 3-.
+   |             | |       |        | |       |        |
+   |          .--|-|------(+)       | |      (+)       |
+   |          |  | |    /  |  \     | |    /  |  \     |
+   |         (+) | | (+)  (+)  (+)  | | (+)  (+)  (+)  |
+   |        / |  | |  |    |     |  | |  |    |    |   |
+   |    (+)  (+) | `----------------` `----------------`
+   |     |    |  |
+   `-------------`
+```
+```
+.--------------------------------------area 0 (backbone)-.
+|-------(+)--------[=]------------------------[=]        |
+`----------------/-----\-----------------------|---------`
+   .---area 1--/---. .---\----area 2-. .-------|-area 1-.
+   |         /     | |     \         | |       |        |
+   |      (+)      | |      (+)      | |      (+)       |
+   |   /   |  \    | |    /  |  \    | |    /  |  \     |
+   | (+)  (+)  (+) | | (+)  (+)  (+) | | (+)  (+)  (+)  |
+   |  |    |    |  | |  |    |    |  | |  |    |    |   |
+   `---------------` `---------------` `----------------`
 ```
