@@ -1,14 +1,14 @@
 # Routing Protocols
 
 ## Overview
-|Class   |Names|Type|Metric|Admin-Distance|Advertising|IP-Header-Protocol|info-ad|Alg/Called|Balance-path|
+|Class   |Names|Type|Metric|Admin-Distance|Advertising|IP-Header-Protocol|ADs-Timer|Alg/Called|Balance-path|
 |--------|-----|----|------|---|-----------|------------------|-------|----------|------------|
 |Static  |     |               |               |1                            |
-|Interior|RIPv1|Distance-vector|Hops (Max15)   |120                          |255.255.255.255|         |every 30s|Routing-by-rumor|1-32(4)|
-|Interior|RIPv2|Distance-vector|Hops (Max15)   |120                          |224.0.0.9      |         |every 30s|Routing-by-rumor|1-32(4)|
-|Interior|EIGRP|Hybrid         |Bandwith, delay|5(Summary)/90(Int.)/170(Ext.)|224.0.0.10     |0x58(88) |         |                |1-32(4)|
-|Interior|OSPF |Link-state(LSR)|Cost (100M/BW) |110                          |224.0.0.5-6    |0x59(89) |         |Dijkstra        |1-32(4)|
-|Interior|IS-IS|Link-state(LSR)|               |115                          |               |0x7C(124)|         |                |       |
+|Interior|RIPv1|Distance-vector|Hops (Max15)   |120                          |255.255.255.255|         |30s|Routing-by-rumor|1-32(4)|
+|Interior|RIPv2|Distance-vector|Hops (Max15)   |120                          |224.0.0.9      |         |30s|Routing-by-rumor|1-32(4)|
+|Interior|EIGRP|Hybrid         |Bandwith, delay|5(Summary)/90(Int.)/170(Ext.)|224.0.0.10     |0x58(88) |   |                |1-32(4)|
+|Interior|OSPF |Link-state(LSR)|Cost (100M/BW) |110                          |224.0.0.5-6    |0x59(89) |10s|Dijkstra        |1-32(4)|
+|Interior|IS-IS|Link-state(LSR)|               |115                          |               |0x7C(124)|   |                |       |
 |Exterior|BGP  |Path-vector    |               |20(eBGP)/200(iBGP)           |
 |Exterior|EGP  |               |
 
@@ -47,8 +47,8 @@ EIGRP is a Hybrid distance-vector routing protocol. Metric calculates bandwith(K
 R1(config)#router eigrp 1                           //AS (Autonomous System) number must match between routers
 R1(config-router)#no aoto-summary
 R1(config-router)#passive-interface g2/0            //Stop sending EIGRP ads out of the specified interface (G2/0)
-R1(config-router)#network 10.0.0.0                  //'network' cmd can be classful,
-R1(config-router)#network 172.16.1.0 0.0.0.15       //or classless
+R1(config-router)#network 10.0.0.0                  //'network' cmd can be classful, or
+R1(config-router)#network 172.16.1.0 0.0.0.15       //classless
 R1(config-router)#eigrp router-id 1.1.1.1           //Router-id priority, manual->loopbak->physical_interface_ip
 R1(config-router)#defualt-information originate     //Ad default gateway out to other RIP adjacent routers
 ```
@@ -66,17 +66,17 @@ _Single-area_ topology:
 ```
 .-------------------------------------AREA 0--.
 | 172.16.1.0/28                192.168.2.0/24 |    .---------------------------------.        
-|   .14|G2/0     10.0.12.0/30        |        |    | LSDB                            |
-|   R1(+) ------------------------- (+)R2     |    | .-----. .-----. .-----. .-----. |            .-----------------------.
-|      |                             |        |    | | LSA | | LSA | | LSA | | LSA |-|----------> | LSA                   |
-|      | 10.0.13.0/30                |        |    | `-----` `-----` `-----` `-----` |            | RID:4.4.4.4           |
-|      |                             |        |    | .-----. .-----. .-----.         |            | Subnet:192.168.4.0/24 |
-|      |                10.0.24.0/30 |        |    | | LSA | | LSA | | LSA |         |            | Cost:1                |
-|      |                             |        |    | `-----` `-----` `-----`         |            `-----------------------`
-|   R3(+) ------------------------- (+)R4     |    `---------------------------------` 
-|      |         10.0.34.0/30    G1/0|.254    |
-| 192.168.3.0/25               192.168.4.0/24 |
-`---------------------------------------------` 
+|   .14|G2/0     10.0.12.0/30        |G2/0    |    | LSDB                            |
+|   R1(+)-G0/0-----------------G0/0-(+)R2     |    | .-----. .-----. .-----. .-----. |       .-----------------------.
+|      |G1/0                         |G1/0    |    | | LSA | | LSA | | LSA | | LSA |-|------>| LSA                   |
+|      | 10.0.13.0/30                |        |    | `-----` `-----` `-----` `-----` |       | RID:4.4.4.4           |
+|      |                             |        |    | .-----. .-----. .-----.         |       | Subnet:192.168.4.0/24 |
+|      |                10.0.24.0/30 |        |    | | LSA | | LSA | | LSA |         |       | Cost:1                |
+|      |G0/0                         |G0/0    |    | `-----` `-----` `-----`         |       `-----------------------`
+|   R3(+)-F2/0-----------------F2/0-(+)R4     |    `---------------------------------` 
+|      |G1/0     10.0.34.0/30    G1/0|.254    |    
+| 192.168.3.0/25               192.168.4.0/24 |    R1's cost to 192.168.4.0/24 is: 100(R1_g0/0)+100(R2_g1/0)+100(R4_g1/0)=300
+`---------------------------------------------`    R1's cost to R2 is: 100(R1_g0/0)+1(R2_lookback0)=101
 ```
 CLI configuration example:
 ```
@@ -84,17 +84,22 @@ R1(config)#router ospf 1                                 //Process ID is locally
 R1(config-router)#network 10.0.12.0 0.0.0.3 area 0
 R1(config-router)#network 10.0.13.0 0.0.0.3 area 0
 R1(config-router)#network 172.16.1.14 0.0.0.0 area 0
-R1(config-router)#passive-interface g2/0
+R1(config-router)#passive-interface g2
 R1(config-router)#default-information originate
 R1(config-router)#router-id 1.1.1.1
 R1(config-router)#maximum-path 8                          //Change load-balancing pathes from 4 to 8
 R1(config-router)#distance 85                             //Change administrative distance from 110 to 85
+R1(config-router)#auto-cost reference-bandwidth 100000    //Default is 100Mbits/s
+
+R1(config)#interface g0/0                                 //Change the cost of interface g0/0
+R1(config-if)#ip ospf cost <1-65535>                      //Manualy set the interface OSPF cost, or
+R1(config-if)#bandwidth <1-10000000>                      //Change the interface bandwidth (It won't change speed of the interface)
 ```
 Cost calculation formula
 ```
 cost = reference bandwith(bw) / exit-interface bw        #default reference bw is 100Mbits/s
 ```
-Facts for OSPF:
+Facts of OSPF:
 1. An OSPF area is a set of routers and links that share the same LSDB.
 2. The _backbone area (area 0)_ is an area that all other areas **must directly connect to**.
 3. All areas must have **at least one ABR** connect to the _backbone area_. (Best-practice for design)
@@ -103,30 +108,28 @@ Facts for OSPF:
 6. OSPF area should be contigous.
 7. _Cost_ to a destination is the total cost of the **outgoing/exit interfaces' costs**.
 
-Wrong OSPF topology designs:
+WRONG OSPF TOPOLOGY DESIGNS:
 ```
 .-------------------------------------area 0 (backbone)-.
-|-------(+)---------------[=]----------------[=]        |
-`--------------------------|------------------|---------`
-   .------area 1-. .-------|-area 2-. .-------|-area 3-.
-   |             | |       |        | |       |        |
-   |          .--|-|------(+)       | |      (+)       |
-   |          |  | |    /  |  \     | |    /  |  \     |
-   |         (+) | | (+)  (+)  (+)  | | (+)  (+)  (+)  |
-   |        / |  | |  |    |     |  | |  |    |    |   |
-   |    (+)  (+) | `----------------` `----------------`
-   |     |    |  |
-   `-------------`
+|-------(+)-----------------[=]---------------[=]       |
+`----------------------------|-----------------|--------`
+   .--------area 1-. .-------|area 2-. .-------|area 3-.
+   |               | |       |       | |       |       |
+   |      (+)------|-|------(+)      | |      (+)      |
+   |    /  |  \    | |    /  |  \    | |    /  |  \    |
+   | (+)  (+)  (+) | | (+)  (+)  (+) | | (+)  (+)  (+) |
+   |  |    |    |  | |  |    |    |  | |  |    |    |  |
+   `---------------` `---------------` `---------------`
 ```
 ```
-.--------------------------------------area 0 (backbone)-.
-|-------(+)--------[=]------------------------[=]        |
-`----------------/-----\-----------------------|---------`
-   .---area 1--/---. .---\----area 2-. .-------|-area 1-.
-   |         /     | |     \         | |       |        |
-   |      (+)      | |      (+)      | |      (+)       |
-   |   /   |  \    | |    /  |  \    | |    /  |  \     |
-   | (+)  (+)  (+) | | (+)  (+)  (+) | | (+)  (+)  (+)  |
-   |  |    |    |  | |  |    |    |  | |  |    |    |   |
-   `---------------` `---------------` `----------------`
+.-------------------------------------area 0 (backbone)-.
+|-------(+)--------[=]------------------------[=]       |
+`----------------/-----\-----------------------|--------`
+   .---area 1--/---. .---\----area 2-. .-------|area 1-.
+   |         /     | |     \         | |       |       |
+   |      (+)      | |      (+)      | |      (+)      |
+   |   /   |  \    | |    /  |  \    | |    /  |  \    |
+   | (+)  (+)  (+) | | (+)  (+)  (+) | | (+)  (+)  (+) |
+   |  |    |    |  | |  |    |    |  | |  |    |    |  |
+   `---------------` `---------------` `---------------`
 ```
