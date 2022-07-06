@@ -13,6 +13,7 @@
 |Exterior|EGP|
 
 **Important**: For RIP, EIGRP, and OSPF, `network` cmd doen't tell the router which networks to **advertise**, instead of which interfaces to **activate** routing-protocol on, and then the router will advertise the network prefix of those interfaces.
+---
 
 ### RIP (Route Information Protocol) & EIGRP (Enhanced Interior Gateway Routing Protocol)
 ```
@@ -54,6 +55,7 @@ R1(config-router)#network 172.16.1.0 0.0.0.15       //or classless
 
 R1(config-router)#defualt-information originate     //Ad default gateway out to other RIP adjacent routers
 ```
+---
 
 ### OSPF (Open Shortest Path First)
 
