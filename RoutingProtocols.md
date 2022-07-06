@@ -13,6 +13,7 @@
 
 ### OSPF (Open Shortest Path First)
 
+ABR - Area boarder router. ASBR - Autonomous system boundary router (it connects to external network, normally Internet).
 LSA - Link state advertisement. LSDB - Link state database.
 ```
 .---------------------------------.        
@@ -42,3 +43,16 @@ Facts for OSPF
 4. OSPF area should be contigous.
 5. The OSPF _process ID_ is **locally significant**, so routers with different _process IDs_ can become neighbors.
 6. _Cost_ to a destination is the total cost of the **outgoing/exit interfaces' costs**.
+
+CLI configuration example:
+```
+
+```
+
+### RIPv2
+
+
+### EIGRP
+
+
+
