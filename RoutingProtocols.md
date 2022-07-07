@@ -117,7 +117,7 @@ WAN---(+)-s0/0-------------s0/0-(+)-g0/0--------\     /--------g0/0-(+)----
                                 (+)-g0/0--------/     \--------g0/0-(+)----
                                 R3-id_2.2.2.2                       R5-id_5.5.5.5
 ```
-  > Note: When _DR_ is down, current _BDR_ becomes new _DR_ even thog=ugh existing of another **higher-priority** interface that will become new BDR.
+  > Note: When _DR_ is down, current _BDR_ becomes new _DR_ even though existing of another **higher-priority** interface that will become new BDR.
 #### _Facts of OSPF_
 1) An OSPF area is a set of routers and links that share the same LSDB.
 2) The _backbone area (area 0)_ is an area that all other areas **must directly connect to**.
