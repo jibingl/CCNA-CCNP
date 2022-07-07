@@ -1,6 +1,6 @@
 # NAT (Network Address Translation)
 ## Static NAT
-one private IP <--> one public IP 
+_one private IP <--> one public IP_ 
 ```
 192.168.1.10--[=]----------------------------g1/0---(+)---g0/0----------------------{ISP}----8.8.8.8
                                               .1     R1    .2       122.11.0/30   .1 
@@ -22,7 +22,7 @@ R1(config)#ip nat inside source static 192.168.1.10 122.11.11.2
 //Syntax: ip nat inside source static <inside-local> <inside-global>
 ```
 ## Dynamic NAT
-one or more private subnets <--> multiple public IPs
+_one or more private subnets <--> multiple public IPs_
 ```
 192.168.1.0/24--[=]--------------------------g1/0---(+)---g0/0----------------------{ISP}----{Internet}
                                               .1     R1    .2       122.11.0/29   .1 
@@ -46,7 +46,7 @@ R1(config)#ip nat inside source list 1 pool POOL-1
 //Syntax: ip nat inside source <acl> <nat-pool>
 ```
 ## PAT (aka NAT overload)
-one or more private subnets <--> one or more public IPs
+_one or more private subnets <--> one or more public IPs_
 ```
 192.168.1.0/24--[=]--------------------------g1/0---(+)---g0/0----------------------{ISP}----{Internet}
                                               .1     R1    .2       122.11.0/29   .1 
