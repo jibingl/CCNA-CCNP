@@ -71,7 +71,7 @@ R1(config)#ip nat inside source list 1 pool POOL-1 overload
 
 R1(config)#ip nat inside source list 1 interface g0/0 overload                //Use single public IP for PAT
 ```
-### _Other NAT cmds_
+### Other NAT cmds
 ```
 clear ip nat translation *
 show ip nat translations
