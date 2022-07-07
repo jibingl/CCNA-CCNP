@@ -13,4 +13,5 @@ R1(config-if)#clock rate 64000                               //Configue operatin
 R1(config-if)#ip address 192.168.1.1 255.255.255.0     
 R1(config-if)#no shut
 R1(config-if)#encapsulation ppp                              //Change to point-to-point encapsulation
+R1#show controllers s0/0                                     //Check serial infor of an interface
 ```
