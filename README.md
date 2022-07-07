@@ -16,7 +16,7 @@
 
 
 Abbreviations| Names | Purposes| Key-concepts
----|---|---|
+---|---|---|---|
 STP | Spanning Tree Protocol | Loop-free switching network | |
 DTP | Dynamic Trunking Protocol | Negotiate trunk link | |
 VTP | VLAN Trunking Protocol | Propagate VLANs | |
