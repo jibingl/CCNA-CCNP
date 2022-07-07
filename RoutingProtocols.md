@@ -67,13 +67,13 @@ _Single-area_ topology:
 .-------------------------------------AREA 0--.
 | 172.16.1.0/28                192.168.2.0/24 |    .---------------------------------.        
 |   .14|g2/0     10.0.12.0/30        |g2/0    |    | LSDB                            |
-|   R1(+)-g0/0-----------------f0/0-(+)R2     |    | .-----. .-----. .-----. .-----. |       .-----------------------.
-|      |g1/0                         |g1/0    |    | | LSA | | LSA | | LSA | | LSA |-|------>| LSA                   |
+|   R1(+)---------------------------(+)R2     |    | .-----. .-----. .-----. .-----. |       .-----------------------.
+|  g1/0| g0/0                   g0/0 |g1/0    |    | | LSA | | LSA | | LSA | | LSA |-|------>| LSA                   |
 |      | 10.0.13.0/30                |        |    | `-----` `-----` `-----` `-----` |       | RID:4.4.4.4           |
 |      |                             |        |    | .-----. .-----. .-----.         |       | Subnet:192.168.4.0/24 |
 |      |                10.0.24.0/30 |        |    | | LSA | | LSA | | LSA |         |       | Cost:1                |
-|      |g0/0                         |g0/0    |    | `-----` `-----` `-----`         |       `-----------------------`
-|   R3(+)-f2/0-----------------f2/0-(+)R4     |    `---------------------------------` 
+|  g0/0| f2/0                   f2/0 |g0/0    |    | `-----` `-----` `-----`         |       `-----------------------`
+|   R3(+)---------------------------(+)R4     |    `---------------------------------` 
 |      |g1/0     10.0.34.0/30    g1/0|.254    |    
 | 192.168.3.0/25               192.168.4.0/24 |    R1's cost to 192.168.4.0/24 is: 100(R1_g0/0)+100(R2_g1/0)+100(R4_g1/0)=300
 `---------------------------------------------`    R1's cost to R2 is: 100(R1_g0/0)+1(R2_lookback0)=101
@@ -84,20 +84,23 @@ R1(config)#router ospf 1                                 //Process ID is locally
 R1(config-router)#network 10.0.12.0 0.0.0.3 area 0
 R1(config-router)#network 10.0.13.0 0.0.0.3 area 0
 R1(config-router)#network 172.16.1.14 0.0.0.0 area 0
-R1(config-router)#passive-interface g2
+R1(config-router)#passive-interface g2/0
 R1(config-router)#default-information originate
 R1(config-router)#router-id 1.1.1.1
 R1(config-router)#maximum-path 8                          //Change load-balancing pathes from 4 to 8
 R1(config-router)#distance 85                             //Change administrative distance from 110 to 85
 R1(config-router)#auto-cost reference-bandwidth 100000    //Default is 100Mbits/s
+R1(config-router)#passive-interface default               //Set all interfaces to passive, then
+R1(config-router)#no passive-interface g1/0               //specify an interface as active
 
-R1(config)#interface g0/0                                 //Change the cost of interface g0/0
+R1(config)#interface g0/0
+R1(config-if)#ip ospf 1 area 0                            //Active OSPF directly on an interface
 R1(config-if)#ip ospf cost <1-65535>                      //Manualy set the interface OSPF cost, or
 R1(config-if)#bandwidth <1-10000000>                      //Change the interface bandwidth (It won't change speed of the interface)
 ```
-Cost calculation formula
+Interface _cost_ calculation formula
 ```
-cost = reference bandwith(bw) / exit-interface bw        #default reference bw is 100Mbits/s
+cost = reference bandwith(bw) / exit-interface bw         //default reference bw is 100Mbits/s
 ```
 Facts of OSPF:
 1. An OSPF area is a set of routers and links that share the same LSDB.
