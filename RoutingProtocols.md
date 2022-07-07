@@ -97,6 +97,7 @@ R1(config)#interface g0/0
 R1(config-if)#ip ospf 1 area 0                            //Active OSPF directly on an interface
 R1(config-if)#ip ospf cost <1-65535>                      //Manualy set the interface OSPF cost, or
 R1(config-if)#bandwidth <1-10000000>                      //Change the interface bandwidth (It won't change speed of the interface)
+R1(config-if)#ip ospf priority <0-255>                    //Change interface priority (defualt is 1)
 ```
 Interface _cost_ calculation formula
 ```
