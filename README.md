@@ -15,11 +15,11 @@
 13. UDP vs TCP, suitable to what situations?
 
 
-Abbreviations| Names | Purposes|
+Abbreviations| Names | Purposes| Key-concepts
 ---|---|---|
-STP | Spanning Tree Protocol | loop-free switching network |
-DTP | Dynamic Trunking Protocol | negotiate trunk link |
-VTP | VLAN Trunking Protocol | propagate VLAN |
-CDP | CIsco Discovery Protocol | exchange device info |
-NTP | Network Time Protocol | syncronize time |
+STP | Spanning Tree Protocol | Loop-free switching network | |
+DTP | Dynamic Trunking Protocol | Negotiate trunk link | |
+VTP | VLAN Trunking Protocol | Propagate VLANs | |
+CDP | CIsco Discovery Protocol | Exchange device info | |
+NTP | Network Time Protocol | Syncronize time | |
 
