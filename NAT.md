@@ -3,8 +3,7 @@
 ```
 192.168.1.10--[=]----------------------------g1/0---(+)---g0/0----------------------{ISP}----8.8.8.8
                                               .1     R1    .2       122.11.0/30   .1 
-                                               inside|outside
-                                                     |
+                                                
                                          Translations Table
 .-Pro---Inside global----------Inside local----------|--Outside local--------Outside global------.
 | udp   122.11.11.2:61116      192.168.1.10:61116    |  8.8.8.8:53           8.8.8.8:53          |
@@ -25,8 +24,7 @@ R1(config)#ip nat inside source static 192.168.1.10 122.11.11.2
 ```
 192.168.1.0/24--[=]--------------------------g1/0---(+)---g0/0----------------------{ISP}----{Internet}
                                               .1     R1    .2       122.11.0/29   .1 
-                                               inside|outside
-                                                     |
+ 
                                          Translations Table
 .-Pro---Inside global----------Inside local----------|--Outside local--------Outside global------.
 | icmp  122.11.11.2:3          192.168.1.10:3        |  8.8.8.8:3            8.8.8.8:3           |
