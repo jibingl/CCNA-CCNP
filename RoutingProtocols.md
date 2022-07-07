@@ -145,8 +145,8 @@ NEIGHBOR REQUIREMENTS:
 3) No shurdown to OSPF process
 4) Hello/Dead intervals must match
 5) Router ID must unique
-6) OSPF Netwwork type must match
-7) Authentication settings must match
+6) Authentication settings must match
+7) OSPF Netwwork type must match
 8) IP MTU settings must match
   > Under _7_ and _8_, neighbors can be formed but OSPF operate inproperly.  
 
