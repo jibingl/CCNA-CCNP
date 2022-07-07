@@ -15,7 +15,7 @@
 13. UDP vs TCP, suitable to what situations?
 
 
-Abb.| Names | Purposes|
+Abbreviations| Names | Purposes|
 ---|---|---|
 STP | Spanning Tree Protocol | loop-free switching network |
 DTP | Dynamic Trunking Protocol | negotiate trunk link |
