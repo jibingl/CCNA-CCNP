@@ -58,40 +58,68 @@ Steps to form LSDBs (Link State Database):
  1. **Become neighbors** with other routers connected to the same segment;
  2. **Exchange** LSAs (Link State Advertisement) with neighbor routers;
  3. **Calculate** the best routes to each destination, and insert them into the routing table.  
-#### _Configuration_  
-_Single-area_ topology:
+#### _Key-info & Configuration_  
+Topology example and Key-info:
 ```
-     .-------------------------------------AREA 0--.     #show ip ospf database
-     | 172.16.1.0/28                192.168.2.0/24 |    .---------------------------------.        
-     |   .14|g2/0     10.0.12.0/30        |g2/0    |    | LSDB                            |
-WAN--|---R1(+)---------------------------(+)R2     |    | .-----. .-----. .-----. .-----. |       .-----------------------.
-     |  g1/0| g0/0                   g0/0 |g1/0    |    | | LSA | | LSA | | LSA | | LSA |-|------>| LSA(type 1)           |  Type 1: Router LSA, gened by routers
-     |      | 10.0.13.0/30                |        |    | `-----` `-----` `-----` `-----` |       | RID:4.4.4.4           |  Type 2: Network LSA, gened by DR
-     |      |                             |        |    | .-----. .-----. .-----.         |       | Subnet:192.168.4.0/24 |  Type 5: AS-external LSA, gened by ASBR
-     |      |                10.0.24.0/30 |        |    | | LSA | | LSA | | LSA |         |       | Cost:1                |
-     |  g0/0| f2/0                   f2/0 |g0/0    |    | `-----` `-----` `-----`         |       `-----------------------`
-     |   R3(+)---------------------------(+)R4     |    `---------------------------------` 
-     |      |g1/0     10.0.34.0/30    g1/0|.254    |    R1 is ASBR (Autonomous system boundary router) that connects to external network, normally Internet.
-     | 192.168.3.0/25               192.168.4.0/24 |    R1's cost to 192.168.4.0/24 is: 100(R1_g0/0)+100(R2_g1/0)+100(R4_g1/0)=300
-     `---------------------------------------------`    R1's cost to R2 is: 100(R1_g0/0)+1(R2_lookback0)=101
+                                                  WAN_144.14.14.1/30
+               .---area 0------------------------------|-----------.    
+               |    R2-id_2.2.2.2                    R1|id_1.1.1.1 |
+192.168.2.0/24 |  DR             10.0.10.0/30          |g0/0       | 172.16.1.1   .---------------------area 1-----------------------------. 
+         [=]---|-g1/1-(+)-g0/0-DR------------BDR-g1/1-(+)-f1/0-DR-.2----[=]       |     R8-id_8.8.8.8                       R7-id_7.7.7.7  |
+               |    BDR|f1/0                        BDR|g2/2       |              |     (+)-g0/0--------\     /--------g0/0-(+)-g1/1---[=] |
+               |       |                               |           |              |          DR          \   /          BDR      DR        |
+               |       | 10.0.20.0/30                  |           |              |                       \ /                              |
+               |       |                  10.0.40.0/30 |           |              |                       [=] 172.16.0.0/24                |
+               |       |                               |           |              |                       / \                              |
+               |     DR|f1/0                         DR|g2/2       | 10.0.50.0/30 |         DROther      /   \        DROther    DR        |
+         [=]---|-g1/1-(+)-g0/0-BDR------------DR-g0/0-(+)-s1/0-----|-ospf-ppp-net-|-s1/0-(+)-g0/0-------/     \--------g0/0-(+)-g1/1---[=] |
+192.168.3.0/24 |  DR              10.0.30.0/30       DR|g1/1       |              |       R5-id_5.5.5.5                     R6-id_6.6.6.6  |
+               |    R3-id_3.3.3.3                    R4|id_4.4.4.4 |              `-------------------ospf-broadcast-net-------------------` 
+               `---------------ospf-broadcast-net------|-----------`
+                                                      [=]192.168.4.0/24
+                                                                                
+  R2#show ip ospf database                                                       *Routes cost calculation (reference-bw 100000):
+ .-------------------------------------.                                        ..........................................................
+ | LSDB (area0)                        |       .---routers generate-.           | Route 1    = R1_g1/1 -> R2_g1/1_192.168.2.0            |
+ |           Router LSAs               |       | RID:3.3.3.3        |           |  Cost 200  =   100   +    100                          |
+ | .------. .------. .------. .------. |       | Net:192.168.3.0/24 |           | Route 2    = R1_g1/1 -> R2_lookback                    |
+ | | LSA1 | | LSA1 | | LSA1 | | LSA1 |-|------>| Cost:100           |           |  Cost 101  =   100   +     1                           |
+ | `------` `------` `------` `------` |       `--------------------`           | Route 3    = R1_g1/1 -> R2_f1/0 -> R3_g1/1_192.168.3.0 |
+ | .------. .------. .------. .------. |       .---routers generate-.           |  Cost 1200 =   100   +    1000  +    100               |
+ | | LSA1 | | LSA1 | | LSA1 | | LSA1 |-|------>| RID:3.3.3.3        |           ``````````````````````````````````````````````````````````
+ | `------` `------` `------` `------` |       | Net:10.0.20.0/30   |             *Cost forluma = reference-bw / exit-interface-bw
+ |           Network LSAs              |       | Cost:1000          |
+ | .------. .------. .------.          |       `--------------------`
+ | | LSA2 | | LSA2 | | LSA2 |----------|------>.---DR generates-----.
+ | `------` `------` `------`          |       | DR-RID:3.3.3.3     |
+ |         AS-external LSA             |       `--------------------`
+ | .------.                            |       .---ASBR generates---.
+ | | LSA5 |----------------------------|------>| ASBR RID:1.1.1.1   |
+ | `------`                            |       `--------------------`
+ `-------------------------------------`       
+
+*ASBR (Autonomous system boundary router) is R1 that connects to external network, normally Internet.
+*ABR (Area Border Router) is R5 or R4, depends on context, that connects two areas.
+*In OSPF broastcast network, DR/BDR election rule (High-Low): interface-priority --> router-id --> interface-ip.
+*When DR is down, current BDR becomes new DR even though existing of another higher-priority interface that will become new BDR.
 ```
 CLI configuration example:
 ```
-R1(config)#router ospf 1                                 //Process ID is locally significant, so routers with different process IDs can become neighbors.
-R1(config-router)#network 10.0.12.0 0.0.0.3 area 0
-R1(config-router)#network 10.0.13.0 0.0.0.3 area 0
-R1(config-router)#network 172.16.1.14 0.0.0.0 area 0
-R1(config-router)#passive-interface g2/0
+R1(config)#router ospf 1                                  //Process ID is locally significant.Rrouters with different process IDs can become neighbors.
+R1(config-router)#network 10.0.10.0 0.0.0.3 area 0
+R1(config-router)#network 10.0.40.0 0.0.0.3 area 0
+R1(config-router)#network 172.16.1.2 0.0.0.0 area 0
+R1(config-router)#passive-interface f1/0
 R1(config-router)#default-information originate
 R1(config-router)#router-id 1.1.1.1
 R1(config-router)#maximum-path 8                          //Change load-balancing pathes from 4 to 8
 R1(config-router)#distance 85                             //Change administrative distance from 110 to 85
 R1(config-router)#auto-cost reference-bandwidth 100000    //Default is 100Mbits/s
 R1(config-router)#passive-interface default               //Set all interfaces to passive, then
-R1(config-router)#no passive-interface g1/0               //specify an interface as active
+R1(config-router)#no passive-interface g1/1               //specify an interface as active
 R1(config-router)#shutdown                                //Shut the OSPF process 1 down
 
-R1(config)#interface g0/0
+R1(config)#interface g1/1
 R1(config-if)#ip ospf 1 area 0                            //Active OSPF directly on an interface
 R1(config-if)#ip ospf cost <1-65535>                      //Manualy set the interface OSPF cost, or
 R1(config-if)#bandwidth <1-10000000>                      //Change the interface bandwidth (It won't change speed of the interface)
@@ -102,26 +130,10 @@ R1(config-if)#ip ospf network broadcast                   //Set as broadcast OSP
 R1(config-if)#ip ospf authentication-key <string>         //Set password for OSPF neighbors communication
 R1(config-if)#ip ospf authentication                      //Enable
 ```
-Interface _cost_ calculation formula `cost = reference bandwith(bw) / exit-interface bw         //default reference bw is 100Mbits/s`  
-#### _DR/BDR/DROther of broardcast OSPF network_
-_DR/BDR_ election rule (High-Low): interface-priority --> router-id --> interface-ip
-```
-       R1-id_1.1.1.1            
-               10.0.0.0/30      R2-id_2.2.2.2                       R4-id_4.4.4.4
-WAN---(+)-s0/0-------------s0/0-(+)-g0/0--------\     /--------g0/0-(+)----
-                                   .2_DROther    \   /       .4_BDR     DR
-                                                  \ /
-                                                  [=] 192.168.0.0/24
-                                                  / \
-                             DR     .3_DROther   /   \        .5_DR     DR
-                             ---(+)-g0/0--------/     \--------g0/0-(+)----
-                                R3-id_3.3.3.3                       R5-id_5.5.5.5
-```
-  > Note: When _DR_ is down, current _BDR_ becomes new _DR_ even though existing of another **higher-priority** interface that will become new BDR.
 #### _Facts of OSPF_
 1) An OSPF area is a set of routers and links that share the same LSDB.
 2) The _backbone area (area 0)_ is an area that all other areas **must directly connect to**.
-3) All areas must have **at least one ABR (Area Border Router)** connect to the _backbone area_. (Best-practice for design)
+3) All areas must have **at least one ABR** connect to the _backbone area_. (Best-practice for design)
 4) An ABR connnect maximum of 2 areas. (Best-practice for design)
 5) OSPF interfaces in the same subnet must be in the same area. (Best-practice for design)
 6) OSPF area should be contigous.
@@ -165,60 +177,3 @@ WRONG OSPF TOPOLOGY DESIGNS:
    `---------------` `---------------` `---------------`
 ```
   > Issues: _area 1_ is not contigous, instead it is divided into two parts.
-
-
-
-```
-                                                             WAN/External
-                                                              |
-                         .---area 0---------------------------|--------.    
-                         |                                    |        |
-        192.168.2.0/24   |      R2        10.0.12.0/30      R1|g0/0    |    
-                   [=]---|g1/1-(+)-g0/0-----------------g1/1-(+)-s1/0-----|------s1/0-(+)-g0/0--------\     /--------g0/0-(+)----  
-                     \   |    /g2/2                           |g2/2    |              .2_DROther    \   /       .4_BDR     DR
-                       \ |  /     10.0.13.0/30                |        |                             \ /
-                         \/                                   |        |                             [=] 192.168.0.0/24
-                         /\                      10.0.24.0/30 |        |                             / \
-                       / |  \                            f2/0 |g0/0    |        DR     .3_DROther   /   \        .5_DR     DR
-                     /        \g2/2  
-                   [=]---|g1/1-(+)-g0/0-----------------g0/0-(+)R4     |        ---(+)-g0/0--------/     \--------g0/0-(+)----
-         192.168.3.0/24  |                10.0.34.0/30    g1/1|.254    |           R3-id_3.3.3.3                       R5-id_5.5.5.5  
-                         |                                    |        |    
-                         `------------------------------------|--------`
-                                                             [=]
-                                                        192.168.4.0/24
-
-                                   
-                                                 
-                                                 
-                                                 
-                            
-                             
-                                
-
-
-R1 is ASBR (Autonomous system boundary router) that connects to external network, normally Internet.
-R1's cost to 192.168.4.0/24 is: 100(R1_g0/0)+100(R2_g1/0)+100(R4_g1/0)=300
-R1's cost to R2 is: 100(R1_g0/0)+1(R2_lookback0)=101
-
-     #show ip ospf database
-    .-------------------------------------.       .-----------------------.
-    | LSDB                                |       | LSA(type 1)           |
-    |           Router LSAs               |       | RID:4.4.4.4           |
-    | .------. .------. .------. .------. |       | Subnet:192.168.4.0/24 |
-    | | LSA1 | | LSA1 | | LSA1 | | LSA1 |-|------>| Cost:1                |
-    | `------` `------` `------` `------` |       `-----------------------`
-    |           Network LSAs              |       .-----------------------.
-    | .------. .------. .------.          |       | LSA(type 2)           |
-    | | LSA2 | | LSA2 | | LSA2 |          |       | RID:4.4.4.4           |
-    | `------` `------` `------`          |       | RID:4.4.4.4           |
-    |         AS-external LSA             |       `-----------------------`
-    | .------.                            |       .-----------------------.
-    | | LSA5 |                            |       | LSA(type 5)           | 
-    | `------`                            |       | RID:1.1.1.1           |
-    `-------------------------------------`       `-----------------------`
-R1 is ASBR (Autonomous system boundary router) that connects to external network, normally Internet.
-R1's cost to 192.168.4.0/24 is: 100(R1_g0/0)+100(R2_g1/0)+100(R4_g1/0)=300
-R1's cost to R2 is: 100(R1_g0/0)+1(R2_lookback0)=101
-
-```
