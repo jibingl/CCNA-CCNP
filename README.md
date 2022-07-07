@@ -4,7 +4,7 @@
 2. Addrivatation-terms table: STP, VTP, CDP...
 3. Router ID/Interface election summary table
 4. Protocol headers - drawing fun - IP header, Ehternet packet, ...
-5. NAT - inside local, inside global, outside local, outside global (draw a pic)
+5. ~~NAT - inside local, inside global, outside local, outside global (draw a pic)~~
 6. Stats/Processing for some protocols, like STP, ~~OSPF~~
 7. Router boost order, loading IOS sequence, and each of storage's usage?
 8. WLAN
