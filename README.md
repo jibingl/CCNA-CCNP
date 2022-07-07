@@ -13,4 +13,13 @@
 11. QoS
 12. Network design - 3-tier, 2-tier (callopsed core layer)
 13. UDP vs TCP, suitable to what situations?
-14. 
+
+
+Abb.| Names | Purposes|
+---|---|---|
+STP | Spanning Tree Protocol | loop-free switching network |
+DTP | Dynamic Trunking Protocol | negotiate trunk link |
+VTP | VLAN Trunking Protocol | propagate VLAN |
+CDP | CIsco Discovery Protocol | exchange device info |
+NTP | Network Time Protocol | syncronize time |
+
