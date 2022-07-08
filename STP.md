@@ -1,6 +1,6 @@
 # Spanning Tree Protocol
 
-## STP
+## STP (802.1D)
 ### _Forming STP_
 Interfaces state: blocking -> listening -> learning -> forwarding
 ```
@@ -19,8 +19,8 @@ Interfaces state: blocking -> listening -> learning -> forwarding
 ```
 Process to form spanning tree topology:
 1. Elect ONE _root bridge_ (lowest bridge-id/BID) which has all interfaces to be _d-port_.
-2. Each remaining SW select ONE of its interfaces to be its _r-port_ (lowest root cost -> neighbor BID -> neighbor port id). Ports across from _r-port_ are always _d-port_.
-3. Each remaining collision domain select ONE interface to be _d-port_ (lowest root cost -> BID), then other interfaces are _nd-port_.  
+2. Each remaining switch selects ONE of its interfaces to be its _r-port_ (lowest root cost -> neighbor BID -> neighbor port id). Ports across from _r-port_ are always _d-port_.
+3. Each remaining collision domain selects ONE interface to be _d-port_ (lowest root cost -> BID), then other interfaces are _nd-port_.  
 ### _Configuration_
 ```
 SW1(config)#spanning-tree vlan <vlan-id> root primary              //Set switch's BID as 24576 by default, or less than current-lowest_BID by 4096.
