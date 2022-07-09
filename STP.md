@@ -110,5 +110,5 @@ Speed | STP Cost | RSTP Cost |
 Comparation between STP and RSTP
 Paras | Hello Originated | Hello Timer | BPDU Age | BPDU des_MAC |
 ---|---|---|---|---|
-STP | Root bridge | 2s | 10\*2s| 01:80:c2:00:00:00 |
-RSTP | All switches | 2s | 3\*2s | 01:00:0c:cc:cc:cd |
+STP/PVST | Root bridge | 2s | 10\*2s| 01:80:c2:00:00:00 |
+RSTP/PVST+ | All switches | 2s | 3\*2s | 01:00:0c:cc:cc:cd |
