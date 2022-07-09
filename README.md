@@ -30,6 +30,7 @@ MAC | Interface |
 00-01-11-22-aa-cc | FastEthnet 0/1 |
 
 ARP Table
-MAC | IP |
----|---|
-00-01-11-22-aa-cc | 192.168.1.1 |
+Internet Address | Physical Address | Type |
+---|---|---|
+169.254.255.255 | ff-ff-ff-ff-ff-ff | Static |
+192.168.1.101   | 00-01-11-22-aa-cc | Dynamic |
