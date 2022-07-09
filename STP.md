@@ -35,7 +35,7 @@ Data | drop | drop | only learn MAC | send/receive/learn MAC |
 Timer | N/A | 15s | 15S | N/A |
 
 ### _portfast & bpduguard_
-The command `switchport access portfast` quickly moves access ports to _forwarding_ by passing _listening_ and _learning_. However, it may lead to loop links when a new switch connects to this fast-port. To solve the issue, `switchport access bpduguard` is used to block BPDU packets coming into the fast-port.
+The command `SW(config-if)#spanning-tree portfast` quickly moves access ports to _forwarding_ by passing _listening_ and _learning_. However, it may lead to loop links when a new switch connects to this fast-port. To solve the issue, `SW(config-if)#spanning-tree bpduguard` is used to block BPDU packets coming into the fast-port.
 ## RSTP (802.1W)
 ### _Forming RSTP_
 Steps and process are the same as STP.
@@ -108,7 +108,7 @@ Speed | STP Cost | RSTP Cost |
 1 Tbps |X|20|
 
 Comparation between STP and RSTP
-Paras | Hello Originated | Hello Timer | BPDU Age
----|---|---|---|
-STP | Root bridge | 2s | 10*2s
-RSTP | All switches | 2s | 3*2s |
+Paras | Hello Originated | Hello Timer | BPDU Age | BPDU des_MAC |
+---|---|---|---|---|
+STP | Root bridge | 2s | 10\*2s| 01:80:c2:00:00:00 |
+RSTP | All switches | 2s | 3\*2s | 01:00:0c:cc:cc:cd |
