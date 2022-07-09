@@ -25,12 +25,15 @@ CDP | CIsco Discovery Protocol | Exchange device info | |
 NTP | Network Time Protocol | Syncronize time | |
 
 MAC Address Table
-MAC | Interface |
----|---|
-00-01-11-22-aa-cc | FastEthnet 0/1 |
+Vlan | Mac Address | Type | Ports |
+---|---|---|---|
+1 | 00-01-11-22-aa-cc | dynamic | Fa0/1 |
+
+Cisco cmds `show mac address-table`, `clear mac address-table dynamic [address <specific-mac> | interface <inter-id>]`.  
+Aging is 5 minutes.
 
 ARP Table
 Internet Address | Physical Address | Type |
 ---|---|---|
-169.254.255.255 | ff-ff-ff-ff-ff-ff | Static |
-192.168.1.101   | 00-01-11-22-aa-cc | Dynamic |
+169.254.255.255 | ff-ff-ff-ff-ff-ff | static |
+192.168.1.101   | 00-01-11-22-aa-cc | dynamic |
