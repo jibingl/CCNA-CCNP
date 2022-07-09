@@ -1,4 +1,4 @@
-# Routing Protocols
+# Dynamic Routing Protocols
 ## Overview  
 |Class   |Names|Type|Metric|Admin-Distance|Advertising|IP-Header-Protocol|ADs-Timer|Alg/Called|Balance-path|
 |--------|-----|----|------|---|-----------|------------------|-------|----------|------------|
