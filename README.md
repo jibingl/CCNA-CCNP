@@ -24,3 +24,12 @@ VTP | VLAN Trunking Protocol | Propagate VLANs | |
 CDP | CIsco Discovery Protocol | Exchange device info | |
 NTP | Network Time Protocol | Syncronize time | |
 
+MAC Address Table
+MAC | Interface |
+---|---|
+00-01-11-22-aa-cc | FastEthnet 0/1 |
+
+ARP Table
+---|---|
+MAC | IP |
+00-01-11-22-aa-cc | 192.168.1.1 |
