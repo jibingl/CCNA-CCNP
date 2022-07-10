@@ -19,7 +19,7 @@
 Abbreviations| Names | Purposes| Key-concepts|
 ---|---|---|---|
 STP | Spanning Tree Protocol | Loop-free layer2 network | |
-DTP | Dynamic Trunking Protocol | Negotiate trunk link | |
+DTP | Dynamic Trunking Protocol | Automatically configure switchport states | |
 VTP | VLAN Trunking Protocol | Propagate VLANs | |
 CDP | CIsco Discovery Protocol | Exchange device info | |
 NTP | Network Time Protocol | Syncronize time | |
