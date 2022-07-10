@@ -1,5 +1,6 @@
 # Dynamic Routing Protocols
-## Overview  
+## Overview
+```
 Class   Names   Algorithm         Metric           Admin-Distance   Advertising-IP       Protocol-NO.   ADs-Timer   Balance-path   Route-table
 -----   -----   ---------         ------           --------------   --------------       ------------   ---------   ------------   -----------
 IGP     RIP     Distance-vector   Hops(Max15)      120              255.255.255.255(v1)                 30s         1-32(4)        Only neighbors'
@@ -12,7 +13,7 @@ IGP     OSPF    Link-state(LSR)   Cost(100M/BW)    110              224.0.0.5(He
 IGP     IS-IS   Link-state(LSR)   Cost             115                                   0x7C(124)
 EGP     BGP     Path-vector                        20(eBGP)
                                                    200(iBGP)
-
+```
 **Important**: For RIP, EIGRP, and OSPF, `network` cmd doen't tell the router which networks to **advertise**, instead of which interfaces to **activate** routing-protocol on, and then the router will advertise the network prefix of those interfaces.
 *****
 ## RIP (Route Information Protocol) & EIGRP (Enhanced Interior Gateway Routing Protocol)
