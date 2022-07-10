@@ -1,0 +1,29 @@
+# Cisco Products List #
+
+Class      Name        Full-name                          Key-words
+-----      ----        ---------                          ---------
+Switch     Catalyst    Catalyst Micro Switches            small, compact, LAN
+                       Catalyst 1000 Series               small, compact, LAN
+                       Catalyst 3560-CX                   small, compact, LAN
+                       Catalyst Digital Building Series   small, compact, building
+                       Catalyst 9200/9300/9400 Series     large, LAN access, LAN distribution
+                       Catalyst 9500/9600 Series          large, LAN distribution & core
+           Meraki      Meraki MS120-8                     small, compact, LAN
+                       Meraki MS400 Series                large, LAN distribution & core
+           Nexus       Nexus 3550 Series                  huge, data center
+                       Nexus 9000 Series                  huge, data center
+           MDS         Multilayer Director Switch         SAN
+           IE          Industry Ethernet                  industrial network
+           Business    Business Series                    small business
+Router     ISR         Integrated Services Router         branch, small business
+           ESR         Embedded Series Router
+           ASR         Aggregation Services Router        WAN aggregation, ISP
+           CSR         Cloud Service Router
+           Catalyst    Catalyst 8200/8300                 branch, WAN aggregation
+           Catalyst    IR                                 industrial
+           NCS         Network Convergence System         WAN aggregation, ISP
+Firewall   ASA         Adaptive Security Appliance
+           FirePower   FirePower
+           FTD         FirePower Threat Defense
+WLAN
+Software
