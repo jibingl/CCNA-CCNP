@@ -1,15 +1,17 @@
 # Dynamic Routing Protocols
 ## Overview  
-|Class   |Names|Type|Metric|Admin-Distance|Advertising|IP-Header-Protocol|ADs-Timer|Alg/Called|Balance-path|
-|--------|-----|----|------|---|-----------|------------------|-------|----------|------------|
-|Static  |     |               |               |1                            |
-|Interior|RIPv1|Distance-vector|Hops (Max15)   |120                          |255.255.255.255|         |30s|Routing-by-rumor|1-32(4)|
-|Interior|RIPv2|Distance-vector|Hops (Max15)   |120                          |224.0.0.9      |         |30s|Routing-by-rumor|1-32(4)|
-|Interior|EIGRP|Hybrid         |Bandwith, delay|5(Summary)/90(Int.)/170(Ext.)|224.0.0.10     |0x58(88) |   |                |1-32(4)|
-|Interior|OSPF |Link-state(LSR)|Cost (100M/BW) |110                          |224.0.0.5-6    |0x59(89) |Hello-10s/Dead-40s|Dijkstra        |1-32(4)|
-|Interior|IS-IS|Link-state(LSR)|               |115                          |               |0x7C(124)|   |                |       |
-|Exterior|BGP  |Path-vector    |               |20(eBGP)/200(iBGP)           |
-|Exterior|EGP  |               |               |                             |               |         |    |                |      |      |       |  
+Class   Names   Algorithm         Metric           Admin-Distance   Advertising-IP       Protocol-NO.   ADs-Timer   Balance-path   Route-table
+-----   -----   ---------         ------           --------------   --------------       ------------   ---------   ------------   -----------
+IGP     RIP     Distance-vector   Hops(Max15)      120              255.255.255.255(v1)                 30s         1-32(4)        Only neighbors'
+                                                                    224.0.0.9(v2)        
+IGP     EIGRP   Distance-vector   Bandwith&delay   5(Summary)       224.0.0.10           0x58(88)                   1-32(4)        Only neighbors'
+                                                   90(Internal)
+                                                   170(External)
+IGP     OSPF    Link-state(LSR)   Cost(100M/BW)    110              224.0.0.5(Hello)     0x59(89)       Hello-10s   1-32(4)        Whole network
+                                                                    224.0.0.6(DR)                       Dead-40s                   Whole network
+IGP     IS-IS   Link-state(LSR)   Cost             115                                   0x7C(124)
+EGP     BGP     Path-vector                        20(eBGP)
+                                                   200(iBGP)
 
 **Important**: For RIP, EIGRP, and OSPF, `network` cmd doen't tell the router which networks to **advertise**, instead of which interfaces to **activate** routing-protocol on, and then the router will advertise the network prefix of those interfaces.
 *****
