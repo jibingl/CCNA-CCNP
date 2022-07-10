@@ -5,8 +5,8 @@ DTP will not form a _trunk_ with a router, PC, etc. The _switchport_ will be in 
 ## Syntax
 ```
 SW1(config-if)#switchport mode dynamic <auto | desirable>
-SW1(config-if)#switchport mode nonegotiate                      //prevent DTP (negotiation) packets from being sent out the interface
-SW1(config-if)#switchport trunk encapsulation <isl | dot1q>     //isl is favored by default
+SW1(config-if)#switchport mode nonegotiate                                   //prevent DTP (negotiation) packets from being sent out the interface
+SW1(config-if)#switchport trunk encapsulation <negotiate | isl | dot1q>      //Configue DTP encapsulation method. By defualt, negotiate is enabled and ISL is favored.
 ```
 ## DTP Negotiating Table
 Int-states | access | auto | desirable | trunk |
