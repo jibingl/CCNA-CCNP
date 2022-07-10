@@ -15,6 +15,10 @@
 13. UDP vs TCP, suitable to what situations?
 14. EtherChannel
 
+Router Boost Order:
+ Power on     Load Bootstrap     POST     Load IOS     Load startup configuration     Generate running configuration
++--------+->-+--------------+->-+----+->-+--------+->-+--------------------------+->-+------------------------------+
+                  ROM            ROM       flash              NVRAM                              RAM
 
 Abbreviations| Names | Purposes| Key-concepts|
 ---|---|---|---|
