@@ -57,4 +57,4 @@ R1(config-router)#defualt-information originate     //Ad default gateway out to 
 ```
 *******
 ## OSPF (Open Shortest Path First)
-Refer to [_OSPF.md_](https://github.com/jibingl/CCNA/edit/main/OSPF.md) for detail knowledge.
+Refer to [_OSPF.md_](https://github.com/jibingl/CCNA/edit/main/OSPF.md) for detailed knowledge.
