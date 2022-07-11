@@ -1,5 +1,10 @@
 # Internet Protocol Version 6
 
+IPv6 Architecture   Global Routing Prefix   Subnet Identifier   Interface Identifier  /CIDR
+-----------------   ---------------------   -----------------   --------------------  -----
+Example             2001:0DB8:8D00:         0001:               0000:0000:0000:0000   /64
+Number of bit       48 bits                 16 bits             64 bits
+
 Address Type Identification (rfc 4291)
 ======================================
 The type of an IPv6 address is identified by the high-order bits of the address, as follows:
@@ -12,4 +17,29 @@ The type of an IPv6 address is identified by the high-order bits of the address,
       Link-Local unicast   1111111010           FE80::/10    
       Global Unicast       (everything else)
 
+EUI-64 Based IPv6 Addresses Transmation
+=======================================
+                                                                                              0     7                  24                      47
+      MAC/Ehternet/Link-layer Address                                                        +------------------------+-------------------------+
+        (built in MAC address)                                                               |      0    OUI          |          NIC id         |
+                                                                                             +------------------------+-------------------------+ 
+                                                                             0     7                  24               40                      64
+      IPv6 Interface Identifier                                             +------------------------+----------------+-------------------------+
+        (U/L bit set to 1)                                                  |      1    OUI          |1111111111111110|         NIC id          |
+                                                                            +------------------------+----------------+-------------------------+  
+                                          0        9                         64                                                                128
+      Link-Local Unicast Address         +----------+-----------------------+-------------------------------------------------------------------+
+        (prefix FE80::/64)               |1111111010|     54-bit (zeros)    |                        Interface Identifier                       |
+                                         +----------+-----------------------+-------------------------------------------------------------------+
+                                          0              15                                           88               104                     128
+      Solicited-node Multicast Address   +----------------+------------------------------------------+----------------+-------------------------+
+        (prefix FF02::1:FF00:0/104)      |1111111100000002|           72-bit (zeros)                 |0000000111111111|  24-bit of Interface ID |
+                                         +----------------+------------------------------------------+----------------+-------------------------+   
+
+      Addresses                          Example
+      ---------                          -------
+      MAC address                        34-56-78-9A-BC-DE
+      IPv6 Interface ID                  36-56-78-FF-FE-9A-BC-DE
+      Link-Local Unicast Address         FE80::36-56-78-FF-FE-9A-BC-DE/64
+      Solicited-node Multicast Address   FF02::1:FF:9A-BC-DE/64
 
