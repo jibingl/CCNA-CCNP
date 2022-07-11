@@ -1,7 +1,13 @@
 # Media Access Control Address
 
 Aka MAC address, Ethernet IEEE 802 address, or link-layer address.
- 0          1        
-+--------+--------+--------+--------+--------+--------+--------+--------+
-|
 
+ 0          1          2          3           4        
++--------+--------+--------+--------+--------+--------+
+|      bb      OUI         |           NIC            |
++--------+--------+--------+--------+--------+--------+
+
+OUI - Organizationally Unique ID   
+NIC - Network Interface Controller
+bit 6 (next to the last bit of the first octet) - Universial/Local (U/L) bit, "0" for global address, "1" for local address.
+bit 7 (the last bit of the first octec) - "0" for unicast, "1" for multicast.
