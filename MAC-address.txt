@@ -1,40 +1,7 @@
 # Media Access Control Address
 
 Aka MAC address, Ethernet IEEE 802 address, or link-layer address.
+ 0          1        
++--------+--------+--------+--------+--------+--------+--------+--------+
+|
 
-
-
-
-Interface Identifier (rfc 2464)
-   1. The OUI of the Ethernet address (the first three octets) becomes the company_id of the EUI-64 (the first three octets).  
-   2. The fourth and fifth octets of the EUI are set to the fixed value FFFE hexadecimal.
-   3. The last three octets of the Ethernet address become the last three octets of the EUI-64.
-   4. Set the Universal/Local (U/L) bit to 1.
-  MAC address (built-in) 
-                                                          0     7                  24                      47
-                                                         +------------------------+-------------------------+
-                                                         |      0    OUI          |          NIC id         |
-                                                         +------------------------+-------------------------+
-  IPv6 Interface Identifier
-                                         0     7                  24               40                      64
-                                        +------------------------+----------------+-------------------------+
-                                        |      1    OUI          |1111111111111110|         NIC id          |
-                                        +------------------------+----------------+-------------------------+
-  Link-Local Address (prefix FE80::/64)
-      0        9                         64                                                                128
-     +----------+-----------------------+-------------------------------------------------------------------+
-     |1111111010|     54-bit (zeros)    |                        Interface Identifier                       |
-     +----------+-----------------------+-------------------------------------------------------------------+
-  Solicited-node Multicast Address (prefix FF02::1:FF00:0/104)
-      0              15                                           88               104                     128
-     +----------------+------------------------------------------+----------------+-------------------------+
-     |1111111100000002|           72-bit (zeros)                 |0000000111111111|  24-bit of Interface ID |
-     +----------------+------------------------------------------+----------------+-------------------------+   
-   
-   Example
-   -------
-   MAC address                        34-56-78-9A-BC-DE
-   IPv6 Interface ID                  36-56-78-FF-FE-9A-BC-DE
-   Link-Local Address                 FE80::36-56-78-FF-FE-9A-BC-DE/64
-   Solicited-node Multicast Address   FF02::1:FF:9A-BC-DE/64
-   
