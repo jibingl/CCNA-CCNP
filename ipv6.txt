@@ -1,80 +1,77 @@
 # Internet Protocol Version 6
 
-IPv6 Architecture   Global Routing Prefix   Subnet Identifier   Interface Identifier  /CIDR
------------------   ---------------------   -----------------   --------------------  -----
-Example             2001:0DB8:8D00:         0001:               0000:0000:0000:0000   /64
-Number of bit       48 bits                 16 bits             64 bits
+      IPv6 Architecture   Global Routing Prefix   Subnet Identifier   Interface Identifier  /CIDR
+      -----------------   ---------------------   -----------------   --------------------  -----
+      Example             2001:0db8:8d00:         0001:               0000:0000:0000:0001   /64
+      Number of bit       48 bits                 16 bits             64 bits
 
-Address Type Identification (rfc 4291)
-======================================
-The type of an IPv6 address is identified by the high-order bits of the address, as follows:
+## EUI-64 Based Interface Identifier Convertion
+                                         0     7                  24                      47
+      MAC/Ehternet/Link-layer Address   +------------------------+-------------------------+
+        (built in MAC address)          |      b    OUI          |          NIC id         |
+        34-56-78-9A-BC-DE               +------------------------+-------------------------+ 
+                                         0     7                  24               40                      64
+      IPv6 Interface Identifier         +------------------------+----------------+-------------------------+
+        (revert U/L bit)                |      b    OUI          |1111111111111110|         NIC id          |
+        3656:78ff:fe9a:bcde             +------------------------+----------------+-------------------------+ 
 
+## Addresses Type Identification (rfc 4291)
       Address type             IPv6 notation   Binary prefix       Compare-to-IPv4
       ------------             -------------   -------------       ---------------
       Unspecified              ::/128          00...0 (128 bits)   0.0.0.0
       Loopback                 ::1/128         00...1 (128 bits)   127.0.0.1
-      Multicast                FF00::/8        11111111            224.0.0.0
-      Link-Local unicast       FE80::/10       1111111010          N/A
+      Multicast                ff00::/8        11111111            224.0.0.0
+      Link-Local unicast       fe80::/10       1111111010          N/A
       Global unicast           2000::3         0010-0011           8.8.8.8
-      Unique local unicast     FD00::/7        11111101            192.168.0.0/24
-      
-            Muticast Scope         Prefix   Description                                Examples
-            --------------         ------   -----------                                --------
-            Interface-local        FF01     Local device                               
-            Link-local             FF02     Local subnet                               FF02::1 all nodes/hosts of a subnet
-            Site-local             FF05     Limit to a single physical location        FF05::1 all hosts of a company location
-            Organization-local     FF08     Wider than site-local (an entire company)  FF08::2 all routers of a company
-            Global-local           FF0E     No boundaries
+      Unique local unicast     fd00::/7        11111101            192.168.0.0/24
 
-EUI-64 Based IPv6 Addresses Transmation
-=======================================
-                                                                                              0     7                  24                      47
-      MAC/Ehternet/Link-layer Address                                                        +------------------------+-------------------------+
-        (built in MAC address)                                                               |      b    OUI          |          NIC id         |
-                                                                                             +------------------------+-------------------------+ 
-                                                                             0     7                  24               40                      64
-      IPv6 Interface Identifier                                             +------------------------+----------------+-------------------------+
-        (revert U/L bit)                                                    |      b    OUI          |1111111111111110|         NIC id          |
-                                                                            +------------------------+----------------+-------------------------+  
-                                          0        9                         64                                                                128
-      Link-Local Unicast Address         +----------+-----------------------+-------------------------------------------------------------------+
-        (prefix FE80::/64)               |1111111010|     54-bit (zeros)    |                        Interface Identifier                       |
-                                         +----------+-----------------------+-------------------------------------------------------------------+
-                                          0              15                                           88               104                     128
-      Solicited-node Multicast Address   +----------------+------------------------------------------+----------------+-------------------------+
-        (prefix FF02::1:FF00:0/104)      |1111111100000002|           72-bit (zeros)                 |0000000111111111|  24-bit of Interface ID |
-                                         +----------------+------------------------------------------+----------------+-------------------------+   
+## Multicast Addresses
+      Multicast Scope        Prefix   Description                                Examples
+      --------------         ------   -----------                                --------
+      Interface-local        ff01     Local device                               
+      Link-local             ff02     Local subnet                               ff02::1 all nodes/hosts of a subnet
+      Site-local             ff05     Limit to a single physical location        ff05::1 all hosts of a company location
+      Organization-local     ff08     Wider than site-local (an entire company)  ff08::2 all routers of a company
+      Global-local           ff0e     No boundaries
 
-      Addresses                          Example
-      ---------                          -------
-      MAC address                        34-56-78-9A-BC-DE
-      IPv6 Interface ID                  36-56-78-FF-FE-9A-BC-DE
-      Link-Local Unicast Address         FE80::36-56-78-FF-FE-9A-BC-DE/64
-      Solicited-node Multicast Address   FF02::1:FF:9A-BC-DE/64
-
-Calculating the IPv6 Prefix
-===========================
-      IPv6 address   2001:0DB8:8D00:0001:FB89:017B:0020:0011/93
+## Convertion Between Different Type Address
+      Interface Identifier/ID example 3656:78ff:fe9A:bcde,
+                                          0        9
+      Link-Local Unicast                 +----------+-------------+-----------------------------------------------------+
+        (prefix FE80::/64)               |1111111010|  54-bit 0s  |              Interface Identifier (64 bits)         |
+        fe80::3656:78ff:fe9a:bcde/64     +----------+-------------+-----------------------------------------------------+
+                                          0              15                   98             104
+      Solicited-node Multicast           +----------------+------------------+----------------+-------------------------+
+        (prefix FF02::1:FF00:0/104)      |1111111100000002|     72-bit 0s    |0000000111111111|  24-bit of Interface ID |
+        fe02::1:ff:9a:bcde/64            +----------------+------------------+----------------+-------------------------+
+     
+## Calculating the IPv6 Prefix
+      IPv6 address   2001:0db8:8d00:0001:fb89:017b:0020:0011/93
             |                                    |
             |                                   0d11
             |                                   0b1011 -> 0b1000
             |                                             0d8
             |                                             0x8
-      the prefix     2001:0DB8:8D00:0001:FB89:0178::/93
-More examples:
+      the prefix     2001:0db8:8d00:0001:fb89:0178::/93
+      
       IPv6 Address                                 Prefix
       ------------                                 ------
-      FE80:0000:0000:0000:4C2C:E2ED:6A89:2A27/9    FE80::/9
-      2001:0DB8:0001:0B23:BA89:0020:0000:00C1/64   2001:DB8:1:B23::/64
-      2001:0DB8:0BAD:CAFE:1300:0689:9000:0CDF/71   2001:DB8:BAD:CAFE:1200::/71
-      2001:0DB8:0000:FEED:0DAD:018F:6001:0DA3/62   2001:DB8:0:FEEC::/62
-      2001:0DB8:9BAD:BABE:0DE8:AB78:2301:0010/63   2001:DB8:9BAD:BABE::/63
+      fe80:0000:0000:0000:4c2c:e2ed:6a89:2a27/9    fe80::/9
+      2001:0db8:0001:0b23:ba89:0020:0000:00c1/64   2001:db8:1:b23::/64
+      2001:0db8:0bad:cafe:1300:0689:9000:0cdf/71   2001:db8:bad:cafe:1200::/71
+      2001:0db8:0000:feed:0dad:018f:6001:0da3/62   2001:db8:0:feec::/62
+      2001:0db8:9bad:babe:0de8:ab78:2301:0010/63   2001:db8:9bad:babe::/63
 
-Configuration
-=============
+## Configuration
       R1(config)#ipv6 unicast-routing                       //Enable router to perform ipv6 routing
       R1(config)#interface g0/0
       R1(config-if)#ipv6 address 2001:db8:0:0::1/64         //Manmully set a global unicast ipv6
-        or
-      R1(config-if)#ipv6 address 2001:db8::/64 eui-64       //Autoconfigue a global unicast ipv6 address based on EUI-64 method
+        OR
+      R1(config-if)#ipv6 address 2001:db8::/64 eui-64       //Autoconfiguration by using EUI-64 method combining wiht the configured prefix
+        OR (SLAAC)
+      R1(config-if)#ipv6 address autoconfig                 //Autoconfiguation by using NDP(RS/RA) to learn the prefix combining with EUI-64 or random method
+      
+      R1(config)#ipv6 route destination/prefix {next-hop | exit-interface [next-hop]} [ad]
+      //Note: For using link-local address as the next-hop, fully specified route must be given, like below syntax
+      R1(config)#ipv6 route destination/prefix exit-interface next-hop-link-local-address
       
