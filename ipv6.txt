@@ -9,14 +9,22 @@ Address Type Identification (rfc 4291)
 ======================================
 The type of an IPv6 address is identified by the high-order bits of the address, as follows:
 
-      Address type           Binary prefix        IPv6 notation
-      ------------           -------------        -------------
-      Unspecified            00...0  (128 bits)   ::/128       
-      Loopback               00...1  (128 bits)   ::1/128      
-      Multicast              11111111             FF00::/8     
-      Link-Local unicast     1111111010           FE80::/10    
-      Global unicast         0010-0011            2000::/3
-      Unique local unicast   11111101             FD00::/7
+      Address type             IPv6 notation   Binary prefix       Compare-to-IPv4
+      ------------             -------------   -------------       ---------------
+      Unspecified              ::/128          00...0 (128 bits)   0.0.0.0
+      Loopback                 ::1/128         00...1 (128 bits)   127.0.0.1
+      Multicast                FF00::/8        11111111            224.0.0.0
+      Link-Local unicast       FE80::/10       1111111010          N/A
+      Global unicast           2000::3         0010-0011           8.8.8.8
+      Unique local unicast     FD00::/7        11111101            192.168.0.0/24
+      
+            Muticast Scope         Prefix   Description                                Examples
+            --------------         ------   -----------                                --------
+            Interface-local        FF01     Local device                               
+            Link-local             FF02     Local subnet                               FF02::1 all nodes/hosts of a subnet
+            Site-local             FF05     Limit to a single physical location        
+            Organization-local     FF08     Wider than site-local (an entire company)
+            Global-local           FF0E     No boundaries
 
 EUI-64 Based IPv6 Addresses Transmation
 =======================================
