@@ -5,7 +5,8 @@
 10. REST and ?
 11. QoS
 12. Network design - 3-tier, 2-tier (callopsed core layer)
-13. UDP vs TCP, suitable to what situations?
+14. PoE configue override?
+15. Late collisions?
 
 Router Boost Order:
 ```
