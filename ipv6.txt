@@ -22,8 +22,8 @@ The type of an IPv6 address is identified by the high-order bits of the address,
             --------------         ------   -----------                                --------
             Interface-local        FF01     Local device                               
             Link-local             FF02     Local subnet                               FF02::1 all nodes/hosts of a subnet
-            Site-local             FF05     Limit to a single physical location        
-            Organization-local     FF08     Wider than site-local (an entire company)
+            Site-local             FF05     Limit to a single physical location        FF05::1 all hosts of a company location
+            Organization-local     FF08     Wider than site-local (an entire company)  FF08::2 all routers of a company
             Global-local           FF0E     No boundaries
 
 EUI-64 Based IPv6 Addresses Transmation
