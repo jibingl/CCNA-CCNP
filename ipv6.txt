@@ -9,13 +9,14 @@ Address Type Identification (rfc 4291)
 ======================================
 The type of an IPv6 address is identified by the high-order bits of the address, as follows:
 
-      Address type         Binary prefix        IPv6 notation
-      ------------         -------------        -------------
-      Unspecified          00...0  (128 bits)   ::/128       
-      Loopback             00...1  (128 bits)   ::1/128      
-      Multicast            11111111             FF00::/8     
-      Link-Local unicast   1111111010           FE80::/10    
-      Global Unicast       (everything else)
+      Address type           Binary prefix        IPv6 notation
+      ------------           -------------        -------------
+      Unspecified            00...0  (128 bits)   ::/128       
+      Loopback               00...1  (128 bits)   ::1/128      
+      Multicast              11111111             FF00::/8     
+      Link-Local unicast     1111111010           FE80::/10    
+      Global unicast         0010-0011            2000::/3
+      Unique local unicast   11111101             FD00::/7
 
 EUI-64 Based IPv6 Addresses Transmation
 =======================================
@@ -43,3 +44,29 @@ EUI-64 Based IPv6 Addresses Transmation
       Link-Local Unicast Address         FE80::36-56-78-FF-FE-9A-BC-DE/64
       Solicited-node Multicast Address   FF02::1:FF:9A-BC-DE/64
 
+Calculating the IPv6 Prefix
+===========================
+      IPv6 address   2001:0DB8:8D00:0001:FB89:017B:0020:0011/93
+            |                                    |
+            |                                   0d11
+            |                                   0b1011 -> 0b1000
+            |                                             0d8
+            |                                             0x8
+      the prefix     2001:0DB8:8D00:0001:FB89:0178::/93
+More examples:
+      IPv6 Address                                 Prefix
+      ------------                                 ------
+      FE80:0000:0000:0000:4C2C:E2ED:6A89:2A27/9    FE80::/9
+      2001:0DB8:0001:0B23:BA89:0020:0000:00C1/64   2001:DB8:1:B23::/64
+      2001:0DB8:0BAD:CAFE:1300:0689:9000:0CDF/71   2001:DB8:BAD:CAFE:1200::/71
+      2001:0DB8:0000:FEED:0DAD:018F:6001:0DA3/62   2001:DB8:0:FEEC::/62
+      2001:0DB8:9BAD:BABE:0DE8:AB78:2301:0010/63   2001:DB8:9BAD:BABE::/63
+
+Configuration
+=============
+      R1(config)#ipv6 unicast-routing                       //Enable router to perform ipv6 routing
+      R1(config)#interface g0/0
+      R1(config-if)#ipv6 address 2001:db8:0:0::1/64         //Manmully set a global unicast ipv6
+        or
+      R1(config-if)#ipv6 address 2001:db8::/64 eui-64       //Autoconfigue a global unicast ipv6 address based on EUI-64 method
+      
