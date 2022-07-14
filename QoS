@@ -9,18 +9,80 @@
                       - Da Da Da Da Da  |      | -- Da3 Da2 Da1 -----CBWFQ----40%---|/  
                                         +------+                                   round-robin
 
-Classification    Based on setting the values of PCP/CoS (Layer 2 802.1q) or DSCP (Layer 3)
-    PCP/CoS       
-    DSCP
+Classification
+    Classification gives priority to certain types of traffic over others.
+    Ways to classifying traffic: 
+        #1 ACLs;
+        #2 NBAR (Network Based Application Recognition) inspects layer 3, layer 4, and up to layer 7.
+        #3 PCP/CoS (Priority Code Point/Class of Service) of 802.1q tag (layer 2).
+                PCP-value   Traffic-types
+                ---------   -------------
+                0 (000)     Best effort (default)
+                1 (001)     Backgroud
+                2 (002)     Excellent effort
+                3 (003)     Critical applications
+                4 (004)     Video
+                5 (005)     Voice
+                6 (006)     Internetwork control
+                7 (007)     Network control
+        #4 DSCP (Differentiated Service Code Point) of IP header (layer 3).
+                Traffic-types              DSCP-value           Description
+                -------------              ----------           -----------
+                DF(Defualt Forwarding)     0 (000000)           Best effort
+                EF(Expedited Forwarding)   46 (101110)          Low loss/latency/jitter
+                AF(Assured Forwarding)     12-values (bbbbb0)   Defines four classes with three-level of drop precedence each
+                CS(Class Selector)         8-values (bbb000)    Backward compatible to IPP
+               
+                           Lowest---drop_precedence--Highest       Value-Converting Diagrams
+                  Highest  ---------------------------------       0d-  32 16 8  4  2  1   (DSCP-cal-values)
+                     |       AF41(34)   AF42(36)   AF43(38)            +--+--+--+--+--+--+        |
+                  priority   AF31(26)   AF32(28)   AF33(30)        0b- |x  x  x |y  y  0 | (formula 8x + 2y)
+                     |       AF21(18)   AF22(20)   AF23(22)            +--+--+--+--+--+--+        |
+                  Lowest     AF11(10)   AF12(12)   AF13(14)        0d-  4  2  1  2  1      (AF-cal-values)
+                  
+                           Lowest-----precedence-----Highest
+                  -----    ---------------------------------       0d-  32 16 8  4  2  1 (DSCP-cal-values)
+                  IPP       0   1   2   3   4   5   6   7          0b-  x  x  x  0  0  0 (formula 8x)
+                  CS        CS0 CS1 CS2 CS3 CS4 CS5 CS6 CS7        0d-  4  2  1          (CS-cal-values)
+                  DSCP      0   8   16  24  32  40  48  56
 
-Queuing           When congestion occurs, calssified data were buffered in different queues to wait for being taken by a Scheduler to transmit.
-Scheduling        Theoritecally, a scheduler decides which queue traffic is forwarded from next. A popular scheduling method is Wieghted Round-Robin combining with CBWFQ.
-    Round-robin   Pakets are taken fom each queue in order cyclically;
-    Weighted      More data is taken from high priority queues each time the scheduler reaches that queue;
-    CBWFQ         Class-Based Weighted Fair Queuing, guaranteeing each queuw a certain percentage of the interface's bandwidth.
-                  Not ideal for voice/video traffic because even the high priority queues have to wait their turn in the scheduler, which adds delay and jitter.
-    LLQ           Low Latency Queue, designating one or more queues as strict priority queues (SPQ) from which will be always taken the next packet until it is empty.
+Queuing           
+    When a device receives messages faster than forwards them out, new messages are placed in a queue and taken by a Scheduler later to transmit.
+    Classified packets are queued in different queues.
+    By default, queued messages will be forwarded in FIFO (First In First Out) manner.
+    When a queue is full, new arriving packets will be dropped. This is called tail drop.
+                     Queue (FIFO)
+           Dropped   +----(queue is full)-+
+          +--+ +--+  | +--+--+--+--+--+--+|
+          |Pa| |Pa|  | |Pa|Pa|Pa|Pa|Pa|Pa||
+          |ck| |ck|  | |ck|ck|ck|ck|ck|ck||
+          |et| |et|  | |et|et|et|et|et|et||
+          +--+ +--+  | +--+--+--+--+--+--+|
+                     +--------------------+
+                  (Tail Drop)
+    Tail drop is harmful because it can lead to TCP global synchronization.
+    RED (Random Early Detection) is introduced to prevent tail drop and TCP global synchronization.
+    WRED (Weighted Random Early Detection) is an improved version, allows to control which packets are dropped depending on the traffic class.
+        
+Scheduling
+    Theoritecally, a scheduler decides which queue traffic is forwarded from next. A popular scheduling method is Wieghted Round-Robin combining with CBWFQ.
+    Round-robin - Pakets are taken fom each queue in order cyclically;
+    Weighted    - More data is taken from high priority queues each time the scheduler reaches that queue;
+    CBWFQ       - Class-Based Weighted Fair Queuing, guaranteeing each queuw a certain percentage of the interface's bandwidth.
+                  Not ideal for voice/video because even the highest priority queues have to wait their turn in the scheduler, which adds delay & jitter.
+    LLQ         - Low Latency Queue, designating one or more queues as strict priority queues (SPQ);
+                  SPQ queues will be always taken the next packet until it is empty.
                   Best for voice/video traffic.
-Policing     Drops or remark packets if the traffic rate goes over the configured rate. 
-             Solve the downside of LLQ where schedulers are starving if there is always traffic in the designated SPQ.
-Shaping      Buffers traffic in a queue if the traffic rate goes over the configured rate.
+                  
+Policing
+    Drops or remark packets if the traffic rate goes over the configured rate. 
+    Solve the downside of LLQ where schedulers are starving if there is always traffic in the designated SPQ.
+    
+Shaping
+    Buffers traffic in a queue if the traffic rate goes over the configured rate.
+
+# Qaulity Measurement
+  Bandwidth, Delay, Jitter, Loss
+  Acceptable audio quality: one-way delay 150ms or less
+                            jitter 30ms or less
+                            loss 1% or less
