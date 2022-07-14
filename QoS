@@ -1,3 +1,12 @@
 # Qaulity of Service
 
 routing Classification queuing sheduling shaping policing 
+                          
+                        CLASSIFICATION   POLICING   QUEUING          SCHEDULING       SHAPING
+                                         +-rate-+
+                      - Vo Vo Vo Vo  ----|      |-- Vo3 Vo2 Vo1 -----LLQ/SPQ---10%--------.
+                    / - Vi Vi Vi Vi  ----| Drop |-- Vi3 Vi2 Vi1 -----CBWFQ-----20%---|--\  \
+ Ingress--Routing---- - Vis Vis Vis  ----|  or  |-- Vis3 Vis2 Vis1 --CBWFQ-----15%---|-----------Egress
+                    \ - Hd Hd Hd Hd  ----|Remark|-- Hd3 Hd2 Hd1 -----CBWFQ-----15%---|--/
+                      - Da Da Da Da  ----|      |-- Da3 Da2 Da1 -----CBWFQ-----40%---|/
+                                         +------+
