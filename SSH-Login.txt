@@ -1,0 +1,22 @@
+# Secure Cisco Devices Login
+
+## SSH
+  config t
+  enable secret ccna
+  hostname SW1
+  ip domain-name mydomain.ca
+  crypto key generate rsa modulus 4096
+  ip ssh version 2
+  access-list 99 permit host 192.168.1.99
+  username ciscoadmin secret ccna
+  line vty 0 15
+  login local
+  exec-timeout 5 0
+  transport input ssh
+  access-class 99 in
+  end
+  
+## Other security config
+  config t
+  service password-encryption
+  service time-stamps
