@@ -5,10 +5,11 @@
   enable secret ccna
   hostname SW1
   ip domain-name mydomain.ca
-  crypto key generate rsa modulus 4096
   ip ssh version 2
   access-list 99 permit host 192.168.1.99
   username ciscoadmin secret ccna
+  crypto key generate rsa modulus 4096
+  
   line vty 0 15
   login local
   exec-timeout 5 0
@@ -20,3 +21,9 @@
   config t
   service password-encryption
   service time-stamps
+  
+  line console 0
+  password cisco
+  login
+  exit
+  
