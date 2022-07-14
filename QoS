@@ -10,13 +10,18 @@ Data Flow through QoS:
                     \ - Hd Hd Hd Hd Hd  |Remark| -- Hd3 Hd2 Hd1 -----CBWFQ----15%---|--/      +---------+
                       - Da Da Da Da Da  |      | -- Da3 Da2 Da1 -----CBWFQ----40%---|/  
                                         +------+                                   round-robin
-Classification: Based on setting the values of PCP/CoS (Layer 2 802.1q) or DSCP (Layer 3)
-  PCP/CoS
-  DSCP
-Policing
-Queuing: When congestion occurs, calssified data were buffered in different queues to wait for being taken by a Scheduler to transmit.
-Scheduling: Theoritecally, a scheduler decides which queue traffic is forwarded from next. A popular scheduling method is Wieghted Round-Robin combining with CBWFQ.
-  Round-robin = pakets are taken fom each queue in order cyclically;
-  Weighted = more data is taken from high priority queues each time the scheduler reaches that queue;
-  CBWFQ = Class-Based Weighted Fair Queuing, guaranteeing each queuw a certain percentage of the interface's bandwidth.
-Shaping
+Classification    Based on setting the values of PCP/CoS (Layer 2 802.1q) or DSCP (Layer 3)
+    PCP/CoS       
+    DSCP
+
+Queuing           When congestion occurs, calssified data were buffered in different queues to wait for being taken by a Scheduler to transmit.
+Scheduling        Theoritecally, a scheduler decides which queue traffic is forwarded from next. A popular scheduling method is Wieghted Round-Robin combining with CBWFQ.
+    Round-robin   Pakets are taken fom each queue in order cyclically;
+    Weighted      More data is taken from high priority queues each time the scheduler reaches that queue;
+    CBWFQ         Class-Based Weighted Fair Queuing, guaranteeing each queuw a certain percentage of the interface's bandwidth.
+                  Not ideal for voice/video traffic because even the high priority queues have to wait their turn in the scheduler, which adds delay and jitter.
+    LLQ           Low Latency Queue, designating one or more queues as strict priority queues (SPQ) from which will be always taken the next packet until it is empty.
+                  Best for voice/video traffic.
+Policing     Drops or remark packets if the traffic rate goes over the configured rate. 
+             Solve the downside of LLQ where schedulers are starving if there is always traffic in the designated SPQ.
+Shaping      Buffers traffic in a queue if the traffic rate goes over the configured rate.
