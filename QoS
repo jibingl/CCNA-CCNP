@@ -1,7 +1,5 @@
 # Qaulity of Service
 
-Data Flow through QoS:
-
                         CLASSIFICATION  POLICING    QUEUING          SCHEDULING                SHAPING
                                         +-rate-+
                       - Vo Vo Vo Vo Vo  |      | -- Vo3 Vo2 Vo1 -----LLQ/SPQ--10%--------.
@@ -10,6 +8,7 @@ Data Flow through QoS:
                     \ - Hd Hd Hd Hd Hd  |Remark| -- Hd3 Hd2 Hd1 -----CBWFQ----15%---|--/      +---------+
                       - Da Da Da Da Da  |      | -- Da3 Da2 Da1 -----CBWFQ----40%---|/  
                                         +------+                                   round-robin
+
 Classification    Based on setting the values of PCP/CoS (Layer 2 802.1q) or DSCP (Layer 3)
     PCP/CoS       
     DSCP
