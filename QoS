@@ -1,13 +1,13 @@
 # Qaulity of Service
 
                         CLASSIFICATION  POLICING    QUEUING          SCHEDULING                SHAPING
-                                        +-rate-+
+                                        +-rate-+     (FIFO)
                       - Vo Vo Vo Vo Vo  |      | -- Vo3 Vo2 Vo1 -----LLQ/SPQ--10%--------.
-                    / - Vi Vi Vi Vi Vi  | Drop | -- Vi3 Vi2 Vi1 -----CBWFQ----20%---|--\  \   +--rate---+
- Ingress--Routing---- - Vis Vis Vis Vis |  or  | -- Vis3 Vis2 Vis1 --CBWFQ----15%---|---------| Queuing |---Egress
-                    \ - Hd Hd Hd Hd Hd  |Remark| -- Hd3 Hd2 Hd1 -----CBWFQ----15%---|--/      +---------+
+                    / - Vi Vi Vi Vi Vi  | Drop | -- Vi3 Vi2 Vi1 -----CBWFQ----20%---|--\  \    +--rate---+
+ Ingress--Routing---- - Vis Vis Vis Vis |  or  | -- Vis3 Vis2 Vis1 --CBWFQ----15%---|----------| Queuing |---Egress
+                    \ - Hd Hd Hd Hd Hd  |Remark| -- Hd3 Hd2 Hd1 -----CBWFQ----15%---|--/       +---------+
                       - Da Da Da Da Da  |      | -- Da3 Da2 Da1 -----CBWFQ----40%---|/  
-                                        +------+                                   round-robin
+                                        +------+     (WRED)                        round-robin
 
 Classification
     Classification gives priority to certain types of traffic over others.
@@ -77,9 +77,11 @@ Scheduling
 Policing
     Drops or remark packets if the traffic rate goes over the configured rate. 
     Solve the downside of LLQ where schedulers are starving if there is always traffic in the designated SPQ.
+    ISPs use policing to comply a rate/speed with a WAN service contract.
     
 Shaping
     Buffers traffic in a queue if the traffic rate goes over the configured rate.
+    Companies may deploy shaping on their edge-router to adapt to a service rate/speed provided by ISPs. 
 
 # Qaulity Measurement
   Bandwidth, Delay, Jitter, Loss
