@@ -45,3 +45,8 @@ All OSPF routers | 224.0.0.5 | FF02::5 |
 All OSPF DR/BDRs | 224.0.0.6 | FF02::6 |
 All RIP routers | 224.0.0.9 | FF02::9 |
 All EICRP routers | 224.0.0.10 | FF02::A |
+
+IEEE | Description |
+---|---|
+802.3 | Ethernet |
+802.11 | WLAN |
