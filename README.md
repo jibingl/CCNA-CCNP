@@ -13,13 +13,14 @@ Router Boost Order:
                   ROM            ROM       flash              NVRAM                              RAM
 ```
 
-Abbreviations| Names | Purposes| Key-concepts|
----|---|---|---|
-STP | Spanning Tree Protocol | Loop-free layer2 network | |
-DTP | Dynamic Trunking Protocol | Automatically configure switchport states | |
-VTP | VLAN Trunking Protocol | Centralized VLANs management | |
-CDP | CIsco Discovery Protocol | Exchange device info | |
-NTP | Network Time Protocol | Syncronize time | |
+Abbr.| Names | Purposes| Key-concepts|
+-----|-------|---------|-------------|
+STP  | Spanning Tree Protocol | Loop-free layer2 network | |
+DTP  | Dynamic Trunking Protocol | Automatically configure switchport states | |
+VTP  | VLAN Trunking Protocol | Centralized VLANs management | |
+CDP  | CIsco Discovery Protocol | Exchange device info | |
+NTP  | Network Time Protocol | Syncronize time | |
+NDP  | Neighbor Discovering Protocol | IPv6 'ARP'| 5 ICMPv6 packet types |
 
 MAC Address Table
 Vlan | Mac Address | Type | Ports |
