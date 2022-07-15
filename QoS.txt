@@ -45,7 +45,11 @@ Classification
                   IPP       0   1   2   3   4   5   6   7          0b-  x  x  x  0  0  0 (formula 8x)
                   CS        CS0 CS1 CS2 CS3 CS4 CS5 CS6 CS7        0d-  4  2  1          (CS-cal-values)
                   DSCP      0   8   16  24  32  40  48  56
-
+    RFC 4954 offers some specefic recommendations to classify traffic:
+        - Vioce traffic: EF (DSCP46)
+        - Interactive video: AF4x (DSCP34/36/38)
+        - Streaming video: AF3x (DSCP26/28/30)
+        - High priority data: AF2x (DSCP18/20/22)
 Queuing           
     When a device receives messages faster than forwards them out, new messages are placed in a queue and taken by a Scheduler later to transmit.
     Classified packets are queued in different queues.
