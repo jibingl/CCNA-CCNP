@@ -32,14 +32,3 @@ NBI - North-bound Interface - human-cotrollers
  > Notes: NBI - Northbound Interface); SBI - Southbound Interface 
 
 
-
-
-```
-        .-----.
-  .---.(       ).---.
- (                   )
-(       Internet      )
- (                   )
-  -(     (      ).--`
-    `---` `-``--`
-````
