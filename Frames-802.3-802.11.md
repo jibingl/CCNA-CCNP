@@ -29,8 +29,8 @@ The size of a Ethernet frame (Eth-Header + Data + Eth-Trailer) must between 64 -
 +-------+--------+------------+------------+------------+--------+------------+-------+---------+------------------+----------+
 ```
 **Frame Control**: Provide info about type and subtype. There are three types:
- - _Management_: Beacon, Probe request & response, Authentication, and Association request & response.
- - -Control-: Controll access to the medium (radio frequency). Like RTS (Request to Send), CTS (Clear to Send), and ACK.
+ - _Management_: Beacon, Probe request & response, Authentication, and Association request & response. Those msg used for connection process between wireless devices and APs.  
+ - _Control_: Controll access to the medium (radio frequency). Like RTS (Request to Send), CTS (Clear to Send), and ACK.
  - _Data_: Actual data packets.
 
 **Duration/ID**: Depending on message type, it can be the time dedicatedly used by the channel to transmit the frame, or identifier for the association.
