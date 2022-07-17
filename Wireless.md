@@ -74,3 +74,10 @@ Two radios are used by MAPs: one to provide a BSS, the other to form a 'backhaul
 ```
 
 ## 
+802.11 Messages Types
+
+**Management**: Beacon, Probe request & response, Authentication, and Association request & response.
+
+**Control**: Controll access to the medium (radio frequency). Like RTS (Request to Send), CTS (Clear to Send), and ACK.
+
+**Data**: Actual data packets.
