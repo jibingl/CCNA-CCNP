@@ -1,7 +1,5 @@
 # CCNA
 
-8. WLAN
-9. SDN
 10. REST and ?
 12. Network design - 3-tier, 2-tier (callopsed core layer)
 15. Late collisions?
