@@ -109,8 +109,8 @@ Embedded WLC | WLC is integrated wiht a switch | 200 APs |
 Mobility Express WLC | WLC is intergated within an AP | 100 APs |
 
 ## WiFi Encryptions
-            | WEP | WPA | WPA2 |WPA3 |
-------------|-----|-----|------|-----|
+  Terms | WEP | WPA | WPA2 |WPA3 |
+--------|-----|-----|------|-----|
 Release Year| 1999| 2003| 2004| 2018 |
 Authentication| WEP-open & WEP-sharedkey| PSK & 802.1x| PSK & 802.1x| SAE & 802.1x|
 Encryption| RC4| TKIP| AES counter mode| AES counter mode|
