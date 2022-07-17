@@ -154,6 +154,7 @@ SW1(config-if)#ip address 192.168.200.1 255.255.255.0
 SW1(config)#interface range f0/6-8
 SW1(config-if-range)#switchport mode access
 SW1(config-if-range)#switchport access vlan 10
+SW1(config-if-range)#switchport nonegociate
 SW1(config-if-range)#spanning-tree portfast
 SW1(config-if-range)#spanning-tree bpdu guard
 
