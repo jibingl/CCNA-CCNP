@@ -73,11 +73,10 @@ Two radios are used by MAPs: one to provide a BSS, the other to form a 'backhaul
         PC                                                              PC
 ```
 
-## 
-802.11 Messages Types
+## Wireless Architectures
+AP Deployment | WLC | APs Config | To-Wired-Net | Requirements | 
+--------------|-----|------------|--------------|--------------|
+Autonomous | No WLC | Individually | Trunk | Each AP needs Mngt IP & RF parameters |
+Lightweight | WLC | Centrally | | 
 
-**Management**: Beacon, Probe request & response, Authentication, and Association request & response.
-
-**Control**: Controll access to the medium (radio frequency). Like RTS (Request to Send), CTS (Clear to Send), and ACK.
-
-**Data**: Actual data packets.
+split-MAC archtecture
