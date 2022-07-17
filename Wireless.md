@@ -118,3 +118,67 @@ Data Integrity| CRC-32| MIC| CBC-MAC| GMAC|
 Session-Key Size| 64 bits(24 IV)| 128 bits| 128 bits| 128 bits (Personal); 192 bits (Enterprise)|
 Cipher Type| Stream| Stream| Block| Block|
 Key Management| N/A| 4-way Handshake| 4-way Handshake| SAE Handshake|
+
+## Configuration of WLAN
+`option 43 <WLC-IP-Address>` of DHCP configuration can be used to tell APs the IP address of their WLC. It is useful when a WLC is located in a remote network and can't hear CAPWAP messages broadcasted by APs which directly connect to a local subnet.  
+
+Exmaple topology:
+```
+                        +---+
+                        |WLC| .100/.100/.100           +-------------------------------------+
+                        +---+                          | WLANs/VLANs:                        |
+                   port1 | | port2                     | Vlan10: MNGT, 10.10.10.0/24         |
+                        (|+|)LAG                       | Vlan100: Internal, 192.168.100.0/24 |
+                         | |                           | Vlan200: Guest, 192.168.200.0/24    |
+                     f0/1| |f0/2                       +-------------------------------------+
+    (<i>)----------f0/7-+[=]+-f0/8---------(<i>) 
+     AP1                 SW1 \f0/6          AP2
+     dhcp           .1/.1/.1  \             dhcp
+                               PC1-dhcp
+```
+Configuration on `SW1`:
+```
+SW1(config)#vlan 10
+SW1(config-vlan)#name MNGT
+SW1(config-vlan)#vlan 100
+SW1(config-vlan)#name Internal
+SW1(config-vlan)#vlan 200
+SW1(config-vlan)#anme Guest
+SW1(config-vlan)#interface vlan 10
+SW1(config-if)#ip address 10.10.10.1 255.255.255.0
+SW1(config-if)#interface vlan 100
+SW1(config-if)#ip address 192.168.100.1 255.255.255.0
+SW1(config-if)#interface vlan 200
+SW1(config-if)#ip address 192.168.200.1 255.255.255.0
+
+SW1(config)#interface range f0/6-8
+SW1(config-if-range)#switchport mode access
+SW1(config-if-range)#switchport access vlan 10
+SW1(config-if-range)#spanning-tree portfast
+SW1(config-if-range)#spanning-tree bpdu guard
+
+SW1(config-if-range)#interface range f0/1-2
+SW1(config-if-range)#channel-group 1 mode on
+SW1(config-if-range)#interface port-channel 1
+SW1(config-if)#switchport mode trunk
+SW1(config-if)#switchport trunk allowed vlan 10,100,200
+
+SW1(config)#ip dhcp pool VLAN10-MNGT
+SW1(dhcp-config)#network 10.10.10.0 255.255.255.0
+SW1(dhcp-config)#default-router 10.10.10.1
+SW1(dhcp-config)#option 43 ip 10.10.10.100
+
+SW1(config)#ip dhcp pool VLAN100-INTERNAL
+SW1(dhcp-config)#network 192.168.100.0 255.255.255.0
+SW1(dhcp-config)#default-router 192.168.100.1
+
+SW1(config)#ip dhcp pool VLAN200-GUEST
+SW1(dhcp-config)#network 192.168.200.0 255.255.255.0
+SW1(dhcp-config)#default-router 192.168.200.1
+
+SW1(config)#ip dhcp excluded-address 10.10.10.1 10.10.10.100
+SW1(config)#ip dhcp excluded-address 192.168.100.1 192.168.100.100
+SW1(config)#ip dhcp excluded-address 192.168.200.1 192.168.200.100
+
+SW1(config)#ntp server
+```
