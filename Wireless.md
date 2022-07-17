@@ -74,9 +74,36 @@ Two radios are used by MAPs: one to provide a BSS, the other to form a 'backhaul
 ```
 
 ## Wireless Architectures
-AP Deployment | WLC | APs Config | To-Wired-Net | Requirements | 
---------------|-----|------------|--------------|--------------|
-Autonomous | No WLC | Individually | Trunk | Each AP needs Mngt IP & RF parameters |
-Lightweight | WLC | Centrally | | 
+### APs Deployment Modes
+AP Deployment | To-WLC | APs Config | APs-To-Wired-Net | WLC-to-wired-Net | Notes | 
+--------------|--------|------------|------------------|------------------|-------|
+Autonomous AP | N/A | Individually | Trunk | N/A |Each AP needs Mngt IP & RF parameters |
+Lightweight AP | CAPWAP | Centrally | Access | Trunk | WLC & APs authenticate each other by x.509 |
+Cloud-based AP | Cloud/Meraki | Centally | | | _Autonomous_ APs are centrally managed in the cloud |
 
-split-MAC archtecture
+#### _Lightweight AP Deployment_
+**Lightweight** APs deployment is also known as _split-MAC archtecture_.
+
+**CAPWAP** (Control And Provisioning of Wireless Access Points): a protocol for communication between lightweight APs and WLC.
+ - Control Tunnel: encrypted. UDP port 5246.
+ - Data Tunnedl: not encrypted but can be configured to. UDP port 5247.
+
+Lightweight APs operational modes:
+Modes | Functions | 
+------|-----------|
+Local | Offer BSS or BSSs (default mode) |
+FlexConnect | Local + _autonomous_ deploment (when WLC is lost) |
+Sniffer | Dedicated to capture 802.11 frames and send to a sniffer app (WireShark) |
+Monitor | Decicated to receive 802.11 frames and detect rogue devices |
+Rogue Detector | Dedicated to work with WLC to listen to wired traffic only and detect rogue devices |
+SE-Connect | Dedicated to RF spectrum analysis on all channels |
+Bridge/Mesh | Like autonomous AP's _outdoor Bridge_ |
+Flex plus Bridge | Add _FlexConnect_ to _Bridge/Mesh_ |
+
+### WLC Deployment Modes
+Deploment modes | Description | Support |
+----------------|-------------|---------|
+Unified WLC| Hareware WLC | 6000 APs |
+Cloud-based WLC | VM WLC | 3000 APs |
+Embedded WLC | WLC is integrated wiht a switch | 200 APs |
+Mobility Express WLC | WLC is intergated within an AP | 100 APs |
