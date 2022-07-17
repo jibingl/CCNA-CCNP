@@ -1,6 +1,6 @@
 # Wireless Network
 
-## Fundimentals
+## Fundamentals
 ### _WiFi Table_
 WiFi-Alliance | IEEE | Max-bps | Freqency |
 ---------|------|-----------|----------|
@@ -34,6 +34,7 @@ Aka **ad hoc**. An example is Apple _AirDrop_.
 **BSS** (Basic Service Set) - A kind of Infrastracture Service Set in which clients connect to each other via an AP.  
 BSSID (Basic Service Set ID) is used to uniquely identify the AP.  
 BSA (Basic Service Area) is the physical area around an AP where its signal can cover.  
+When multiple BSSs separately provide service, each BSS is mapped to a separate VLAN on the wired network, and each AP should connect to switch via _trunk_.
 
 **ESS** (Extended Service Set) - Multiple BSSs connect together. Each BSS uses the same SSID, but has own unique BSSID. Each BSS must uses a fifferent channnel to avoid interference.  
 Roaming, wireless devices can seamless travel between BSSs.
@@ -71,3 +72,5 @@ Two radios are used by MAPs: one to provide a BSS, the other to form a 'backhaul
         |                                                               |
         PC                                                              PC
 ```
+
+## 
