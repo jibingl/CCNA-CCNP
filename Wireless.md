@@ -114,7 +114,7 @@ Mobility Express WLC | WLC is intergated within an AP | 100 APs |
 Release Year| 1999| 2003| 2004| 2018 |
 Authentication| WEP-open & WEP-sharedkey| PSK & 802.1x| PSK & 802.1x| SAE & 802.1x|
 Encryption| RC4| TKIP| AES counter mode| AES counter mode|
-Data Integrity| N/A| MIC| CBC-MAC| GMAC|
-Session-Key Size| 
-Cipher Type|
-Key Management|
+Data Integrity| CRC-32| MIC| CBC-MAC| GMAC|
+Session-Key Size| 64 bits(24 IV)| 128 bits| 128 bits| 128 bits (Personal); 192 bits (Enterprise)|
+Cipher Type| Stream| Stream| Block| Block|
+Key Management| N/A| 4-way Handshake| 4-way Handshake| SAE Handshake|
