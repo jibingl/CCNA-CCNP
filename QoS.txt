@@ -84,8 +84,9 @@ Policing
     ISPs use policing to comply a rate/speed with a WAN service contract.
     
 Shaping
-    Buffers traffic in a queue if the traffic rate goes over the configured rate.
-    Companies may deploy shaping on their edge-router to adapt to a service rate/speed provided by ISPs. 
+    Buffers traffic in a queue if the traffic rate goes over the configured rate.  
+    Shapping optimize delay of some traffic by delaying others.   
+    Companies may deploy shaping on source traffic (custmor-edge-router) to ensure the traffic they send complies with a contract (limited service rate/speed) which may be enfoced in ISPs network by traffic polcing. 
 
 # Qaulity Measurement
   Bandwidth, Delay, Jitter, Loss
