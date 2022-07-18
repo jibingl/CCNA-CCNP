@@ -1,6 +1,6 @@
 # CCNA
 1. Portsecurity - the behavior of the switch when configure port-security? Under what cuccumstance port will be vilated?
-
+2. IP helper - where should the helper configration reside in?
 12. Network design - 3-tier, 2-tier (callopsed core layer)
 15. Late collisions?
 
