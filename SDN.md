@@ -32,7 +32,7 @@ SDN Architecture & Network Automation
 
  Notes | Data Plane | Controll PLane | Management Plane |
 -------|------------|----------------|------------------|
-aka | forwarding plane | | |
-functions | Data forwarding | How to forward data | Manage Devices |
-if effect forwarding? | Yes | Yes | No |
-examples | routing, forwarding, NAT, ACLs, port security| routing table, ARP table, MAC address table, STP | SSH, Telnet, Syslog, SNMP, NTP |
+AKA | forwarding plane | | |
+Functions | Data forwarding | How to forward data | Manage Devices |
+If effect forwarding? | Yes | Yes | No |
+Examples | routing, forwarding, NAT, ACLs, port security| routing table, ARP table, MAC address table, STP | SSH, Telnet, Syslog, SNMP, NTP |
