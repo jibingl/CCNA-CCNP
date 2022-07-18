@@ -28,7 +28,7 @@ SDN Architecture & Network Automation
                          +---------+            +---------+
 ```
  > Notes: NBI (Northbound Interface) - controller-to-devices; SBI (Southbound Interface) - human/apps-to-contoller.  
-**SBI** traffics can be OpenFlow, onePK, OpFlex, and NETCONF.
+**SBI** traffics can be OpenFlow, onePK, OpFlex, NETCONF, RESTCONF.
 
  Notes | Data Plane | Controll PLane | Management Plane |
 -------|------------|----------------|------------------|
