@@ -15,7 +15,7 @@ URI Unified Resource Identifier: indicates the resource it is trying to access.
 Example of URI:
 ```
 https://sandboxdnac.cisco.com/dna/intent/api/v1/network-device
-+----+  +--------------------+-------------------------------+
+<---->  <-------------------><------------------------------->
 Scheme      Authority              Path
 ```
 Table 2 - HTTP Responses:
