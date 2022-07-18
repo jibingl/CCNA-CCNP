@@ -35,4 +35,4 @@ SDN Architecture & Network Automation
 aka | forwarding plane | | |
 functions | Data forwarding | How to forward data | Manage Devices |
 if effect forwarding? | Yes | Yes | No |
-examples | NAT, ACLs, port security| routing table, ARP table, MAC address table, STP | SSH, Telnet, Syslog, SNMP, NTP |
+examples | routing, forwarding, NAT, ACLs, port security| routing table, ARP table, MAC address table, STP | SSH, Telnet, Syslog, SNMP, NTP |
