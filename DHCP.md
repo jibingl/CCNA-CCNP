@@ -1,7 +1,7 @@
 # Dynamic Host Configuration Protocl
 
-IPv4 DHCP
-=========
+## IPv4 DHCP
+```
                 Server          Client          Server
             (not selected)                    (selected)
 
@@ -46,6 +46,6 @@ IPv4 DHCP
                   v               v               v
      Figure 3: Timeline diagram of messages exchanged between DHCP
      (rfc2131) client and servers when allocating a new network address
+```
+## IPv6 DHCP
 
-IPv6 DHCP
-=========
