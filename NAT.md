@@ -36,7 +36,7 @@ _one or more private subnets <--> multiple public IPs_
 | tcp   122.11.11.6:61616      192.168.1.102:61616   |  140.82.113.4:443     140.82.113.4:443    |
 `---------------dynamic(24h)/permanent---------------|--------------dynamic/temporary------------`
 ```
-Dynamic NAT configuration requires an _access-list_ for _inside local_ IPs and a IPs pool for _inside global_.
+Dynamic NAT configuration requires an _**access-list**_ for _inside local_ IPs and a _**ip nat pool**_ for _inside global_.
 ```
 //...Omitc configuration of inside and outside interfaces
 R1(config)#access-list 1 permit 192.168.1.0 0.0.0.255
