@@ -48,3 +48,10 @@ IEEE | Description |
 ---|---|
 802.3 | Ethernet |
 802.11 | WLAN |
+
+Network Automation Tools
+Name| Client-SRV| OperateModel| CommunicationProtocal| Port| Language| Key Components|
+----|-----------|-------------|----------------------|-----|---------|---------------|
+Ansible| agentless| push model| SSH| 22| Python| Control Node: Inventory, Template, Variable, Playbook|
+Puppet| agent-based/agentless| pull model| HTTP(s)| 8140| Ruby| Puppet Master: Manifest , Templates|
+Chef| agent-based| pull model| 10002| Ruby| HTTP(s)| Resources, Recipes, Cookbooks, Run-list|
