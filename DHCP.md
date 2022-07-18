@@ -49,7 +49,7 @@ RFC 2131
        client and servers when allocating a new network address
 ```
 ## IPv6 DHCP
-Before DHCP process starts, clients and servers (routers) exchange info by using NDP (part of ICMPv6).
+Before DHCP process starts, clients and servers (routers) exchange info by using NDP (part of ICMPv6) to determine how to get IPv6 address.
 ```
                 Server          Client          Server
             (not selected)                    (selected)
@@ -67,9 +67,9 @@ Before DHCP process starts, clients and servers (routers) exchange info by using
                   |\              |  ____________/|
                   | \________     | /     RA      |              Multicast ff02:1
                   |      RA  \    |/              |
-                  |           \   |               |              A=1, O=0, M=0
-                  |      Collects Advertises      |              A=1, O=1, M=0
-                  |             \ |               |              A=0, O=0, M=1
+                  |           \   |               |              A=1, O=0, M=0 SLAAC
+                  |      Collects Advertises      |              A=1, O=1, M=0 
+                  |             \ |               |              A=0, O=0, M=1 Stateful (DHCP)
                   |     Selects configuration     |
                   |               |               |
                   v               v               v
