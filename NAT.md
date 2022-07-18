@@ -36,14 +36,14 @@ _one or more private subnets <--> multiple public IPs_
 | tcp   122.11.11.6:61616      192.168.1.102:61616   |  140.82.113.4:443     140.82.113.4:443    |
 `---------------dynamic(24h)/permanent---------------|--------------dynamic/temporary------------`
 ```
-Dynamic NAT cmd
+Dynamic NAT configuration requires an _access-list_ for _inside local_ IPs and a IPs pool for _inside global_.
 ```
 //...Omitc configuration of inside and outside interfaces
 R1(config)#access-list 1 permit 192.168.1.0 0.0.0.255
 R1(config)#ip nat pool POOL-1 122.11.11.2 122.11.11.6 netmask 255.255.255.248        //Or type 'prefix-length 29'
 
 R1(config)#ip nat inside source list 1 pool POOL-1
-//Syntax: ip nat inside source <acl> <nat-pool>
+//Syntax: ip nat inside source <acl-for-inside-local-ips> <nat-pool-for-inside-global-ips>
 ```
 ## PAT (aka NAT overload)
 _one or more private subnets <--> one or more public IPs_
@@ -60,14 +60,14 @@ _one or more private subnets <--> one or more public IPs_
 | tcp   122.11.11.3:61616      192.168.1.22:61616    |  140.82.113.4:443     140.82.113.4:443    |
 `---------------dynamic(24h)/permanent---------------|--------------dynamic/temporary------------`
 ```
-PAT cmd
+PAT configuring cmds are the same as _dynamic NAT_ but only append `overload`.
 ```
 //...Omitc configuration of inside and outside interfaces
 R1(config)#access-list 1 permit 192.168.1.0 0.0.0.255
 R1(config)#ip nat pool POOL-1 122.11.11.2 122.11.11.3 prefix-length 29        //Prefix is not really impact the IP range
 
 R1(config)#ip nat inside source list 1 pool POOL-1 overload
-//Syntax: ip nat inside source <acl> <nat-pool> overload
+//Syntax: ip nat inside source <acl-for-inside-local-ips> <nat-pool-for-inside-global-ips> overload
 
 R1(config)#ip nat inside source list 1 interface g0/0 overload                //Use single public IP for PAT
 ```
