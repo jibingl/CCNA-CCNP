@@ -44,12 +44,12 @@ All routers | 224.0.0.2 | FF02::2 |
 All OSPF routers | 224.0.0.5 | FF02::5 |
 All OSPF DR/BDRs | 224.0.0.6 | FF02::6 |
 All RIP routers | 224.0.0.9 | FF02::9 |
-All EICRP routers | 224.0.0.10 | FF02::A |
+All EIGRP routers | 224.0.0.10 | FF02::A |
 
 **IEEE 802** are standards for LAN, PAN, and MAN. The services and protocols specified in IEEE 802 map to the _data link_ and _physical_ layer.
 Table-5 IEEE Standards
 IEEE | Description |
----|---|
+-----|-------------|
 802.3 | Ethernet |
 802.11 | WLAN |
 
