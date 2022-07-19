@@ -16,7 +16,7 @@ Classification gives priority to certain types of traffic over others.
 Ways to classifying traffic:   
 - #1 ACLs;  
 - #2 NBAR (Network Based Application Recognition) inspects layer 3, layer 4, and up to layer 7.  
-- #3 PCP/CoS (Priority Code Point/Class of Service) of 802.1q tag (layer 2).  
+- #3 **PCP/CoS** (Priority Code Point/Class of Service) of 802.1q tag (layer 2).  
 
     PCP-value | Traffic-types
     ----------|--------------
@@ -29,7 +29,7 @@ Ways to classifying traffic:
     6 (006)   | Internetwork control
     7 (007)   | Network control
 
-- #4 DSCP (Differentiated Service Code Point) of IP header (layer 3).  
+- #4 **DSCP** (Differentiated Service Code Point) of IP header (layer 3).  
 
     Traffic-types |DSCP-value |Description
     --------------|-----------|-----------
@@ -94,5 +94,6 @@ Companies may deploy shaping on source traffic (custmor-edge-router) to ensure t
 
 ## Qaulity Measurement
 Acceptable qaulity| Bandwidth| Delay| Jitter| Loss|
+------------------|----------|------|-------|-----|
 Audio | 30-128Kbps| one-way delay =< 150ms| jitter =< 30ms| loss =< 1%|
 Video | 384K-20Mbps| one-way delay =< 200-400ms| jitter =< 30-50ms| loss =< 0.1-1%|
