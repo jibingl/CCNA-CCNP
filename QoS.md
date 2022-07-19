@@ -14,28 +14,29 @@
 ## Classification
 Classification gives priority to certain types of traffic over others.  
 Ways to classifying traffic:   
-    #1 ACLs;
-    #2 NBAR (Network Based Application Recognition) inspects layer 3, layer 4, and up to layer 7.
-    #3 PCP/CoS (Priority Code Point/Class of Service) of 802.1q tag (layer 2).
-            PCP-value   Traffic-types
-            ---------   -------------
-            0 (000)     Best effort (default)
-            1 (001)     Backgroud
-            2 (002)     Excellent effort
-            3 (003)     Critical applications
-            4 (004)     Video
-            5 (005)     Voice
-            6 (006)     Internetwork control
-            7 (007)     Network control
-    #4 DSCP (Differentiated Service Code Point) of IP header (layer 3).
-            Traffic-types              DSCP-value           Description
-            -------------              ----------           -----------
-            DF(Defualt Forwarding)     0 (000000)           Best effort
-            EF(Expedited Forwarding)   46 (101110)          Low loss/latency/jitter; 
-                                                            Voice traffic
-            AF(Assured Forwarding)     12-values (bbbbb0)   4-classe with 3-level drop-precedences; 
-                                                            Interactive video AF4x; Streaming video AF3x; High priority data AF2x
-            CS(Class Selector)         8-values (bbb000)    Backward compatible to IPP
+- #1 ACLs;  
+- #2 NBAR (Network Based Application Recognition) inspects layer 3, layer 4, and up to layer 7.  
+- #3 PCP/CoS (Priority Code Point/Class of Service) of 802.1q tag (layer 2).  
+
+    PCP-value | Traffic-types
+    ----------|--------------
+    0 (000)   | Best effort (default)
+    1 (001)   | Backgroud
+    2 (002)   | Excellent effort
+    3 (003)   | Critical applications
+    4 (004)   | Video
+    5 (005)   | Voice
+    6 (006)   | Internetwork control
+    7 (007)   | Network control
+
+- #4 DSCP (Differentiated Service Code Point) of IP header (layer 3).  
+
+    Traffic-types |DSCP-value |Description
+    --------------|-----------|-----------
+    DF(Defualt Forwarding)  |  0 (000000)        |  Best effort
+    EF(Expedited Forwarding)|  46 (101110)       |  Low loss/latency/jitter; Voice traffic
+    AF(Assured Forwarding)  |  12-values (bbbbb0)|  4-classe with 3-level drop-precedences; Interactive video AF4x; Streaming video AF3x; High priority data AF2x
+    CS(Class Selector)      |  8-values (bbb000) |  Backward compatible to IPP
 
                        Lowest---drop_precedence--Highest       Value-Converting Diagrams
               Highest  ---------------------------------       0d-  32 16 8  4  2  1   (DSCP-cal-values)
@@ -50,46 +51,48 @@ Ways to classifying traffic:
               CS        CS0 CS1 CS2 CS3 CS4 CS5 CS6 CS7        0d-  4  2  1          (CS-cal-values)
               DSCP      0   8   16  24  32  40  48  56
 
-Queuing           
-    When a device receives messages faster than forwards them out, new messages are placed in a queue and taken by a Scheduler later to transmit.
-    Classified packets are queued in different queues.
-    By default, queued messages will be forwarded in FIFO (First In First Out) manner.
-    When a queue is full, new arriving packets will be dropped. This is called tail drop.
-                     Queue (FIFO)
-           Dropped   +----(queue is full)-+
-          +--+ +--+  | +--+--+--+--+--+--+|
-          |Pa| |Pa|  | |Pa|Pa|Pa|Pa|Pa|Pa||
-          |ck| |ck|  | |ck|ck|ck|ck|ck|ck||
-          |et| |et|  | |et|et|et|et|et|et||
-          +--+ +--+  | +--+--+--+--+--+--+|
-                     +--------------------+
-                  (Tail Drop)
-    Tail drop is harmful because it can lead to TCP global synchronization.
-    RED (Random Early Detection) is introduced to prevent tail drop and TCP global synchronization.
-    WRED (Weighted Random Early Detection) is an improved version, allows to control which packets are dropped depending on the traffic class.
-        
-Scheduling
-    Theoritecally, a scheduler decides which queue traffic is forwarded from next. A popular scheduling method is Wieghted Round-Robin combining with CBWFQ.
-    Round-robin - Pakets are taken fom each queue in order cyclically;
-    Weighted    - More data is taken from high priority queues each time the scheduler reaches that queue;
-    CBWFQ       - Class-Based Weighted Fair Queuing, guaranteeing each queuw a certain percentage of the interface's bandwidth.
-                  Not ideal for voice/video because even the highest priority queues have to wait their turn in the scheduler, which adds delay & jitter.
-    LLQ         - Low Latency Queue, designating one or more queues as strict priority queues (SPQ);
-                  SPQ queues will be always taken the next packet until it is empty.
-                  Best for voice/video traffic.
-                  
-Policing
-    Drops or remark packets if the traffic rate goes over the configured rate. 
-    Solve the downside of LLQ where schedulers are starving if there is always traffic in the designated SPQ.
-    ISPs use policing to comply a rate/speed with a WAN service contract.
-    
-Shaping
-    Buffers traffic in a queue if the traffic rate goes over the configured rate.  
-    Shapping optimize delay of some traffic by delaying others.   
-    Companies may deploy shaping on source traffic (custmor-edge-router) to ensure the traffic they send complies with a contract (limited service rate/speed) which may be enfoced in ISPs network by traffic polcing. 
+## Queuing           
+When a device receives messages faster than forwards them out, new messages are placed in a queue and taken by a _Scheduler_ later to transmit.  
+Classified packets are queued in different queues.  
+By default, queued messages will be forwarded in **_FIFO (First In First Out)_** manner.  
+When a queue is full, new arriving packets will be dropped. This is called **_tail drop_**.  
 
-# Qaulity Measurement
-  Bandwidth, Delay, Jitter, Loss
-  Acceptable audio quality: one-way delay 150ms or less
-                            jitter 30ms or less
-                            loss 1% or less
+                         Queue (FIFO)
+               Dropped   +----(queue is full)-+
+              +--+ +--+  | +--+--+--+--+--+--+|
+              |Pa| |Pa|  | |Pa|Pa|Pa|Pa|Pa|Pa||
+              |ck| |ck|  | |ck|ck|ck|ck|ck|ck||
+              |et| |et|  | |et|et|et|et|et|et||
+              +--+ +--+  | +--+--+--+--+--+--+|
+                         +--------------------+
+                      (Tail Drop)
+                      
+**_Tail drop_** is harmful because it can lead to TCP global synchronization.  
+**RED (Random Early Detection)** is introduced to prevent tail drop and TCP global synchronization.  
+**WRED (Weighted Random Early Detection)** is an improved version, allows to control which packets are dropped depending on the traffic class.  
+        
+## Scheduling
+Theoritecally, a scheduler decides which queue traffic is forwarded from next. A popular scheduling method is _Wieghted Round-Robin_ combining with _**CBWFQ**_.  
+
+    Round-robin - Pakets are taken fom each queue in order cyclically;  
+    Weighted    - More data is taken from high priority queues each time the scheduler reaches that queue;  
+    CBWFQ       - Class-Based Weighted Fair Queuing, guaranteeing each queuw a certain percentage of the interface's bandwidth.  
+                  Not ideal for voice/video because even the highest priority queues have to wait their turn in the scheduler, which adds delay & jitter.
+    LLQ         - Low Latency Queue, designating one or more queues as strict priority queues (SPQ);  
+                  SPQ queues will be always taken the next packet until it is empty.  
+                  Best for voice/video traffic.  
+                  
+## Policing
+Drops or remark packets if the traffic rate goes over the configured rate.   
+Solve the downside of LLQ where schedulers are starving if there is always traffic in the designated SPQ.  
+ISPs use policing to comply a rate/speed with a WAN service contract.  
+    
+## Shaping
+Buffers traffic in a queue if the traffic rate goes over the configured rate.  
+Shapping optimize delay of some traffic by delaying others.   
+Companies may deploy shaping on source traffic (custmor-edge-router) to ensure the traffic they send complies with a contract (limited service rate/speed) which may be enfoced in ISPs network by traffic polcing. 
+
+## Qaulity Measurement
+Acceptable qaulity| Bandwidth| Delay| Jitter| Loss|
+Audio | 30-128Kbps| one-way delay =< 150ms| jitter =< 30ms| loss =< 1%|
+Video | 384K-20Mbps| one-way delay =< 200-400ms| jitter =< 30-50ms| loss =< 0.1-1%|
