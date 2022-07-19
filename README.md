@@ -20,7 +20,7 @@ CDP  | CIsco Discovery Protocol | Exchange device info | |
 NTP  | Network Time Protocol | Syncronize time | |
 NDP  | Neighbor Discovering Protocol | Gather info required for IPv6 communication| 5 ICMPv6 packet types |
 
-Table-2 `show mac address-table [dynamic | static | vlan <vlan-id> | interface <int-id>]`
+Table-2 **`show mac address-table [dynamic | static | vlan <vlan-id> | interface <int-id>]`**
 Vlan | Mac Address | Type | Ports |
 -----|-------------|------|-------|
 ALL | 0100-0ccc-cccc | STATIC | CPU |
@@ -29,7 +29,7 @@ ALL | 0100-0ccc-cccc | STATIC | CPU |
 Cisco cmds `show mac address-table`, `clear mac address-table dynamic [address <specific-mac> | interface <inter-id>]`.  
 Aging is 5 minutes.
 
-Table-3 `show arp [vlan <vlan-id>| interface <int-id>]`
+Table-3 **`show arp [vlan <vlan-id>| interface <int-id>]`**
 Internet Address | Age |Phtsical Address | Type | Interface |
 -----------------|-----|-----------------|------|-----------|
 169.254.255.255 | - | ff-ff-ff-ff-ff-ff | ARPA |  |
@@ -38,7 +38,7 @@ Internet Address | Age |Phtsical Address | Type | Interface |
 
 Table-4 Well-know Multicast Addresses
 Purpose | IPv4 Address | IPv6 Address |
----|---|---|
+--------|--------------|--------------|
 All nodes/hosts (like broadcast) | 224.0.0.1 | FF02::1 |
 All routers | 224.0.0.2 | FF02::2 |
 All OSPF routers | 224.0.0.5 | FF02::5 |
