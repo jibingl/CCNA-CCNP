@@ -20,19 +20,21 @@ CDP  | CIsco Discovery Protocol | Exchange device info | |
 NTP  | Network Time Protocol | Syncronize time | |
 NDP  | Neighbor Discovering Protocol | Gather info required for IPv6 communication| 5 ICMPv6 packet types |
 
-Table-2 MAC Address Table Example
+Table-2 `show mac address-table [dynamic | static | vlan <vlan-id> | interface <int-id>]`
 Vlan | Mac Address | Type | Ports |
----|---|---|---|
-1 | 00-01-11-22-aa-cc | dynamic | Fa0/1 |
+-----|-------------|------|-------|
+ALL | 0100-0ccc-cccc | STATIC | CPU |
+1 | 0001-1122-aacc | DYNAMIC | Fa0/1 |
 
 Cisco cmds `show mac address-table`, `clear mac address-table dynamic [address <specific-mac> | interface <inter-id>]`.  
 Aging is 5 minutes.
 
-Table-3 ARP Table Examples
-Internet Address | Physical Address | Type |
----|---|---|
-169.254.255.255 | ff-ff-ff-ff-ff-ff | static |
-192.168.1.101   | 00-01-11-22-aa-cc | dynamic |
+Table-3 `show arp [vlan <vlan-id>| interface <int-id>]`
+Internet Address | Age |Phtsical Address | Type | Interface |
+-----------------|-----|-----------------|------|-----------|
+169.254.255.255 | - | ff-ff-ff-ff-ff-ff | ARPA |  |
+192.168.1.1 | - | 1122.3344.55aa | ARPA | Vlan1 |
+192.168.1.101 | 3 | 0001.1122.aacc | ARPA | Vlan1 |
 
 Table-4 Well-know Multicast Addresses
 Purpose | IPv4 Address | IPv6 Address |
