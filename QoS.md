@@ -1,15 +1,16 @@
 # Qaulity of Service
 
 ```
-                        CLASSIFICATION  POLICING    QUEUING          SCHEDULING                SHAPING
-                                        +-rate-+     (FIFO)
-                      - Vo Vo Vo Vo Vo  |      | -- Vo3 Vo2 Vo1 -----LLQ/SPQ--10%--------.
-                    / - Vi Vi Vi Vi Vi  | Drop | -- Vi3 Vi2 Vi1 -----CBWFQ----20%---|--\  \    +--rate---+
- Ingress--Routing---- - Vis Vis Vis Vis |  or  | -- Vis3 Vis2 Vis1 --CBWFQ----15%---|----------| Queuing |---Egress
-                    \ - Hd Hd Hd Hd Hd  |Remark| -- Hd3 Hd2 Hd1 -----CBWFQ----15%---|--/       +---------+
-                      - Da Da Da Da Da  |      | -- Da3 Da2 Da1 -----CBWFQ----40%---|/  
-                                        +------+     (WRED)                        round-robin
+TRUST BOUNDARY                CLASSIFICATION  POLICING    QUEUING          SCHEDULING                SHAPING
+     |                                        +-rate-+     (FIFO)
+     |                      - Vo Vo Vo Vo Vo  |      | -- Vo3 Vo2 Vo1 -----LLQ/SPQ--10%--------.
+     |                    / - Vi Vi Vi Vi Vi  | Drop | -- Vi3 Vi2 Vi1 -----CBWFQ----20%---|--\  \    +--rate---+
+     | Ingress--Routing---- - Vis Vis Vis Vis |  or  | -- Vis3 Vis2 Vis1 --CBWFQ----15%---|----------| Queuing |---Egress
+     |                    \ - Hd Hd Hd Hd Hd  |Remark| -- Hd3 Hd2 Hd1 -----CBWFQ----15%---|--/       +---------+
+     |                      - Da Da Da Da Da  |      | -- Da3 Da2 Da1 -----CBWFQ----40%---|/  
+                                              +------+     (WRED)                        round-robin
 ```
+- Any packets arriving from outside the _trust boundary_ should have any QoS marking ignored and cleared.
 
 ## Classification
 Classification gives priority to certain types of traffic over others.  
