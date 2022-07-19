@@ -1,5 +1,6 @@
 # Qaulity of Service
 
+```
                         CLASSIFICATION  POLICING    QUEUING          SCHEDULING                SHAPING
                                         +-rate-+     (FIFO)
                       - Vo Vo Vo Vo Vo  |      | -- Vo3 Vo2 Vo1 -----LLQ/SPQ--10%--------.
@@ -8,48 +9,47 @@
                     \ - Hd Hd Hd Hd Hd  |Remark| -- Hd3 Hd2 Hd1 -----CBWFQ----15%---|--/       +---------+
                       - Da Da Da Da Da  |      | -- Da3 Da2 Da1 -----CBWFQ----40%---|/  
                                         +------+     (WRED)                        round-robin
+```
 
-Classification
-    Classification gives priority to certain types of traffic over others.
-    Ways to classifying traffic: 
-        #1 ACLs;
-        #2 NBAR (Network Based Application Recognition) inspects layer 3, layer 4, and up to layer 7.
-        #3 PCP/CoS (Priority Code Point/Class of Service) of 802.1q tag (layer 2).
-                PCP-value   Traffic-types
-                ---------   -------------
-                0 (000)     Best effort (default)
-                1 (001)     Backgroud
-                2 (002)     Excellent effort
-                3 (003)     Critical applications
-                4 (004)     Video
-                5 (005)     Voice
-                6 (006)     Internetwork control
-                7 (007)     Network control
-        #4 DSCP (Differentiated Service Code Point) of IP header (layer 3).
-                Traffic-types              DSCP-value           Description
-                -------------              ----------           -----------
-                DF(Defualt Forwarding)     0 (000000)           Best effort
-                EF(Expedited Forwarding)   46 (101110)          Low loss/latency/jitter
-                AF(Assured Forwarding)     12-values (bbbbb0)   Defines four classes with three-level of drop precedence each
-                CS(Class Selector)         8-values (bbb000)    Backward compatible to IPP
-               
-                           Lowest---drop_precedence--Highest       Value-Converting Diagrams
-                  Highest  ---------------------------------       0d-  32 16 8  4  2  1   (DSCP-cal-values)
-                     |       AF41(34)   AF42(36)   AF43(38)            +--+--+--+--+--+--+        |
-                  priority   AF31(26)   AF32(28)   AF33(30)        0b- |x  x  x |y  y  0 | (formula 8x + 2y)
-                     |       AF21(18)   AF22(20)   AF23(22)            +--+--+--+--+--+--+        |
-                  Lowest     AF11(10)   AF12(12)   AF13(14)        0d-  4  2  1  2  1      (AF-cal-values)
-                  
-                           Lowest-----precedence-----Highest
-                  -----    ---------------------------------       0d-  32 16 8  4  2  1 (DSCP-cal-values)
-                  IPP       0   1   2   3   4   5   6   7          0b-  x  x  x  0  0  0 (formula 8x)
-                  CS        CS0 CS1 CS2 CS3 CS4 CS5 CS6 CS7        0d-  4  2  1          (CS-cal-values)
-                  DSCP      0   8   16  24  32  40  48  56
-    RFC 4954 offers some specefic recommendations to classify traffic:
-        - Vioce traffic: EF (DSCP46)
-        - Interactive video: AF4x (DSCP34/36/38)
-        - Streaming video: AF3x (DSCP26/28/30)
-        - High priority data: AF2x (DSCP18/20/22)
+## Classification
+Classification gives priority to certain types of traffic over others.  
+Ways to classifying traffic:   
+    #1 ACLs;
+    #2 NBAR (Network Based Application Recognition) inspects layer 3, layer 4, and up to layer 7.
+    #3 PCP/CoS (Priority Code Point/Class of Service) of 802.1q tag (layer 2).
+            PCP-value   Traffic-types
+            ---------   -------------
+            0 (000)     Best effort (default)
+            1 (001)     Backgroud
+            2 (002)     Excellent effort
+            3 (003)     Critical applications
+            4 (004)     Video
+            5 (005)     Voice
+            6 (006)     Internetwork control
+            7 (007)     Network control
+    #4 DSCP (Differentiated Service Code Point) of IP header (layer 3).
+            Traffic-types              DSCP-value           Description
+            -------------              ----------           -----------
+            DF(Defualt Forwarding)     0 (000000)           Best effort
+            EF(Expedited Forwarding)   46 (101110)          Low loss/latency/jitter; 
+                                                            Voice traffic
+            AF(Assured Forwarding)     12-values (bbbbb0)   4-classe with 3-level drop-precedences; 
+                                                            Interactive video AF4x; Streaming video AF3x; High priority data AF2x
+            CS(Class Selector)         8-values (bbb000)    Backward compatible to IPP
+
+                       Lowest---drop_precedence--Highest       Value-Converting Diagrams
+              Highest  ---------------------------------       0d-  32 16 8  4  2  1   (DSCP-cal-values)
+                 |       AF41(34)   AF42(36)   AF43(38)            +--+--+--+--+--+--+        |
+              priority   AF31(26)   AF32(28)   AF33(30)        0b- |x  x  x |y  y  0 | (formula 8x + 2y)
+                 |       AF21(18)   AF22(20)   AF23(22)            +--+--+--+--+--+--+        |
+              Lowest     AF11(10)   AF12(12)   AF13(14)        0d-  4  2  1  2  1      (AF-cal-values)
+
+                       Lowest-----precedence-----Highest
+              -----    ---------------------------------       0d-  32 16 8  4  2  1 (DSCP-cal-values)
+              IPP       0   1   2   3   4   5   6   7          0b-  x  x  x  0  0  0 (formula 8x)
+              CS        CS0 CS1 CS2 CS3 CS4 CS5 CS6 CS7        0d-  4  2  1          (CS-cal-values)
+              DSCP      0   8   16  24  32  40  48  56
+
 Queuing           
     When a device receives messages faster than forwards them out, new messages are placed in a queue and taken by a Scheduler later to transmit.
     Classified packets are queued in different queues.
