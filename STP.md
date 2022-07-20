@@ -4,7 +4,7 @@ Form a loop-free switch network (layer 2) by exchanging BPDU messages and block 
 ## STP (802.1D)
 ### _Forming STP_
 1. Elect ONE _root bridge_ which has all interfaces to be _d-port_. The rule to elect _root bridge_: lowest Bridge ID (BID).
-    > Default _bridge priority_ is 32678 on all switches, so the MAC address is used as the tie-breaker (lowest MAC becomes the _root bridge_).
+    > Default _bridge priority_ is 32768 on all switches, so the MAC address is used as the tie-breaker (lowest MAC becomes the _root bridge_).
 2. Each remaining switch selects ONE of its interfaces to be its _r-port_ which always connect to _d-port_. The rule to select _r-port_: lowest root cost -> neighbor BID -> neighbor STP port id (= 128 + port number).
 3. Each remaining collision domain selects ONE interface to be _d-port_, then other interfaces are _nd-port_. The rule to select _d-port_: lowest root cost -> BID.
 ```
