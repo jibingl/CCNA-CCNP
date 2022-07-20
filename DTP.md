@@ -10,9 +10,9 @@ SW1(config-if)#switchport trunk encapsulation {negotiate | isl | dot1q}      //C
 ```
 
 ## DTP Negotiating Table
-Int-states | access |  auto  | desirable | trunk |
------------|--------|--------|-----------|-------|
-access     | access | access | access    | X     |
-auto       | access | access | trunk     | trunk |
-desirable  | access | trunk  | trunk     | trunk |
-trunk      |  X     | trunk  | trunk     | trunk |
+Int-states   | access |  auto  | desirable | trunk |
+-------------|--------|--------|-----------|-------|
+**access**   | access | access | access    | X     |
+**auto**     | access | access | trunk     | trunk |
+**desirable**| access | trunk  | trunk     | trunk |
+**trunk**    |  X     | trunk  | trunk     | trunk |
