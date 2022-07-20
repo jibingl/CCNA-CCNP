@@ -41,6 +41,6 @@ The size of a Ethernet frame (Eth-Header + Data + Eth-Trailer) must between 64 -
  - Receiver Address (RA): Immediate recipient
  - Transmitter Address (TA): Immediate sender  
 
-**Sequence Control**: TO reassemble fragments and eliminate duplicate frames.  
+**Sequence Control**: To reassemble fragments and eliminate duplicate frames.  
 
 **HT (High Throughput) Control**: Added in 802.11n to enable High Throughput operations.  
