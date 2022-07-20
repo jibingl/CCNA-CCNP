@@ -1,5 +1,6 @@
 # Spanning Tree Protocol
 Form a loop-free switch network (layer 2) by exchanging BPDU messages and block data traffic on specific interfaces.  
+
 ## STP (802.1D)
 ### _Forming STP_
 1. Elect ONE _root bridge_ which has all interfaces to be _d-port_. The rule to elect _root bridge_: lowest Bridge ID (BID).
@@ -22,17 +23,17 @@ Form a loop-free switch network (layer 2) by exchanging BPDU messages and block 
          SW3-BID_32769                       SW4-BID_32769
          MAC_c.c.c                           MAC_d.d.d
 ```
-### _Interfaces Roles and States
-Interfaces Roles | Designated | Root | Non-Designated |
----|---|---|---|
-BPDUs | send/forward | reveive | receive |
-Data | receive/forward | receive/forward | drop |
+### _Interfaces Roles and States_
+Interfaces Roles | Designated      | Root            | Non-Designated |
+-----------------|-----------------|-----------------|----------------|
+BPDUs            | send/forward    | reveive         | receive |
+Data             | receive/forward | receive/forward | drop |
 
-Interfaces States | blocking | listening | learning | forwarding |
----|---|---|---|---|
-BPDUs | recieve | recieve/forward | send/receive | send/recieve | 
-Data | drop | drop | only learn MAC | send/receive/learn MAC |
-Timer | N/A | 15s | 15S | N/A |
+Interfaces States | blocking | listening       | learning       | forwarding |
+------------------|----------|-----------------|----------------|------------|
+BPDUs             | recieve  | recieve/forward | send/receive   | send/recieve | 
+Data              | drop     | drop            | only learn MAC | send/receive/learn MAC |
+Timer             | N/A      | 15s             | 15S            | N/A |
 
 ### _portfast & bpduguard_
 The command `SW(config-if)#spanning-tree portfast` quickly moves access ports to _forwarding_ by passing _listening_ and _learning_. However, it may lead to loop links when a new switch connects to this fast-port. To solve the issue, `SW(config-if)#spanning-tree bpduguard` is used to block BPDU packets coming into the fast-port.
