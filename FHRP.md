@@ -6,6 +6,7 @@ Abbreviation | Full-name | Property | Router Mode| MulticastIP | vMAC | Load Bal
 HSRP | Hot Standby Reouter Protocol | Cisco | active/standby | 224.0.0.2/102 | 0000.0c07.acXX  0000.0c9f.fXXX | Among subnets
 VRRP | Virtual Router Redundancy protocol |Open-standard | master/backup | 224.0.0.18 | 0000.5e00.01XX | Among subnets
 GLBP | Gateway Load Balancing Protocol | Cisco | AVG/AVF | 224.0.0.102 | 0007.b400.XXYY | Within ONE subnet
+ > Notes: HSRP has two versions, so there are two values sometimes. The 'X' of vMAC is the group number of associated protocol.
 
 ## HSRP
 Typicial Topology
