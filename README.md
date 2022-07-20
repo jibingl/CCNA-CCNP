@@ -2,6 +2,7 @@
 2. IP helper - where should the helper configration reside in?
 12. Network design - 3-tier, 2-tier (callopsed core layer)
 15. Late collisions?
+16. Inter-vlan configuration
 
 Router Boost Order:
 ```
