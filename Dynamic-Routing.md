@@ -1,19 +1,13 @@
 # Dynamic Routing Protocols
 ## Overview
-```
-Class   Names   Algorithm         Metric           Admin-Distance   Advertising-IP       Protocol-NO.   ADs-Timer   Balance-path   Route-table
------   -----   ---------         ------           --------------   --------------       ------------   ---------   ------------   -----------
-IGP     RIP     Distance-vector   Hops(Max15)      120              255.255.255.255(v1)                 30s         1-32(4)        Only neighbors'
-                                                                    224.0.0.9(v2)        
-IGP     EIGRP   Distance-vector   Bandwith&delay   5(Summary)       224.0.0.10           0x58(88)                   1-32(4)        Only neighbors'
-                                                   90(Internal)
-                                                   170(External)
-IGP     OSPF    Link-state(LSR)   Cost(100M/BW)    110              224.0.0.5(Hello)     0x59(89)       Hello-10s   1-32(4)        Whole network
-                                                                    224.0.0.6(DR)                       Dead-40s                   Whole network
-IGP     IS-IS   Link-state(LSR)   Cost             115                                   0x7C(124)
-EGP     BGP     Path-vector                        20(eBGP)
-                                                   200(iBGP)
-```
+Class|Names|Algorithm      | Metric       |Admin-Distance  | Advertising-IP                   |Protocol-NO|ADs-Timer         |Balance-path|Route-table
+-----|-----|---------------|--------------|----------------|----------------------------------|-----------|------------------|------------|-----------
+IGP  |RIP  |Distance-vector|Hops(Max15)   |120             |255.255.255.255(v1); 224.0.0.9(v2)|           | 30s              |1-32(4)     |Only neighbors'
+IGP  |EIGRP|Distance-vector|Bandwith&delay|5-S; 90-I; 170-E| 224.0.0.10                       |0x58(88)   |                  |1-32(4)     |Only neighbors'
+IGP  |OSPF |Link-state(LSR)|Cost(100M/BW) |110             | 224.0.0.5(Hello); 224.0.0.6(DR)  |0x59(89)   |Hello-10s,Dead-40s|1-32(4)     |Whole network
+IGP  |IS-IS|Link-state(LSR)|Cost          |115             |                                  |0x7C(124)  |
+EGP  |BGP  |Path-vector    |              |20-e; 200-i     |
+
 **Important**: For RIP, EIGRP, and OSPF, `network` cmd doen't tell the router which networks to **advertise**, instead of which interfaces to **activate** routing-protocol on, and then the router will advertise the network prefix of those interfaces.
 *****
 ## RIP (Route Information Protocol) & EIGRP (Enhanced Interior Gateway Routing Protocol)
@@ -57,4 +51,4 @@ R1(config-router)#defualt-information originate     //Ad default gateway out to 
 ```
 *******
 ## OSPF (Open Shortest Path First)
-Refer to [_OSPF.md_](https://github.com/jibingl/CCNA/edit/main/OSPF.md) for detailed knowledge.
+Refer to [_OSPF.md_](https://github.com/jibingl/CCNA/blob/main/OSPF.md) for detailed knowledge.
