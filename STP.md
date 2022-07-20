@@ -33,7 +33,7 @@ Interfaces States | blocking | listening       | learning       | forwarding |
 ------------------|----------|-----------------|----------------|------------|
 BPDUs             | recieve  | recieve/forward | send/receive   | send/recieve | 
 Data              | drop     | drop            | only learn MAC | send/receive/learn MAC |
-Timer             | N/A      | 15s             | 15S            | N/A |
+Timer             | N/A      | 15s             | 15s            | N/A |
 
 ### _portfast & bpduguard_
 The command `SW(config-if)#spanning-tree portfast` quickly moves access ports to _forwarding_ by passing _listening_ and _learning_. However, it may lead to loop links when a new switch connects to this fast-port. To solve the issue, `SW(config-if)#spanning-tree bpduguard` is used to block BPDU packets coming into the fast-port.
@@ -62,7 +62,7 @@ Interfaces States | discarding | learning | forwarding |
 ---|---|---|---|
 BPDUs | recieve | recieve/forward | send/receive | 
 Data | drop | only learn MAC | send/receive/learn MAC |
-Timer | N/A | 15S | N/A |
+Timer | N/A | 15s | N/A |
 
 ## Spanning Tree Load-Balancing
 PVST/PVST+ stands for Per-Vlan Spanning Tree which can be used to balance layer 2 traffic by implying different STP setting on each VLAN.
@@ -86,16 +86,16 @@ SW2(config)#spanning-tree vlan 10 root secondary
 ```
 ### _BID Format_
 ```
-                    ---------------Bridge ID---------------------------
+                    +--------------Bridge ID--------------------------+
                     |  BP (16 bits)  |        MAC (32 bits)           |
-                    ------------|--------------------------------------
+                    +----------------+--------------------------------+
                                 |
----------------------------------------------------------------------------------------------------------------------------------
++-------------------------------+-----------------------------------------------------------------------------------------------+
 |     Bridge Priority (4 bit)   |                       Extended System ID  (12 bits)                                           |
----------------------------------------------------------------------------------------------------------------------------------
++-------------------------------+-----------------------------------------------------------------------------------------------+
 | 32768 | 16384 | 8192  | 4096  | 2048  | 1024  |  512  |  256  |  128  |  64   |  32   |  16   |   8   |   4   |   2   |   1   |
 |   1   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   1   |
----------------------------------------------------------------------------------------------------------------------------------
++-------------------------------------------------------------------------------------------------------------------------------+
 ```
 ## Other Kownledge to STP & RSTP
 Cost Table
