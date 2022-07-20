@@ -86,7 +86,7 @@ Cloud-based AP | Cloud/Meraki | Centally | | | _Autonomous_ APs are centrally ma
 
 **CAPWAP** (Control And Provisioning of Wireless Access Points): a protocol for communication between lightweight APs and WLC.
  - Control Tunnel: encrypted. UDP port 5246.
- - Data Tunnedl: not encrypted but can be configured to. UDP port 5247.
+ - Data Tunnel: not encrypted but can be configured to be. UDP port 5247.
 
 Lightweight APs operational modes:
 Modes | Functions | 
