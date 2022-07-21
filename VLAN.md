@@ -1,5 +1,5 @@
 # Virtual LAN
-Limit broadcast domain
+Limiting broadcast domain
 
 ## 802.1Q
 **802.1Q** is one of two trunking ptotocol, the other one is ISL (Cisco property).
@@ -43,7 +43,7 @@ R1(config)#interface g0/1.20
 R1(config-subif)#encapsulation dot1q 20
 R1(config-subif)#ip address 192.168.20.1 255.255.255.0
 ```
-There are two ways to confiure native vlan on a router of ROAS.  
+There are two ways to confiure **native vlan** on a router of ROAS.  
 #1 - Configuring on the subinferface:
 ```
 R1(config)#interface g0/1.5
