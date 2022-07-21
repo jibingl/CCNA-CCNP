@@ -43,3 +43,15 @@ R1(config)#interface g0/1.20
 R1(config-subif)#encapsulation dot1q 20
 R1(config-subif)#ip address 192.168.20.1 255.255.255.0
 ```
+There are two ways to confiure native vlan on a router of ROAS.  
+#1 - Configuring on the subinferface:
+```
+R1(config)#interface g0/1.5
+R1(config-subif)#encapsulation dot1q 5 native
+R1(config-subif)#ip address 192.168.5.1 255.255.255.0
+```
+#2 - Confiuring ip address on the physical interface directly:
+```
+R1(config)#interface g0/1
+R1(config-if)#ip address 192.168.5.1 255.255.255.0
+```
