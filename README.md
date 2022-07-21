@@ -2,6 +2,7 @@
 1. utp cat5e, cat6a?
 2. Network design - 3-tier, 2-tier (callopsed core layer)
 3. WLC configure video
+4. A table for CDP and LLDP
 
 Router Boost Order:
 ```
