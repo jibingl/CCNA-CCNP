@@ -1,5 +1,6 @@
 # Virtual LAN
-Limiting broadcast domain
+\- Limiting broadcast domain  
+\- Important to know the distinctions between _vlan_ and _SVI_. 
 
 ## 802.1Q
 **802.1Q** is one of two trunking ptotocol, the other one is ISL (Cisco property).
