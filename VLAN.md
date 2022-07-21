@@ -29,6 +29,7 @@ Names   | Bits    | Functions |
 **VID** | 12 bits | Vlan ID of the destination. Value 0-4096/1-4094 |
 
 ## ROAS (Router on a Stack)
+Leverage on `subinterfaces` created on a physical interface. 
 ```
 R1#config t
 R1(config)#interface g0/1
@@ -54,4 +55,25 @@ R1(config-subif)#ip address 192.168.5.1 255.255.255.0
 ```
 R1(config)#interface g0/1
 R1(config-if)#ip address 192.168.5.1 255.255.255.0
+```
+
+## Multilayer Switch
+Levarage on `SVI` (Switch Virtual Interface)
+```
+SW1(config)#ip routing
+SW1(config)#vlan 10
+SW1(config-vlan)#vlan 20
+
+SW1(config-vlan)#interface vlan 10
+SW1(config-if)#ip address 192.168.10.1 255.255.255.0
+SW1(config-if)#no shutdown
+SW1(config-if)#interface vlan 20
+SW1(config-if)#ip address 192.168.20.1 255.255.255.0
+SW1(config-if)#no shutdown
+
+SW1(config-if)#interface g0/0
+SW1(config-if)#no switchport
+SW1(config-if)#ip address 211.10.10.2 255.255.255.252
+SW1(config-if)#exit
+SW1(config)#ip route 0.0.0.0 0.0.0.0 211.10.10.1
 ```
