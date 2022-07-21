@@ -35,4 +35,4 @@ SDN Architecture & Network Automation
 AKA | forwarding plane | | |
 Functions | Data forwarding | How to forward data | Manage Devices |
 If effect forwarding? | Yes | Yes | No |
-Examples | routing (match to routing-table), forwarding (match to MAC-table), de- & re-encapsulation, add & remove 802.1q tags, VPN (add new IP), NAT (changing IPs), drop due to ACLs or port-security| matain routing table, ARP table, MAC address table, STP | SSH, Telnet, Syslog, SNMP, NTP |
+Examples | routing (match to routing-table), forwarding (match to MAC-table), de- & re-encapsulation, add & remove 802.1q tags, VPN (add new IP), NAT (changing IPs), dropping due to ACLs or port-security| matain routing table, ARP table, MAC address table, STP | SSH, Telnet, Syslog, SNMP, NTP |
