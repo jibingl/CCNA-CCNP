@@ -4,7 +4,6 @@ Limit broadcast domain
 ## 802.1Q
 **802.1Q** is one of two trunking ptotocol, the other one is ISL (Cisco property).
 
-## Frame of 802.1Q
 The 802.1Q tage is insert into a 802.3/Ethernet frame between _source MAC address_ and _type/length_.
 ```
 +------------+------------++++++++++++-----------+---------------------+----------+
