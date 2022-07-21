@@ -98,3 +98,11 @@ Acceptable qaulity| Bandwidth| Delay| Jitter| Loss|
 ------------------|----------|------|-------|-----|
 Audio | 30-128Kbps| one-way delay =< 150ms| jitter =< 30ms| loss =< 1%|
 Video | 384K-20Mbps| one-way delay =< 200-400ms| jitter =< 30-50ms| loss =< 0.1-1%|
+
+## Cisco Unified Wireless Network QoS
+Class   | Traffic |
+--------|---------|
+Platinum| Voice   |
+Golden  | Video   |
+Silver  | Best effort (default)|
+Bronze  | Background|
