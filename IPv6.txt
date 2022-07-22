@@ -23,7 +23,7 @@
       Multicast                ff00::/8        11111111            224.0.0.0
       Link-Local unicast       fe80::/10       1111111010          N/A
       Global unicast           2000::3         0010-0011           8.8.8.8
-      Unique local unicast     fd00::/7        11111101            192.168.0.0/24
+      Unique local unicast     fc00::/7        1111110             192.168.0.0/24
 
 ## Multicast Addresses
       Multicast Scope        Prefix   Description                                Examples
