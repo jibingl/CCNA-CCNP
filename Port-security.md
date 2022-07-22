@@ -27,6 +27,7 @@ SW1(config-if)#switchport port-security                        //Remeber enable 
 SW1(config-if)#exit
 
 SW1(config)#errdisable recovery interval 300                   //300 seconds
+SW1(config)#errdisable recovery cause {application-name}       //Enable timer for apps, like arp-inspection, psecurity-violation, bpduguard
 SW1(config)#ip dhcp snooping
 SW1(config)#ip dhcp snooping vlan <vlan-ids>
 SW1(config)#interface g0/0
