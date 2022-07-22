@@ -51,8 +51,8 @@ IEEE | Description |
 802.11 | WLAN |
 
 Table-6 Network Automation Tools
-Name| Client-SRV| OperateModel| CommunicationProtocal| Port| Language| Key Components|
+Name| Client-SRV| Op-Model| Comm-Protocal| Port| By-Lang| Use-Lang| Key Components|
 ----|-----------|-------------|----------------------|-----|---------|---------------|
-Ansible| agentless| push model| SSH| 22| Python| Control Node: Inventory, Template, Variable, Playbook|
-Puppet| agent-based; agentless| pull model| HTTP(s)| 8140| Ruby| Puppet Master: Manifest , Templates|
-Chef| agent-based| pull model| HTTP(s)| 10002| Ruby| Resources, Recipes, Cookbooks, Run-list|
+Ansible| agentless| push model| SSH| 22| Python| YAML| Control Node: Inventory, Template, Variable, Playbook|
+Puppet| agent-based; agentless| pull model| HTTP(s)| 8140| Ruby|Declarative language|Puppet Master: Manifest , Templates|
+Chef| agent-based| pull model| HTTP(s)| 10002| Ruby| | Resources, Recipes, Cookbooks, Run-list|
