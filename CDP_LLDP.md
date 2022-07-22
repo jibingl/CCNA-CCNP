@@ -22,7 +22,7 @@ show cdp                     //Global settings info, timers, version
 show cdp traffic             //CDP packets input and output
 show cdp interface           //Info of the interfaces enabled CDP
 show cdp neighbors           //CDP neighbors' info, including Device ID (hostname), Holdtme, 
-                               Capability (router/switch/IGMP/phone), Platform (brand), 
+                               Capability (router/switch/IGMP/phone), Platform (brand #), 
                                Port ID (neighbor's port), Local Interface
 show cdp neighbors detail    //More info, Software version, VTP domain, Native Vlan, Duplex, IP
 show cdp entry <device-id>
