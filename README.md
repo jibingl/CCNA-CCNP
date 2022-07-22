@@ -1,6 +1,4 @@
 # CCNA
-2. Network design - 3-tier, 2-tier (callopsed core layer)
-3. WLC configure video
 
 Router Boost Order:
 ```
