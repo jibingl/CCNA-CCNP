@@ -52,7 +52,7 @@ IEEE | Description |
 
 Table-6 Network Automation Tools
 Name| Client-SRV| Op-Model| Comm-Protocal| Port| By-Lang| Use-Lang| Key Components|
-----|-----------|-------------|----------------------|-----|---------|---------------|
+----|-----------|---------|--------------|-----|--------|---------|---------------|
 Ansible| agentless| push model| SSH| 22| Python| YAML| Control Node: Inventory, Template, Variable, Playbook|
 Puppet| agent-based; agentless| pull model| HTTP(s)| 8140| Ruby|Declarative language|Puppet Master: Manifest , Templates|
 Chef| agent-based| pull model| HTTP(s)| 10002| Ruby| | Resources, Recipes, Cookbooks, Run-list|
