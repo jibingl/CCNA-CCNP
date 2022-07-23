@@ -1,43 +1,47 @@
 # Internet Protocol Headers #
 
 ## IPv4 Header ##
-    0                   1                   2                   3
-    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |Version|  IHL  |Type of Service|          Total Length         |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |         Identification        |Flags|      Fragment Offset    |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |  Time to Live |    Protocol   |         Header Checksum       |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |                       Source Address                          |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |                    Destination Address                        |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |                    Options                    |    Padding    |
-   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ 0                   1                   2                   3             0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1           0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|Version|  IHL  |Type of Service|          Total Length         |         |Version| Traffic Class |           Flow Label                  |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|         Identification        |Flags|      Fragment Offset    |         |         Payload Length        |  Next Header  |   Hop Limit   |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|  Time to Live |    Protocol   |         Header Checksum       |         |                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         +                                                               +
+|                       Source Address                          |         |                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         +                        Source Address                         +
+|                    Destination Address                        |         |                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         +                                                               +
+|                    Options                    |    Padding    |         |                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
            Internet Datagram Header (rfc791- figure 4)
 
   Fields            Bits     Explanations
   ------            ----     ------------
-  Version           4        0x04 - 0100 - IPv4;  0x06 - 0110 - IPv6;
-  IHL               4        Internet Header Length. The correct vlaue range is 5-15 (20-60bytes).
+  Version           4        0x04 - 0100 - IPv4;                          Version           4        0x06 - 0110 - version 6
+                             0x06 - 0110 - IPv6;
+  IHL               4        Internet Header Length. 
+                             The correct vlaue range is 5-15 (20-60bytes).
                              Example: the IHL value of 5 = 5 * 4bytes =20bytes total length. 
-  Type of Service   8          0   1   2   3   4   5   6   7
-                             +---+---+---+---+---+---+---+---+  Differentiated Service Code Point - QoS
-                             |    DSCP               |  ECN  |  Explicit Congestion Notification - Note that congested network without dropping data
+  Type of Service   8          0   1   2   3   4   5   6   7            Traffic Class     8
                              +---+---+---+---+---+---+---+---+  
-  Total Length      16       Total length of a packet (L3 header + L4 segment/data)
+                             |    DSCP               |  ECN  |  
+                             +---+---+---+---+---+---+---+---+ 
+                             Differentiated Service Code Point - QoS
+                             Explicit Congestion Notification - Note that congested network without dropping data
+  Total Length      16       Total length of a packet (L3 header + L4 segment/data)      Payload Length    16
                              Minimum 20 bytes (= IPv4 header without L4 data)
                              Maximun 65535 bytes
-  Identification    16       Which packet is a fragment belongs to. 
+  Identification    16       Which packet is a fragment belongs to.                          Flow Label        20
   Flags             3          0   1   2     Bit 0: reserved, must be zero
                              +---+---+---+   Bit 1: (DF) 0 = May Fragment,  1 = Don't Fragment.
                              | 0 |DF |MF |   Bit 2: (MF) 0 = Last Fragment, 1 = More Fragments.
                              +---+---+---+          
   Fragment Offset   13       Where in the datagram this fragment belongs.(A fragement's position within the packet) 
-  Time to Live      8        Recommanded default value is 64
-  Protocol          8        The next level protocol used.
+  Time to Live      8        Recommanded default value is 64                        Hop Limit         8
+  Protocol          8        The next level protocol used.                          Next Header       8
   Header Checksum   16       Check error in the IP header only.
   
 ## IPv6 Header ##
