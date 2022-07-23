@@ -1,4 +1,9 @@
 # OSPF (Open Shortest Path First)
+Version| RFC |
+-------|-----|
+OSPFv2 | rfc2328        |
+OSPFv3 | rfc2740 (IPv6) |
+
 Steps to form LSDBs (Link State Database):
  1. **Become neighbors** with other routers connected to the same segment;
  2. **Exchange** LSAs (Link State Advertisement) with neighbor routers;
