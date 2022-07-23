@@ -1,6 +1,6 @@
 # Internet Protocol Headers #
 
-## IPv4 Header ##
+## IPv4 & IPv6 Header ##
  0                   1                   2                   3             0                   1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1           0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -16,7 +16,15 @@
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         +                                                               +
 |                    Options                    |    Padding    |         |                                                               |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+         +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-           Internet Datagram Header (rfc791- figure 4)
+           Internet Datagram Header (rfc791- figure 4)                    |                                                               |
+                                                                          +                                                               +
+                                                                          |                                                               |
+                                                                          +                      Destination Address                      +
+                                                                          |                                                               |
+                                                                          +                                                               +
+                                                                          |                                                               |
+                                                                          +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+                                                                                                     (rfc2460)
 
 Fields           Bits  Explanations                                       Fields           Bits  Explanations
 ------           ----  ------------                                       ------           ----  ------------
@@ -30,7 +38,8 @@ Type of Service  8      0   1   2   3   4   5   6   7                     Traffi
                        |    DSCP               |  ECN  |  
                        +---+---+---+---+---+---+---+---+ 
                        Differentiated Service Code Point - QoS
-                       Explicit Congestion Notification - Congested network without dropping data
+                       Explicit Congestion Notification
+                       (Congested network without dropping data)
 Total Length     16    Total length of a packet (L3 + L4)                 Payload Length    16
                        Minimum 20 bytes (= only L3 IPv4 header)
                        Maximun 65535 bytes
@@ -44,18 +53,6 @@ Flags            3       0   1   2
                        Bit2(MF): 0 = Last Fragment, 1 = More Fragments
 Fragment Offset  13    Where in the datagram this fragment belongs.
                        (A fragement's position within the packet) 
-Time to Live     8     Recommanded default value is 64                        Hop Limit         8
-Protocol         8     The next level protocol used.                          Next Header       8
+Time to Live     8     Recommanded default value is 64                     Hop Limit         8
+Protocol         8     The next level protocol used.                       Next Header       8
 Header Checksum  16    Check error in the IP header only.
-
-
-                             (rfc2460)
-
-Fields            Bits     Explanations
-------            ----     ------------
-Version           4        0x06 - 0110 - version 6
-Traffic Class     8
-Flow Label        20
-Payload Length    16
-Next Header       8
-Hop Limit         8
