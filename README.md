@@ -1,5 +1,7 @@
 # CCNA
 
+This is the study notes of my personal CCNA learning. Most of contents retrived from the Youtube channel **[Jeremy's IT Lab](https://www.youtube.com/c/JeremysITLab)**. 
+
 Router Boost Order:
 ```
  Power on     Load Bootstrap     POST     Load IOS     Load startup configuration     Generate running configuration
