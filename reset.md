@@ -1,6 +1,7 @@
 # Procedures of Reset/Recovery
 
 ## Factory Configuration Reset
+Approach: Delete configuration files and VLAN infomation.
 1. Under Global Configuration mode, issue `write erase`.  
 2. `reload` switches/routers **without save** when prompt for configuration modified.
 3. Reset vlan information by issuing `delete flash:vlan.dat`.
@@ -13,6 +14,7 @@ switch#reload                       //reboot devices
 ```
 
 ## Password Recovery
+Approach: Using physical button or break-key signal to break normal boot. Then disable the existing configuration file be loaded by boot loader and instead loading factory-default configuration to enter the device's OS. Finally, under global config mode, reload the exsiting configuration file and change those forgotten passwords.
 1. Connect a PC/terminal to console port of a switch/router.
 2. Unplug the power cable to the switch/route.
 3. Power on the switch/router and bring it to the `switch:` prompt by breaking normal boot-up. There are two ways:   
