@@ -15,9 +15,14 @@ switch#reload                       //reboot devices
 ## Password Recovery
 1. Connect a PC/terminal to console port of a switch/router.
 2. Unplug the power cable to the switch/route.
-3. Power on the switch/router and bring it to the `switch:` prompt,
-    - Catalyst 3560, 3750: Hold down the _mode_ button located on the front panel, while reconnect the power cable. Release the _mode_ button after approximately 15 seconds when the _SYST_ LED turns solid green. When release the _mode_ button, the _SYST_ LED blinks green.
-    - 
+3. Power on the switch/router and bring it to the `switch:` prompt by breaking normal boot-up. There are two ways:   
+    - Physical buttons: Hold down the _mode_ button located on the front panel, while reconnect the power cable. 
+        - Catalyst 3560, 3750: Release the _mode_ button after approximately 15 seconds when the _SYST_ LED turns solid green. When release the _mode_ button, the _SYST_ LED blinks green.
+        - Catalyst 2900XL, 2500XL: Release the _mode_ button when the LED above _port1x_ goes out. 
+        > Notes: The break methods may differ among different cisco models. Always referring to manuals.
+    - Software break-key: The devices boot loader detects a _break-key_ input to stop the automatic boot sequence for the password recovery purposes.
+        - Hyperterminal: Press _Ctrl_ + _Break_ for the break-key.
+        - Unix terminal: Press _Ctrl_ + _C_ for the break-key.
 4. Issue the `flash_init` command.
 5. Issue the `load_helper` command.
 6. Issue the `dir flash:` command to check if the configuration file _config.text_ is there.
