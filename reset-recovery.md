@@ -1,4 +1,4 @@
-# Procedures of Reset/Recovery
+# Procedures of Reset or Recovery
 
 ## Factory Configuration Reset
 Approach: Delete configuration files and VLAN infomation.
