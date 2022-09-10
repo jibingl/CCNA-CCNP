@@ -1,4 +1,4 @@
-# Procedures of Reset/Restoration
+# Procedures of Reset/Recovery
 
 ## Factory Configuration Reset
 1. Under Global Configuration mode, issue `write erase`.  
@@ -12,5 +12,5 @@ switch#delete falsh:vlan.dat        //reset vlan configuration
 switch#reload                       //reboot devices
 ```
 
-## Password Restore
+## Password Recovery
 
