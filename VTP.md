@@ -9,8 +9,10 @@ Mode           | Modify Vlan | Forward VTP msg | Syncronize Vlan
  > Notes: To forward VTP msg (vlan datebase), transparent-switch must join the same VTP domain.
 
 ## Reset _Reversion_ Number of a switch to 0
+```
 SW1(config)#vtp mode transparent                 //Method 1: change to transparent mode
 SW1(config)#vtp domain <unsued-domain-name>      //Method 2: change to an unused domain
+```
 
 ## Troubleshoot VTP Propegetion Failures
 1. VTP information only passes through a trunk port.
