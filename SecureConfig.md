@@ -6,6 +6,8 @@
 - Add time stamps
 - Shutdown unused ports and assign them to a black-hole vlan
 - Port-security
+- Disable DTP
+- Disable VTP
 
 ## Basic security config
 Banner, passwords encryption and requirements, login pwds check, time stamps. 
