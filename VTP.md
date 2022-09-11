@@ -14,7 +14,7 @@ SW1(config)#vtp mode transparent                 //Method 1: change to transpare
 SW1(config)#vtp domain <unsued-domain-name>      //Method 2: change to an unused domain
 ```
 
-## Troubleshoot VTP Propegetion Failures
+## Troubleshoot VTP Propagation Failures
 1. VTP information only passes through a trunk port.
 2. Make sure that if EtherChannels are created between two switches, only Layer 2 EtherChannels propagate VLAN information.
 3. Make sure that the VLANs are active in all the devices.
