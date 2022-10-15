@@ -1,12 +1,12 @@
-# 802.3 Frame and 802.11 Fram
+# 802.3 Frame and 802.11 Frame
 
 ## IEEE 802.3 (Ethernet) Frame
-The size of a Ethernet frame (Eth-Header + Data + Eth-Trailer) must between 64 - 1518 bytes. If smaller, padding 0s to it; if larger, fragmented.
+The size of a Ethernet frame (Eth-Header + Data + Eth-Trailer) must between **64 - 1518 bytes**. If smaller, padding 0s to DATA portion; if larger, fragmented.
 ```
-      7 bytes      1 bytes        Ehternet-Header 14 bytes          46-1500 bytes       4 bytes Eth-Trialer 
+ 7 bytes          1 byte   Ehternet-Header 14 bytes              Data/Payload          Eth-Trialer
 +----------------+--------+-------------------------------------+---------------------+----------+
 |   Preamble     |   SFD  |  Dest-MAC  |  Src-MAC   |Type/Length|         DATA        | FCS(CRC) |
-| 10101010 * 7   |10101011|   6 bytes  |   6 bytes  |   2 bytes |                     |          |  
+| 10101010 * 7   |10101011|   6 bytes  |   6 bytes  |  2 bytes  |   46-1500 bytes     |  4 bytes |  
 +----------------+--------+-------------------------------------+---------------------+----------+
 
 ```
