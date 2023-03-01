@@ -32,7 +32,7 @@ Approach: Using physical button or break-key signal to break normal boot. Then d
 8. Issue `boot` command to boot the system.
 9. After the device boot, enter "n" at the prompt to abort the initial configuration dialog.
 10. Enter the global configuration mode.
-11. Issue `rename flash:config.old flash:config.text` to rename the configuration file wiht its original name.
+11. Issue `rename flash:config.old flash:config.text` to rename the configuration file back to its previous name.
 12. Copy the configuration file into memory by `copy flash:config.text system:running-config`.
 13. Overwrite the current passwords that you don't know. For example, command `enable password <password-strings>`.
 14. Save the running configuration by `write memory`.
