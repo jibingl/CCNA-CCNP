@@ -1,5 +1,5 @@
 # Virtual LAN
-\- Limiting broadcast domain  
+\- Limiting broadcast domains in layer2/switched lan.  
 \- Important to know the distinctions between _vlan_ and _SVI_. 
 
 ## 802.1Q
