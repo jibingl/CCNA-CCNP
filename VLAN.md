@@ -1,6 +1,7 @@
 # Virtual LAN
-\- Limiting broadcast domains in layer2/switched lan.  
-\- Important to know the distinctions between _vlan_ and _SVI_. 
+\- Limiting broadcast domains in layer2/switched LAN.  
+\- Important to know the distinctions between _VLAN_ and _SVI_. 
+\- VLAN configuration is locally significant. It means VLAN config on one switch does not have to match another switch connected to it. 
 
 ## 802.1Q
 **802.1Q** is one of two trunking ptotocol, the other one is ISL (Cisco property).
