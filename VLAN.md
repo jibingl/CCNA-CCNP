@@ -1,6 +1,6 @@
 # Virtual LAN
 \- Limiting broadcast domains in layer2/switched LAN.  
-\- Important to know the distinctions between _VLAN_ and _SVI_. 
+\- Important to know the distinctions between _VLAN_ and _SVI_.    
 \- VLAN configuration is locally significant. It means VLAN config on one switch does not have to match another switch connected to it. 
 
 ## 802.1Q
@@ -29,6 +29,11 @@ Names   | Bits    | Functions |
 **PCP** | 3 bits  | Priority Code Point - QoS |
 **DEI** | 1 bit   | Droping or not when network congested |
 **VID** | 12 bits | Vlan ID of the destination. Value 0-4096/1-4094 |
+
+## Tagged/Trunk & Untagged/Access
+
+
+
 
 ## ROAS (Router on a Stack)
 Leverage on `subinterfaces` created on a physical interface. 
