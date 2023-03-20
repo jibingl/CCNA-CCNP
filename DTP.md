@@ -1,5 +1,5 @@
 # Dynamic Trunking Protocol
-Switch interfaces automatically negotiate/configure their _switchport_ state to be _access_ or _trunk_, also negotiate the encapsulation method.  
+Switch interfaces automatically negotiate/configure their _switchport_ state to be _**access**_ or _**trunk**_, also negotiate the encapsulation method.  
 DTP will not form a _trunk_ with a router, PC, etc. The _switchport_ will be in _access_ mode.
 
 ## Syntax
