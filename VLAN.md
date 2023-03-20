@@ -30,10 +30,28 @@ Names   | Bits    | Functions |
 **DEI** | 1 bit   | Droping or not when network congested |
 **VID** | 12 bits | Vlan ID of the destination. Value 0-4096/1-4094 |
 
-## Tagged/Trunk & Untagged/Access
+## Tagged/Trunk & Untagged/Access Ports
 
+```text
+                   +----------------Access-Port-------------+
+                   |                                        |
+--> untagged-frame = insert-vlan_tag --->--- strip-vlan_tag = untagged-frame -->
+                   |                                        |
+                   +----------------------------------------+
+```
+```text
+                   +------------------Trunk-Port----------------+
+                   |                                            |
+  --> tagged-frame = --------------------->-------------------- = tagged-frame -->
+                   |                                            |
+                   +--------------------------------------------+
 
-
+                   +------------------Trunk-Port----------------+
+                   |                                            |
+--> Untagged-frame = insert-native_vlan -->-- strip-native_vlan = Untagged-frame -->
+                   |                                            |
+                   +--------------------------------------------+
+```
 
 ## ROAS (Router on a Stack)
 Leverage on `subinterfaces` created on a physical interface. 
