@@ -18,7 +18,7 @@ Form a loop-free switch network (layer 2) by exchanging BPDU messages and block 
            |                                   |                   Note: MAC addresses are simplfied.  
            |                                   |                   
        r   |                                   |   r                
-      f1/1 |   d                          nd   | g0/0                
+      f1/1 |   nd                          d   | g0/0                
     ------[=]-f1/2-----------------------f1/1-[=]------
          SW3-BID_32769                       SW4-BID_32769
          MAC_c.c.c                           MAC_d.d.d
