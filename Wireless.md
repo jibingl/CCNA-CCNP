@@ -142,7 +142,7 @@ SW1(config-vlan)#name MNGT
 SW1(config-vlan)#vlan 100
 SW1(config-vlan)#name Internal
 SW1(config-vlan)#vlan 200
-SW1(config-vlan)#anme Guest
+SW1(config-vlan)#name Guest
 SW1(config-vlan)#interface vlan 10
 SW1(config-if)#ip address 10.10.10.1 255.255.255.0
 SW1(config-if)#interface vlan 100
