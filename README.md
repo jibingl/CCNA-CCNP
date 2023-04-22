@@ -1,4 +1,4 @@
-# CCNA
+# CCNA & CCNP
 
 📢 This is the study notes of my personal CCNA learning. Most of contents retrived from the Youtube channel **[Jeremy's IT Lab](https://www.youtube.com/c/JeremysITLab)**. 
 
