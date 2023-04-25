@@ -1,6 +1,6 @@
 # Virtual LAN
 \- Limiting broadcast domains in layer2/switched LAN.  
-\- Important to know the distinctions between _VLAN_ and _SVI_.    
+\- The distinctions between _VLAN_ and _SVI_ is layer2 vs layer3.    
 \- VLAN configuration is locally significant. It means VLAN config on one switch does not have to match another switch connected to it. 
 
 ## 802.1Q
