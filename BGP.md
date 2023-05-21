@@ -1,4 +1,5 @@
 # Border Gateway Protocol
+BGP is an exterior gateway protocol designed to exchange routing and reachability information among ASes on the Internet.  
 IBGP (Internal BGP) - AS to AS
 EBGP (External BGP) - Within an AS
 
