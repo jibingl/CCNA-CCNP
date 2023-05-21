@@ -1,7 +1,8 @@
 # Border Gateway Protocol
-IBGP (Interieor BGP) - AS to AS
-EBGP (Extereior BGP) - Within an AS
+IBGP (Internal BGP) - AS to AS
+EBGP (External BGP) - Within an AS
 
+## Multiprotocols and Redistributing Routing Protocols
 
 
 ```
