@@ -15,6 +15,7 @@ AS200-CBR(config)# ip bgp 200
 AS200-CBR(config-router)# bgp router-id 2.2.2.2
 AS200-CBR(config-router)# neighbor 192.168.12.1 remote-as 100
 AS200-CBR(config-router)# network 192.168.2.0/24
+AS200-CBR(config-router)# neighbor 192.168.12.1 password cisco
 
 AS300-ISP-BR1(config)#
 AS300-ISP-BR1(config-router)#
