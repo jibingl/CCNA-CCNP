@@ -13,7 +13,8 @@ Attributes | CLI |
 AS_PATH    | `(config)# access-list 10 permit 192.168.2.0 255.255.255.0` <br> `(config)# bgp as-path access-list 1 deny ^100$` <br> `(config)# bgp as-path access-list 1 permit .*` <br> `(config-router)# neighbor 192.168.23.2 remove-private-AS`
 LOCAL_PREF | `(config)# route-map primary_outbound permit 10` <br> `(config-route-map)# set local-preference 150`
 MED        | `(config)# route-map primary_med_inbound permit 10` <br> `(config-route-map)# set metric 50`
-NEXT HOP   | 
+NEXT HOP   | `(config-router)# neighbor 192.168.44.1 next-hop-self`
+AS_PATH    | 
 
 ## AS_PATH
 The AS_PATH attribute is a list of all ASes that a specific route passes through to reach a specified network. When a router is advertising a BGP route, the AS_PATH attribute is first created empty. Each time the route is advertised from one AS to another, the AS_PATH attribute is modified to prepend the ASN of the router that advertised the route.
@@ -59,7 +60,17 @@ The MED is sent to EBGP peers; those peer routers propagate the MED attribute wi
 In BGP, when a router advertises a route across a BGP session, i.e., between two routers running BGP, it includes the next hop attribute in the advertisement. This attribute determines the next hop IP address to use in order to reach a destination. For EBGP, the next hop attribute is updated to be the IP address of the EBGP neighbor. However, for IBGP, the routers do not update this attribute and the next hop that EBGP advertises is
 propagated into the IBGP domain and by all subsequent IBGP routers.
 
-
+## AS_PATH Prepending
+The BGP AS_PATH attribute is a well-known mandatory attribute that is present for all prefixes exchanged between BGP neighbors. When a BGP router sends a BGP advertisement to an EBGP peer, it adds its own AS number to the front of the AS_PATH.   
+AS_PATH prepending is the process of adding one or more AS Number (ASN) to the front of the AS_PATH when advertising a BGP prefix.
+```
+(config)# route-map prepend_out permit 10
+(config-route-map)# set as-path prepend 100 100
+(config-route-map)# exit
+(config)# router bgp 100
+(config-router)# neighbor 192.168.45.2 route-map prepend_out out
+```
+## Commands
 ```
 AS100-CBR(config)# ip bgp 100                                                   //ASN is 100
 AS100-CBR(config-router)# bgp router-id 1.1.1.1
@@ -87,3 +98,14 @@ AS300-ISP-BR2(config-router)# neighbor 192.168.23.2 filter-list 1 out
 ```
 
 ## Multiprotocols and Redistributing Routing Protocols
+
+
+## Full Mesh IBGP topology
+A topology is called full mesh (fully meshed topology) when there is an IBGP peering relationship between any two routers in the AS. All BGP routers within a single AS must be fully meshed so that any external routing information must be re-distributed to all other routers within that AS.
+
+## BGP Route Reflection
+A BGP route reflector is an IBGP router that repeats routes learned from IBGP peers to some of its other IBGP peers (its clients).
+```
+neighbor 192.168.23.1 route-reflector-client
+neighbor 192.168.34.2 route-reflector-client
+```
