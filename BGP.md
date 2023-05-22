@@ -8,7 +8,12 @@ Each AS is identified by an ASN that is either public or private. A public ASN i
 A public ASN is required only when an AS is originating routes that are visible on the Internet. However, a private ASN should be used when an AS is only exchanging routes via BGP with a single Internet Service Provider (ISP).  
 **E.G.** The AS of the customer is assigned a private A SN (64512) since the customer is connected to one ISP via BGP. The ISP has a public ASN (100) since it originates the routes that are visible on the Internet. 
 
-## Multiprotocols and Redistributing Routing Protocols
+Attributes | CLI |
+-----------|----------
+AS_PATH    | `(config)# access-list 10 permit 192.168.2.0 255.255.255.0` <br> `(config)# bgp as-path access-list 1 deny ^100$` <br> `(config)# bgp as-path access-list 1 permit .*` <br> `(config-router)# neighbor 192.168.23.2 remove-private-AS`
+LOCAL_PREF | `(config)# route-map primary_outbound permit 10` <br> `(config-route-map)# set local-preference 150`
+MED        | `(config)# route-map primary_med_inbound permit 10` <br> `(config-route-map)# set metric 50`
+NEXT HOP   | 
 
 ## AS_PATH
 The AS_PATH attribute is a list of all ASes that a specific route passes through to reach a specified network. When a router is advertising a BGP route, the AS_PATH attribute is first created empty. Each time the route is advertised from one AS to another, the AS_PATH attribute is modified to prepend the ASN of the router that advertised the route.
@@ -81,3 +86,4 @@ AS300-ISP-BR2(config)# bgp as-path access-list 1 permit .*                      
 AS300-ISP-BR2(config-router)# neighbor 192.168.23.2 filter-list 1 out
 ```
 
+## Multiprotocols and Redistributing Routing Protocols
