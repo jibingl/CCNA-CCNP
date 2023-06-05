@@ -1,10 +1,13 @@
 # VLAN Trunking Protocol
 
-Mode           | Modify Vlan | Forward VTP msg | Syncronize Vlan
----------------|-------------|-----------------|----------------
-**server**     | Yes         | Yes             | Yes
-**client**     | No          | Yes             | Yes
-**transparent**| Yes         | Yes             | No
+Mode           | Versions | Forward VTP msg | Syncronize Vlan | Modify VLANs |
+---------------|----------|-----------------|-----------------|--------------|
+**server**     | 1, 2     | Yes             | Yes             | Yes
+**primary server** | 3    | Yes             | Yes             | Yes
+**secondary server**| 3   | Yes             | Yes             | No
+**client**     | 1, 2, 3  | Yes             | Yes             | No
+**transparent**| 1, 2, 3  | Yes             | No              | No
+**off**        | 3        | No              | No              | No
 
  > Notes: To forward VTP msg (vlan datebase), transparent-switch must join the same VTP domain.
 
