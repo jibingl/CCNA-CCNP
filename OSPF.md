@@ -50,7 +50,7 @@ Topology example and Key-info:
 
 *ASBR (Autonomous system boundary router) is R1 that connects to external network, normally Internet.
 *ABR (Area Border Router) is R5 or R4, depends on context, that connects two areas.
-*In OSPF broastcast network, DR/BDR election rule (High-Low): interface-priority --> router-id --> interface-ip. "First placement".
+*In OSPF broastcast network, DR/BDR election rule (High-Low): interface-priority --> router-id --> interface-ip. "First placement" rule.
 *When DR is down, current BDR becomes new DR even though existing of another higher-priority interface that will become new BDR.
 ```
 CLI configuration example:
