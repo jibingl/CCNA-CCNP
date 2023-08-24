@@ -1,5 +1,5 @@
 # IPv4 Subnetting
-Firt thing firt, knowing below glossaries. THe last two terms are created/defined by myself.
+First thing first, knowing below glossaries. THe last two terms are created/defined by myself.
 - CIDR/network Mask: A number indicates how many bits used to present network part within 32 bits.
 - Network Portion: All bits used to present network part within a subnet.
 - Host Portion: All bits used to present host part within a subnet.
