@@ -80,7 +80,7 @@ First thing first, knowing below glossaries. THe last two terms are created/defi
 ```
 
 
-## Basic Formula
+## Basic Formulas
 How many IP addresses totally? ` 2 ^ h ` (h equals to the *Host portion* bits)  
 How many usable/assignable IP addresses/hosts? ` 2 ^ h - 2 ` (h equals to the *Host portion* bits)  
 What is the network IP address? ` The start point or 1st IP address`  
