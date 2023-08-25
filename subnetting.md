@@ -81,7 +81,8 @@ First thing first, knowing below glossaries. THe last two terms are created/defi
 
 
 ## Basic Formula
-How many IP addresses totally? ` 2 ^ m ` (m equals to the *Host portion* bits)  
-How many usable/assignable IP addresses/hosts? ` 2 ^ m - 2 ` (m equals to the *Host portion* bits)  
+How many IP addresses totally? ` 2 ^ h ` (h equals to the *Host portion* bits)  
+How many usable/assignable IP addresses/hosts? ` 2 ^ h - 2 ` (h equals to the *Host portion* bits)  
 What is the network IP address? ` The start point or 1st IP address`  
 What is the broadcast IP address? ` The last IP address`  
+How many subnet created? ` 2 ^ n ` (n equals to the *Network portion* bits within the *divided-octet*)  
