@@ -42,13 +42,13 @@ Names   | Bits    | Functions |
 ```text
                    +------------------Trunk-Port----------------+
                    |                                            |
-  --> tagged-frame = --------------------->-------------------- = tagged-frame -->
+  --> tagged-frame = --------------------->-------------------- = tagged-frame --> tagged-vlan
                    |                                            |
                    +--------------------------------------------+
 
                    +------------------Trunk-Port----------------+
                    |                                            |
---> Untagged-frame = insert-native_vlan -->-- strip-native_vlan = Untagged-frame -->
+--> Untagged-frame = --------------------->-------------------- = Untagged-frame --> native-vlan
                    |                                            |
                    +--------------------------------------------+
 ```
