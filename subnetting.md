@@ -16,8 +16,8 @@ First thing first, knowing below glossaries. THe last two terms are created/defi
    - What is the *increment-number* to each subnet? ` 2 ^ 5 = 32 `
 2. Writing down the subnets created by following below rules.
    - Copying the given IP address;
-   - Set the *divided-octet* (It's 4th octet in this case) and all afterwards to 0 so that you have the start point;
-   - Inreasing by the *increment-number* (It's 32 in this case) to get each subnet's 1st IP;
+   - Setting the *divided-octet* (It's 4th octet in this case) and all afterwards to 0 so that you have the start point;
+   - Inreasing the *divided-octet* by the *increment-number* (It's 32 in this case) to get each subnet's 1st IP;
    ```
    1st subnet: 192.168.100.0          <--- Set the divided-otect (4th octet) to 0.
    2nd subnet: 192.168.100.32
@@ -37,8 +37,8 @@ First thing first, knowing below glossaries. THe last two terms are created/defi
    - What is the *increment-number* for each subnet? ` 2 ^ 6 = 64 `
 2. Writing down the subnets created by following below rules.
    - Copying the given IP address;
-   - Set the *divided-octet* (It's 3rd here) and all afterwards to 0;
-   - Inreasing by the *increment-number* (It's 64 here) to get each subnet's 1st IP;
+   - Setting the *divided-octet* (It's 3rd here) and all afterwards to 0;
+   - Inreasing the *divided-octet* by the *increment-number* (It's 64 here) to get each subnet's 1st IP;
    ```
    1st subnet: 172.31.0.0           <--- Set the divided-otect (3rd octet) and afterwards (4th octet) to 0.
    2nd subnet: 172.31.64.0
@@ -56,8 +56,8 @@ First thing first, knowing below glossaries. THe last two terms are created/defi
    - What is the *increment-number* for each subnet? ` 2 ^ 2 = 4 `
 2. Writing down the subnets created by following below rules.
    - Copying the given IP address;
-   - Set the *divided-octet* (It's 2nd here) and all afterwards to 0;
-   - Inreasing by the *increment-number* (It's 4 here) to get each subnet's 1st IP;
+   - Setting the *divided-octet* (It's 2nd here) and all afterwards to 0;
+   - Inreasing the *divided-octet* by the *increment-number* (It's 4 here) to get each subnet's 1st IP;
    ```
    1st subnet: 10.0.0.0           <--- Set the divided-otect (2nd octet) and afterwards (3rd & 4th octets) to 0.
    2nd subnet: 10.4.0.0
@@ -86,3 +86,5 @@ How many usable/assignable IP addresses/hosts? ` 2 ^ h - 2 ` (h equals to the *H
 What is the network IP address? ` The start point or 1st IP address`  
 What is the broadcast IP address? ` The last IP address`  
 How many subnet created? ` 2 ^ n ` (n equals to the *Network portion* bits within the *divided-octet*)  
+What the x-th subnet? ` (x - 1) * increment-number `  
+
