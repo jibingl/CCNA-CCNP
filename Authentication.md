@@ -20,7 +20,7 @@ Abb. | Names | Property | Decription |
 LEAP | Lightweight EAP | Cisco | Based on WEP, using dynamic WEP keys |
 EAP-FAST | EAP Flexible Authentication via Secure Tunneling | Cisco | Establish TLS tunnel firstly, then authentication |
 PEAP | Protected EAP | | Tunnel established by AS certificate |
-EPA-TLS | EAP Transport Layer Secruity | | Mutual authentications are at the very beginning |
+EPA-TLS | EAP Transport Layer Secruity | | Mutual authentications at the very beginning |
 ```
 Supplicant                    Authenticator               Authentication Server
   +---+                         +-----+                      +----+
