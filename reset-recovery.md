@@ -4,7 +4,7 @@
 Approach: Delete configuration files and VLAN infomation.
 1. Under Global Configuration mode, issue `write erase`.  
 2. `reload` switches/routers **without save** when prompt for configuration modified.
-3. Reset vlan information by issuing `delete flash:vlan.dat`.
+3. Delete vlan information by issuing `delete flash:vlan.dat`.
 4. `reload` devices.
 ```
 switch#write erase                  //reset configurations (not clear the boot variables, such as config-register and boot system settings)
@@ -25,13 +25,13 @@ Approach: Using physical button or break-key signal to break normal boot. Then d
     - Software break-key: The devices boot loader detects a _break-key_ input to stop the automatic boot sequence for the password recovery purposes.
         - Hyperterminal: Press _Ctrl_ + _Break_ for the break-key.
         - Unix terminal: Press _Ctrl_ + _C_ for the break-key.
-4. Issue the `flash_init` command.
-5. Issue the `load_helper` command.
-6. Issue the `dir flash:` command to check if the configuration file _config.text_ is there.
+4. Issue `flash_init` command.
+5. Issue `load_helper` command.
+6. Issue `dir flash:` command to check if the configuration file _config.text_ is there.
 7. Rename the confiuration file by command `rename flash:config.text flash:config.old`.
 8. Issue `boot` command to boot the system.
-9. After the device boot, enter "n" at the prompt to abort the initial configuration dialog.
-10. Enter the global configuration mode.
+9. After the device boots up, enter "n" at the prompt to abort the initial configuration dialog.
+10. Enter global configuration mode.
 11. Issue `rename flash:config.old flash:config.text` to rename the configuration file back to its previous name.
 12. Copy the configuration file into memory by `copy flash:config.text system:running-config`.
 13. Overwrite the current passwords that you don't know. For example, command `enable password <password-strings>`.
