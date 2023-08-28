@@ -5,6 +5,7 @@
 - Only allow SSH access
 - Add time stamps
 - Shutdown unused ports and assign them to a black-hole vlan
+- Change the default native vlan
 - Port-security
 - Disable DTP
 - Disable VTP
