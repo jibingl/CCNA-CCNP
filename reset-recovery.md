@@ -2,10 +2,9 @@
 
 ## Factory Configuration Reset
 Approach: Delete configuration files and VLAN infomation.
-1. Under Global Configuration mode, issue `write erase`.  
-2. `reload` switches/routers **without save** when prompt for configuration modified.
-3. Delete vlan information by issuing `delete flash:vlan.dat`.
-4. `reload` devices.
+1. Under Global Execution mode, issue `write erase` to delete both start-configuration and running-configuration.
+2. Issuing `delete flash:vlan.dat` to delete/reset vlan configuration. 
+3. `reload` switches/routers **without save** when prompt for configuration modified.
 ```
 switch#write erase                  //reset configurations (not clear the boot variables, such as config-register and boot system settings)
 switch#dir flash:                   //check vlan.dat file before deletation
