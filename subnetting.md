@@ -12,7 +12,7 @@ First thing first, knowing below glossaries. THe last two terms are created/defi
    - How many bits are used for the *Host portion*? ` 32 - 27 = 5 `
    - What is the *divided-octet*? ` 4th `
    - How many bits are used for the *Network portion* within the *divided-octet*? ` 27 - 24 = 3 `
-   - How manu bits are used for the *Host portion* within the *divided-octet*? ` 8 - 3 = 5 `
+   - How many bits are used for the *Host portion* within the *divided-octet*? ` 8 - 3 = 5 `
    - What is the *increment-number* to each subnet? ` 2 ^ 5 = 32 `
 2. Writing down the subnets created by following below rules.
    - Copying the given IP address;
@@ -33,7 +33,7 @@ First thing first, knowing below glossaries. THe last two terms are created/defi
    - How many bits are used for the *Host portion*? ` 32 - 18 = 14 `
    - What is the *divided-octet*? ` 3th `
    - How many bits are used for the *Network portion* within the *divided-octet*? ` 18 - 16 = 2 `
-   - How manu bits are used for the *Host portion* within the *divided-octet*? ` 8 - 2 = 6 `
+   - How many bits are used for the *Host portion* within the *divided-octet*? ` 8 - 2 = 6 `
    - What is the *increment-number* for each subnet? ` 2 ^ 6 = 64 `
 2. Writing down the subnets created by following below rules.
    - Copying the given IP address;
@@ -52,7 +52,7 @@ First thing first, knowing below glossaries. THe last two terms are created/defi
    - How many bits are used for the *Host portion*? ` 32 - 14 = 18 `
    - What is the *divided-octet*? ` 2th `
    - How many bits are used for the *Network portion* within the *divided-octet*? ` 14 - 8 = 6 `
-   - How manu bits are used for the *Host portion* within the *divided-octet*? ` 8 - 6 = 2 `
+   - How many bits are used for the *Host portion* within the *divided-octet*? ` 8 - 6 = 2 `
    - What is the *increment-number* for each subnet? ` 2 ^ 2 = 4 `
 2. Writing down the subnets created by following below rules.
    - Copying the given IP address;
