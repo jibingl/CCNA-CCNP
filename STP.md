@@ -118,5 +118,5 @@ SW2(config)#spanning-tree vlan 10 root secondary
 ## QoA
 **1. What dose the command `spanning-tree vlan 1 root primary` do?**  
      - __primary__ = set priority to 24576, or 4096 lower than the current Root Bridge (if setting the priority to 24576 wouldn't make this switch the Root).  
-**2. Can __primary__ gurantee the Root?**  
+**2. Can *primary* gurantee the Root?**  
      - No. To gurantte the Root, set priority to zero by command `spanning-tree vlan 1 priority 0`.  
