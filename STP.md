@@ -89,9 +89,9 @@ BPDUs | recieve | recieve/forward | send/receive |
 Data | drop | only learn MAC | send/receive/learn MAC |
 Timer | N/A | 15s | N/A |
 
-## Comparation between STP and RSTP
+### RSTP _vs_ STP
 Paras | Hello Originated | Hello Timer | BPDU Age | BPDU des_MAC |
----|---|---|---|---|
+------|------------------|-------------|----------|--------------|
 STP/PVST | Root bridge | 2s | 10\*2s| 0180-c200-0000 |
 RSTP/PVST+ | All switches | 2s | 3\*2s | 0100-0ccc-cccd |
 
