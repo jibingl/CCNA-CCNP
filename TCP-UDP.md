@@ -25,7 +25,7 @@
                             20-60 Bytes
 ```
 #### Data offset (4 bits)
-Specifies the size of the TCP header in 32-bit words. The minimum size header is 5 words and the maximum is 15 words thus giving **the minimum size of 20 bytes and maximum of 60 bytes**, allowing for up to 40 bytes of options in the header. This field gets its name from the fact that it is also the offset from the start of the TCP segment to the actual data.
+Specifies the size of the TCP header in 32-bit words. The minimum size header is 5 words and the maximum is 15 words thus giving **the minimum size of 20 bytes and maximum of 60 bytes**, allowing for up to 40 bytes optional in the header. This field gets its name from the fact that it is also the offset from the start of the TCP segment to the actual data.
 
 #### Checksum (16 bits)
 The 16-bit checksum field is used for error-checking of the TCP header, the payload and an IP pseudo-header. 
