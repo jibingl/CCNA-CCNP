@@ -7,6 +7,13 @@ Form a loop-free switch network (layer 2) by exchanging BPDU messages and block 
     > Default _bridge priority_ is 32768 on all switches, so the MAC address is used as the tie-breaker (lowest MAC becomes the _root bridge_).
 2. Each remaining switch selects ONE of its interfaces to be its _r-port_ which always connect to _d-port_. The rule to select _r-port_: lowest root cost -> neighbor BID -> neighbor STP port id (= 128 + port number) -> local port id.
 3. Each remaining collision domain selects ONE interface to be _d-port_, then other interfaces are _nd-port_. The rule to select _d-port_: **lowest** root cost -> BID -> local port id.
+
+Selection (*Lowest*) | 1st | 2nd | 3rd | 4th |
+----------|-----|-----|-----|-----|
+Root Bridge /LAN | BID |
+Root Port /Switch| Root Cost | Neighbor BID | Neighbor Port ID | Local Port ID |
+Designated Port /Segment | Root Cost | Local BID | Local Port ID |
+
 ```
         root-bridge                       
         SW1-BID_32769                        SW2-BID_32769
