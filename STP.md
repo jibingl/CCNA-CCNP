@@ -1,18 +1,30 @@
 # Spanning Tree Protocol
 Form a loop-free switch network (layer 2) by exchanging BPDU messages and block data traffic on specific interfaces.  
-
+ __BID Format__
+```
+                    +--------------Bridge ID--------------------------+
+                    |  BP (16 bits)  |        MAC (32 bits)           |
+                    +----------------+--------------------------------+
+                                |
++-------------------------------+-----------------------------------------------------------------------------------------------+
+|     Bridge Priority (4 bit)   |                       Extended System ID  (12 bits)                                           |
++-------------------------------+-----------------------------------------------------------------------------------------------+
+| 32768 | 16384 | 8192  | 4096  | 2048  | 1024  |  512  |  256  |  128  |  64   |  32   |  16   |   8   |   4   |   2   |   1   |
+|   1   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   1   |
++-------------------------------------------------------------------------------------------------------------------------------+
+```
 ## STP (802.1D)
 ### _Forming STP_
-1. Elect ONE _root bridge_ which has all interfaces to be _d-port_. The rule to elect _root bridge_: lowest Bridge ID (BID).
+1. Elect __ONE__ _root bridge_ which has all interfaces to be _d-port_.
     > Default _bridge priority_ is 32768 on all switches, so the MAC address is used as the tie-breaker (lowest MAC becomes the _root bridge_).
-2. Each remaining switch selects ONE of its interfaces to be its _r-port_ which always connect to _d-port_. The rule to select _r-port_: lowest root cost -> neighbor BID -> neighbor STP port id (= 128 + port number) -> local port id.
-3. Each remaining collision domain selects ONE interface to be _d-port_, then other interfaces are _nd-port_. The rule to select _d-port_: **lowest** root cost -> BID -> local port id.
+2. Each remaining switch selects __ONE__ of its interfaces to be its _r-port_ which always connect to _d-port_. 
+3. Each remaining collision domain selects __ONE__ interface to be _d-port_, then other interfaces are _nd-port_. 
 
-Selection (*Lowest*) | 1st | 2nd | 3rd | 4th |
+Election (*Lowest*) | 1st | 2nd | 3rd | 4th |
 ----------|-----|-----|-----|-----|
-Root Bridge /LAN | BID |
-Root Port /Switch| Root Cost | Neighbor BID | Neighbor Port ID | Local Port ID |
-Designated Port /Segment | Root Cost | Local BID | Local Port ID |
+1 - Root Bridge /LAN | BID |
+2 - Root Port /Switch| Root Cost | Neighbor BID | Neighbor Port ID | Local Port ID |
+3 - Designated Port /Segment | Root Cost | Local BID | Local Port ID |
 
 ```
         root-bridge                       
@@ -22,14 +34,22 @@ Designated Port /Segment | Root Cost | Local BID | Local Port ID |
       f1/0 |   d                           r   | g0/0              r: root port
        d   |                                   |   d               nd: non-designated port
            |                                   |                   
-           |                                   |                   Note: MAC addresses are simplfied.  
-           |                                   |                   
-       r   |                                   |   r                
+       r   |                                   |   r               Note: MAC addresses are simplfied. 
       f1/1 |   nd                          d   | g0/0                
     ------[=]-f1/2-----------------------f1/1-[=]------
          SW3-BID_32769                       SW4-BID_32769
          MAC_c.c.c                           MAC_d.d.d
 ```
+### _Cost Table_
+Speed | STP Cost | RSTP Cost |
+------|----------|-----------|
+10 Mbps |100|2,000,000|
+100 Mbps |19|200,000|
+1 Gbps |4|20,000|
+10 Gbps |2|2,000|
+100 Gbps |X|200|
+1 Tbps |X|20|
+
 ### _Interfaces Roles and States_
 Interfaces Roles | Designated      | Root            | Non-Designated |
 -----------------|-----------------|-----------------|----------------|
@@ -54,11 +74,9 @@ Steps and process are the same as STP.
       f1/0 |   d                                r   | g0/0              r: root port
        d   |                                        |   d               al: alternate port
            |                                        |                   b: backup prot
-           |                                        |                    
-           |                                        |                   UplinkFast: al-port can be moved to forwarding state immediately.
-       r   |                                        |   r                
-      f1/1 |   d                               al   | g0/0                
-    ------[=]-f1/2------------[Hub]-----------f1/1-[=]------
+       r   |                                        |   r                           
+      f1/1 |   d                               al   | g0/0              UplinkFast: al-port move to forwarding immediately.
+    ------[=]-f1/2------------[Hub]-----------f1/1-[=]------            
           b| f2/2               |                 SW4-BID_32769
            `--------------------`                 MAC_d.d.d
          SW3-BID_32769
@@ -70,6 +88,12 @@ Interfaces States | discarding | learning | forwarding |
 BPDUs | recieve | recieve/forward | send/receive | 
 Data | drop | only learn MAC | send/receive/learn MAC |
 Timer | N/A | 15s | N/A |
+
+## Comparation between STP and RSTP
+Paras | Hello Originated | Hello Timer | BPDU Age | BPDU des_MAC |
+---|---|---|---|---|
+STP/PVST | Root bridge | 2s | 10\*2s| 0180-c200-0000 |
+RSTP/PVST+ | All switches | 2s | 3\*2s | 0100-0ccc-cccd |
 
 ## Spanning Tree Load-Balancing
 PVST/PVST+ stands for Per-Vlan Spanning Tree which can be used to balance layer 2 traffic by implying different STP setting on each VLAN.
@@ -91,32 +115,3 @@ SW1(config)#spanning-tree vlan 20 root secondary            //Set switch's BID a
 SW2(config)#spanning-tree vlan 20 root primary
 SW2(config)#spanning-tree vlan 10 root secondary
 ```
-### _BID Format_
-```
-                    +--------------Bridge ID--------------------------+
-                    |  BP (16 bits)  |        MAC (32 bits)           |
-                    +----------------+--------------------------------+
-                                |
-+-------------------------------+-----------------------------------------------------------------------------------------------+
-|     Bridge Priority (4 bit)   |                       Extended System ID  (12 bits)                                           |
-+-------------------------------+-----------------------------------------------------------------------------------------------+
-| 32768 | 16384 | 8192  | 4096  | 2048  | 1024  |  512  |  256  |  128  |  64   |  32   |  16   |   8   |   4   |   2   |   1   |
-|   1   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   1   |
-+-------------------------------------------------------------------------------------------------------------------------------+
-```
-## Other Kownledge to STP & RSTP
-Cost Table
-Speed | STP Cost | RSTP Cost |
-------|----------|-----------|
-10 Mbps |100|2,000,000|
-100 Mbps |19|200,000|
-1 Gbps |4|20,000|
-10 Gbps |2|2,000|
-100 Gbps |X|200|
-1 Tbps |X|20|
-
-Comparation between STP and RSTP
-Paras | Hello Originated | Hello Timer | BPDU Age | BPDU des_MAC |
----|---|---|---|---|
-STP/PVST | Root bridge | 2s | 10\*2s| 0180-c200-0000 |
-RSTP/PVST+ | All switches | 2s | 3\*2s | 0100-0ccc-cccd |
