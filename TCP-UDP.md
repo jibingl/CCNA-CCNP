@@ -30,6 +30,9 @@ Specifies the size of the TCP header in 32-bit words. The minimum size header is
 #### Checksum (16 bits)
 The 16-bit checksum field is used for error-checking of the TCP header, the payload and an IP pseudo-header. 
 
+#### How to acknowledge segments have been revieved?
+- The recipient sets the **Acknownledgement Number** to the seqence number of the next segment it expects to recieve, which means the receiver is telling the sender that it knows the last received segment's sequence number and, based on it, calculates the next segment's sequence number.
+
 ## UDP
 ```
     0                   1                   2                   3
