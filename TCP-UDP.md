@@ -27,11 +27,11 @@
 #### Data offset (4 bits)
 Specifies the size of the TCP header in 32-bit words. The minimum size header is 5 words and the maximum is 15 words thus giving **the minimum size of 20 bytes and maximum of 60 bytes**, allowing for up to 40 bytes optional in the header. This field gets its name from the fact that it is also the offset from the start of the TCP segment to the actual data.
 
+#### Acknowledgment Number (32 bits)
+The sequence number of the next segment the recipient expects to accept. In other words, the recipient says to the sender, "I wants the 3001th segment next, becasue the 3000th segment and all before it have been received."
+
 #### Checksum (16 bits)
 The 16-bit checksum field is used for error-checking of the TCP header, the payload and an IP pseudo-header. 
-
-#### How to acknowledge segments have been revieved?
-- The recipient sets the **Acknownledgement Number** to the seqence number of the next segment it expects to recieve, which means the receiver is telling the sender that it knows the last received segment's sequence number and, based on it, calculates the next segment's sequence number.
 
 ## UDP
 ```
