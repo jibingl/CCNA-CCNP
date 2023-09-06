@@ -42,11 +42,11 @@ Create VPNs over MPLS infrastructure.
 
 ## VPN Concept
 ```
-     +---------------+------------+---Encrypted---------------------------------+
-     |               |            |+-----------+-----------+------+------------+|
-     | New L3-header | VPN-header || L3-header | L2-header | data | L2-trialer ||
-     |               |            |+-----------+-----------+------+------------+|
-     +---------------+------------+---------------------------------------------+
+     +---------------+------------+---Encrypted------------------------+
+     |               |            |+-----------+-----------+----------+|
+     | New L3-header | VPN-header || L3-header | L4-header |   data   ||
+     |               |            |+-----------+-----------+----------+|
+     +---------------+------------+------------------------------------+
 ```
 ## IPSec and TLS VPNs
 IPSec commanly used for site-to-site VPN, while TLS VPN conmmanly used for remote access.
