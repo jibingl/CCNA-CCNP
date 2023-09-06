@@ -30,6 +30,9 @@ Specifies the size of the TCP header in 32-bit words. The minimum size header is
 #### Acknowledgment Number (32 bits)
 The sequence number of the next segment the recipient expects to accept. In other words, the recipient says to the sender, "I wants the 3001th segment next, becasue the 3000th segment and all before it have been received."
 
+#### Window (16 bits)
+Allows more data to be sent before an acknowledgement is required. (Theoritically, the maximum number here is 65535. However it is not efficient in real world. In practice, *Windows size scaling factor* is used to multiply the *Window Size*.)
+
 #### Checksum (16 bits)
 The 16-bit checksum field is used for error-checking of the TCP header, the payload and an IP pseudo-header. 
 
