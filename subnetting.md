@@ -3,7 +3,7 @@ First thing first, knowing below glossaries. THe last two terms are created/defi
 - CIDR/Network Mask: A number indicates how many bits out of 32-bit are used to present network part.
 - Network Portion: All bits used to present network part in a given network.
 - Host Portion: All bits used to present host part in a given network.
-- Divided-octet: The octet contains both *Network Portion* and *Host Portion*. 
+- Divided-octet: The octet is divided into two parts, one belongs to *Network Portion*, and the other belongs to *Host Portion*. 
 - Increment-number: A customed number used to decide the start point to each subnet. 
 
 ### 192.168.100.115/27
