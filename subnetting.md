@@ -4,7 +4,7 @@ First thing first, knowing below glossaries. THe last two terms are created/defi
 - Network Portion: All bits used to present network part in a given network.
 - Host Portion: All bits used to present host part in a given network.
 - Divided-octet: The octet is divided into two parts, one belongs to *Network Portion*, and the other belongs to *Host Portion*. 
-- Increment-number: A number used to decide the start point to each subnet. 
+- Increment-number: A number used to calculate each subnet. 
 
 ### 192.168.100.115/27
 1. Working on CIDR/Network Mask to collection below information.
