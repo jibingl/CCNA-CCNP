@@ -17,12 +17,12 @@ First thing first, knowing below glossaries. THe last two terms are created/defi
 2. Writing down the subnets created by following below rules.
    - Copying the given IP address;
    - Setting the *divided-octet* (It's 4th octet in this case) and all afterwards to 0 so that you have the start point;
-   - Inreasing the *divided-octet* by the *increment-number* (It's 32 in this case) to get each subnet's 1st IP;
+   - Inreasing the *divided-octet* by the *increment-number* (It's 32 in this case) to get each subnet;
    ```
    1st subnet: 192.168.100.0          <--- Set the divided-otect (4th octet) to 0.
    2nd subnet: 192.168.100.32
    3rd subnet: 192.168.100.64
-   4th subnet: 192.168.100.96         <--- This is your target subnet because the given network IP address falls into the range.
+   4th subnet: 192.168.100.96         <--- This is your target subnet because the given network IP address falls into this subnet.
    5th subnet: 192.168.100.128
    6th subnet: 192.168.100.160
    ...
@@ -38,13 +38,13 @@ First thing first, knowing below glossaries. THe last two terms are created/defi
 2. Writing down the subnets created by following below rules.
    - Copying the given IP address;
    - Setting the *divided-octet* (It's 3rd here) and all afterwards to 0;
-   - Inreasing the *divided-octet* by the *increment-number* (It's 64 here) to get each subnet's 1st IP;
+   - Inreasing the *divided-octet* by the *increment-number* (It's 64 here) to get each subnet;
    ```
    1st subnet: 172.31.0.0           <--- Set the divided-otect (3rd octet) and afterwards (4th octet) to 0.
    2nd subnet: 172.31.64.0
    3rd subnet: 172.31.128.0
-   4th subnet: 172.31.192.0         <--- This is your target subnet because the given network IP address falls into the range.
-   5th subnet: 172.31.256.0         <--- It is not possible that this subnet exsits due to the decimal number of 3rd octet beyonds 255.
+   4th subnet: 172.31.192.0         <--- This is your target subnet because the given network IP address falls into its range.
+   5th subnet: 172.31.256.0         <--- This subnet dosen't exsits due to the decimal number of 3rd octet beyonds 255.
    ```
 ### 10.10.10.10/14
 1. Working on CIDR/Network Mask to collection below information.
@@ -57,11 +57,11 @@ First thing first, knowing below glossaries. THe last two terms are created/defi
 2. Writing down the subnets created by following below rules.
    - Copying the given IP address;
    - Setting the *divided-octet* (It's 2nd here) and all afterwards to 0;
-   - Inreasing the *divided-octet* by the *increment-number* (It's 4 here) to get each subnet's 1st IP;
+   - Inreasing the *divided-octet* by the *increment-number* (It's 4 here) to get each subnet;
    ```
    1st subnet: 10.0.0.0           <--- Set the divided-otect (2nd octet) and afterwards (3rd & 4th octets) to 0.
    2nd subnet: 10.4.0.0
-   3rd subnet: 10.8.0.0           <--- This is your target subnet because the given network IP address falls into the range.
+   3rd subnet: 10.8.0.0           <--- This is your target subnet.
    4th subnet: 10.12.0.0
    5th subnet: 10.16.0.0
    ...
@@ -72,7 +72,7 @@ First thing first, knowing below glossaries. THe last two terms are created/defi
 - The increment-number is `8 = 2 ^ 3`.
 ```
    1st subnet: 10.10.0.0           <--- Set the divided-otect (3rd octet) and afterwards (4th octet) to 0.
-   2nd subnet: 10.10.8.0           <--- This is your target subnet because the given network IP address falls into the range.
+   2nd subnet: 10.10.8.0           <--- This is your target subnet.
    3rd subnet: 10.10.16.0
    4th subnet: 10.10.24.0
    ...
