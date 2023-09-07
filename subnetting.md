@@ -1,4 +1,5 @@
 # IPv4 Subnetting
+## Glossary
 First thing first, knowing below glossaries. THe last two terms are created/defined by myself.
 - CIDR/Network Mask: A number indicates how many bits out of 32-bit are used to present network part.
 - Network Portion: All bits used to present network part in a given network.
@@ -6,6 +7,8 @@ First thing first, knowing below glossaries. THe last two terms are created/defi
 - Divided-octet: The octet is divided into two parts, one belongs to *Network Portion*, and the other belongs to *Host Portion*. 
 - Increment-number: A number used to calculate each subnet. 
 
+## None-magic-table Procedure
+Following example networks demonstrate how the procedure works.
 ### 192.168.100.115/27
 1. Working on CIDR/Network Mask to collection below information.
    - How many bits are used for the *Network portion*? ` 27 `
@@ -78,7 +81,6 @@ First thing first, knowing below glossaries. THe last two terms are created/defi
    ...
    Last subnet: 10.10.248.0
 ```
-
 
 ## Basic Formulas
 How many IP addresses totally? ` 2 ^ h ` (h equals to the *Host portion* bits)  
