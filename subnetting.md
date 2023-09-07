@@ -88,3 +88,10 @@ What is the broadcast IP address? ` The last IP address`
 How many subnet created? ` 2 ^ n ` (n equals to the *Network portion* bits within the *divided-octet*)  
 What the x-th subnet? ` (x - 1) * increment-number `  
 
+## Magic Table
+Octet | bit 8    | bit 7    | bit 6   | bit 5   | bit 4   | bit 3  | bit 2  | bit 1  |
+------|----------|----------|---------|---------|---------|--------|--------|--------| 
+4th   | 128      | 64       | 32      | 16      | 8       | 4      | 2      | 1      |
+3rd   | 32768    | 16384    | 8192    | 4096    | 2048    | 1024   | 512    | 256    |
+2nd   | 8388608  | 4194304  | 2097152 | 1048576 | 524288  | 262144 | 131072 | 65536  |
+1st   |2147483648|1073741824|536870912|268435456|134217728|67108864|33554432|16777216|
