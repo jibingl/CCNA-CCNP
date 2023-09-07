@@ -1,8 +1,8 @@
 # IPv4 Subnetting
 First thing first, knowing below glossaries. THe last two terms are created/defined by myself.
 - CIDR/Network Mask: A number indicates how many bits out of 32-bit are used to present network part.
-- Network Portion: The bits used to present network part in a network ip address space.
-- Host Portion: The bits used to present host part in a network ip address space.
+- Network Portion: All bits used to present network part in a given network.
+- Host Portion: All bits used to present host part in a given network.
 - Divided-octet: The octet contains both *Network Portion* and *Host Portion*. 
 - Increment-number: A customed number used to decide the start point to each subnet. 
 
