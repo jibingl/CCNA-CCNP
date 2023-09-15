@@ -14,11 +14,11 @@ Form a loop-free switch network (layer 2) by exchanging BPDU messages and block 
 +-------------------------------------------------------------------------------------------------------------------------------+
 ```
 ## STP (802.1D)
-### _Forming STP_
+### _Forming STP_ (3-step)
 1. Elect __ONE__ _root bridge_ which has all interfaces to be _d-port_.
     > Default _bridge priority_ is 32768 on all switches, so the MAC address is used as the tie-breaker (lowest MAC becomes the _root bridge_).
 2. Each remaining switch selects __ONE__ of its interfaces to be its _r-port_ which always connect to _d-port_. 
-3. Each remaining collision domain selects __ONE__ interface to be _d-port_, then other interfaces are _nd-port_. 
+3. Each remaining collision domain selects __ONE__ interface to be _d-port_, then other interfaces are _nd-port_.  
 
 Election (*Lowest*) | 1st | 2nd | 3rd | 4th |
 ----------|-----|-----|-----|-----|
@@ -40,15 +40,6 @@ Election (*Lowest*) | 1st | 2nd | 3rd | 4th |
          SW3-BID_32769                       SW4-BID_32769
          MAC_c.c.c                           MAC_d.d.d
 ```
-### _Cost Table_
-Speed | STP Cost | RSTP Cost |
-------|----------|-----------|
-10 Mbps |100|2,000,000|
-100 Mbps |19|200,000|
-1 Gbps |4|20,000|
-10 Gbps |2|2,000|
-100 Gbps |X|200|
-1 Tbps |X|20|
 
 ### _Interfaces Roles and States_
 Interfaces Roles | Designated      | Root            | Non-Designated |
@@ -64,6 +55,7 @@ Timer             | N/A      | 15s             | 15s            | N/A |
 
 ### _portfast & bpduguard_
 The command `SW(config-if)#spanning-tree portfast` quickly moves access ports to _forwarding_ by passing _listening_ and _learning_. However, it may lead to loop links when a new switch connects to this fast-port. To solve the issue, `SW(config-if)#spanning-tree bpduguard` is used to block BPDU packets coming into the fast-port.
+
 ## RSTP (802.1W)
 ### _Forming RSTP_
 Steps and process are the same as STP.
@@ -94,6 +86,16 @@ Paras | Hello Originated | Hello Timer | BPDU Age | BPDU des_MAC |
 ------|------------------|-------------|----------|--------------|
 STP/PVST | Root bridge | 2s | 10\*2s| 0180-c200-0000 |
 RSTP/PVST+ | All switches | 2s | 3\*2s | 0100-0ccc-cccd |
+
+### _Cost Table_
+Speed | STP Cost | RSTP Cost |
+------|----------|-----------|
+10 Mbps |100|2,000,000|
+100 Mbps |19|200,000|
+1 Gbps |4|20,000|
+10 Gbps |2|2,000|
+100 Gbps |X|200|
+1 Tbps |X|20|
 
 ## Spanning Tree Load-Balancing
 PVST/PVST+ stands for Per-Vlan Spanning Tree which can be used to balance layer 2 traffic by implying different STP setting on each VLAN.
