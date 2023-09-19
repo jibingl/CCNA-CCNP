@@ -62,16 +62,26 @@
       2001:0db8:0000:feed:0dad:018f:6001:0da3/62   2001:db8:0:feec::/62
       2001:0db8:9bad:babe:0de8:ab78:2301:0010/63   2001:db8:9bad:babe::/63
 
-## Configuration
+## Configurating an IPv6 GUA
       R1(config)#ipv6 unicast-routing                       //Enable router to perform ipv6 routing
       R1(config)#interface g0/0
       R1(config-if)#ipv6 address 2001:db8:0:0::1/64         //Manmully set a global unicast ipv6
         OR
       R1(config-if)#ipv6 address 2001:db8::/64 eui-64       //Autoconfiguration by using EUI-64 method combining wiht the configured prefix
         OR (SLAAC)
-      R1(config-if)#ipv6 address autoconfig                 //Autoconfiguation by using NDP(RS/RA) to learn the prefix combining with EUI-64 or random method
+      R1(config-if)#ipv6 address autoconfig                 //Autoconfiguation by using NDP(RS/RA) to learn the prefix of the local link, then combining it with EUI-64 or random method
       
       R1(config)#ipv6 route destination/prefix {next-hop | exit-interface [next-hop]} [ad]
       //Note: For using link-local address as the next-hop, fully specified route must be given, like below syntax
       R1(config)#ipv6 route destination/prefix exit-interface next-hop-link-local-address
-      
+
+## IPv6 DHCP
+1. SLACC (Stateless)
+2. Stateless DHCPv6 (No prefix)
+      - In the DHCP server, define a DHCPv6 pool;
+      - On the gateway port facing the DHCP clients, set other-config-flag;
+      - On the gateway port facing the DHCP clients, clarify the DHCPv6 pool;
+3. Stateful DHCPv6 (Prefix, DNS, Domain, and more)
+      - In the DHCP server, define a stateful DHCPv6 pool;
+      - On the gateway port facing the DHCP clients, set managed-config-flag;
+      - On the gateway port facing the DHCP clients, clarify the DHCPv6 pool;
