@@ -32,7 +32,7 @@ R1(config)#interface g0/0
 R1(config-if)#standby version 2                    //Optional
 R1(config-if)#standby 1 ip 172.16.0.254            //'1' is HSRP group number. THe range of HSRP's version1 is 0-255, v2 is 0-4095. 
 R1(config-if)#standby 1 priority 200               //Default is 100 <0-255>. (Highest priority will be active router; if tied, highest IP)
-R1(config-if)#standby 1 preempt                    //Take over the role of active anyway
+R1(config-if)#standby 1 preempt                    //Take over back the active role anyway
 
 R2(config-if)#standby version 2                    //Routers MUST match the same version
 R2(config-if)#standby 1 ip 172.16.0.254
