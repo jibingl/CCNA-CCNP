@@ -18,7 +18,7 @@ DHCP Server                 ip dhcp snooping            DHCP Client
 1. As long as *ip dhcp snooping* enalbed on S1, PC1 can not get an IP address by DHCP.
 2. You can observe those debugging messages on R1. They indicate the error.
 ```
-R1#debug ip dhcp server packets
+R1#debug ip dhcp server packet
 
 DHCP server packet debugging is on.
 
