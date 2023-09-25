@@ -12,8 +12,9 @@ switch#delete falsh:vlan.dat        //reset vlan configuration
 switch#reload                       //reboot devices
 ```
 
-## Password Recovery
-Approach: Using physical button or break-key signal to break normal boot. Then disable the existing configuration file be loaded by boot loader and instead loading factory-default configuration to enter the device's OS. Finally, under global config mode, reload the exsiting configuration file and change those forgotten passwords.
+## Password Recovery - Bypass loading of *start-config*
+### Approach #1 - Rename *start-config* file
+Using physical button or break-key signal to break normal boot. Then disable the existing configuration file be loaded by boot loader and instead loading factory-default configuration to enter the device's OS. Finally, under global config mode, reload the exsiting configuration file and change those forgotten passwords.
 1. Connect a PC/terminal to console port of a switch/router.
 2. Unplug the power cable to the switch/route.
 3. Power on the switch/router and bring it to the `switch:` prompt by breaking normal boot-up. There are two ways:   
@@ -35,3 +36,8 @@ Approach: Using physical button or break-key signal to break normal boot. Then d
 12. Copy the configuration file into memory by `copy flash:config.text system:running-config`.
 13. Overwrite the current passwords that you don't know. For example, command `enable password <password-strings>`.
 14. Save the running configuration by `write memory`.
+### Approach #2 - Reset Register code
+```
+rommon>confreg 0x2142
+rommon>reset
+```
