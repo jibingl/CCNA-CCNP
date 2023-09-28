@@ -10,7 +10,7 @@ Max MAC| Violation mode| Port-stat befor violation| Port-stat after violation| P
 Violation mode| Port disabled| Data drop| Syslog| Display error| Increase Violation Counter|
 --------------|--------------|----------|-------|--------------|---------------------------|
 **shutdown**| Yes| Yes| No| No| Yes|
-**restrict**| Yes| Yes| Yes| No| Yes|
+**restrict**| No| Yes| Yes| No| Yes|
 **protect**| No| Yes| No| No| No|
 
 ## Recommand Configurations
