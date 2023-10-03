@@ -1,90 +1,85 @@
 # IPv4 Subnetting
 ## Glossary
-First thing first, knowing below glossaries. THe last two terms are created/defined by myself.
+First thing first, knowing below glossaries. The last two terms are customed.
 - CIDR/Network Mask: A number indicates how many bits out of 32-bit are used to present network part.
 - Network Portion: All bits used to present network part in a given network.
 - Host Portion: All bits used to present host part in a given network.
 - Divided-octet: The octet is divided into two parts, one belongs to *Network Portion*, and the other belongs to *Host Portion*. 
-- Increment-number: A number used to calculate each subnet. 
+- Increment-number: A number used to calculate each network/subnet. 
 
-## None-magic-table Procedure
-Following example networks demonstrate how the procedure works.
+## Part1 - Recognizing An Given Network
+Below given networks are examples that demonstrate how to recognize them step by step.
 ### 192.168.100.115/27
-1. Working on CIDR/Network Mask to collection below information.
+1. Working on CIDR/Network Mask (27 in this case) to collection information.
    - How many bits are used for the *Network portion*? ` 27 `
    - How many bits are used for the *Host portion*? ` 32 - 27 = 5 `
    - What is the *divided-octet*? ` 4th `
    - How many bits are used for the *Network portion* within the *divided-octet*? ` 27 - 24 = 3 `
    - How many bits are used for the *Host portion* within the *divided-octet*? ` 8 - 3 = 5 `
-   - What is the *increment-number* to each subnet? ` 2 ^ 5 = 32 `
-2. Writing down the subnets created by following below rules.
-   - Copying the given IP address;
-   - Setting the *divided-octet* (It's 4th octet in this case) and all afterwards to 0 so that you have the start point;
-   - Inreasing the *divided-octet* by the *increment-number* (It's 32 in this case) to get each subnet;
+   - What is the *increment-number*? ` 2 ^ 5 = 32 `
+2. Looking for the given network's range by following below steps.
+   - Firstly, copying all octets to the *divided-octet*'s left; `192.168.100.`
+   - Secondly, setting the *divided-octet* (4th octet in this case) and all otects to its right to 0; `192.168.100.0`
+   - Lastly, constinously inreasing the *divided-octet*'s values by the *increment-number* (32 in this case) untill found the target network range:
    ```
-   1st subnet: 192.168.100.0          <--- Set the divided-otect (4th octet) to 0.
-   2nd subnet: 192.168.100.32
-   3rd subnet: 192.168.100.64
-   4th subnet: 192.168.100.96         <--- This is your target subnet because the given network IP address falls into this subnet.
-   5th subnet: 192.168.100.128
-   6th subnet: 192.168.100.160
+   1st network: 192.168.100.0        #Set the divided-otect (4th octet) and all otects to its right to 0.
+   2nd network: 192.168.100.32       #From 1st network, increase 32 on the divided-octect to get 2nd network.
+   3rd network: 192.168.100.64       #From 2nd network, increase 32 on the divided-octect to get 3rd network. 
+   4th network: 192.168.100.96       #This is target network. Because the given network IP falls into its range (192.168.100.96 - 192.168.100.127).
+   5th network: 192.168.100.128
    ...
    ```
 ### 172.31.211.201/18
-1. Working on CIDR/Network Mask to collection below information.
+1. Working on CIDR/Network Mask (18 here) to collection information.
    - How many bits are used for the *Network portion*? ` 18 `
    - How many bits are used for the *Host portion*? ` 32 - 18 = 14 `
    - What is the *divided-octet*? ` 3th `
    - How many bits are used for the *Network portion* within the *divided-octet*? ` 18 - 16 = 2 `
    - How many bits are used for the *Host portion* within the *divided-octet*? ` 8 - 2 = 6 `
-   - What is the *increment-number* for each subnet? ` 2 ^ 6 = 64 `
-2. Writing down the subnets created by following below rules.
-   - Copying the given IP address;
-   - Setting the *divided-octet* (It's 3rd here) and all afterwards to 0;
-   - Inreasing the *divided-octet* by the *increment-number* (It's 64 here) to get each subnet;
+   - What is the *increment-number*? ` 2 ^ 6 = 64 `
+2. Looking for the given network's range by following below steps.
+   - Firstly, copying all octets to the *divided-octet*'s left; `172.31.`
+   - Secondly, setting the *divided-octet* (3rd octet here) and all otects to its right to 0; `172.31.0.0`
+   - Lastly, constinously inreasing the *divided-octet*'s values by the *increment-number* (64 here) untill found the target network range:
    ```
-   1st subnet: 172.31.0.0           <--- Set the divided-otect (3rd octet) and afterwards (4th octet) to 0.
-   2nd subnet: 172.31.64.0
-   3rd subnet: 172.31.128.0
-   4th subnet: 172.31.192.0         <--- This is your target subnet because the given network IP address falls into its range.
-   5th subnet: 172.31.256.0         <--- This subnet dosen't exsits due to the decimal number of 3rd octet beyonds 255.
+   1st network: 172.31.0.0           #Set the divided-otect (3rd octet) and all otects to its right to 0.
+   2nd network: 172.31.64.0          #Range 172.31.64.0 - 172.31.127.255 
+   3rd network: 172.31.128.0         #Range 172.31.128.0 - 172.31.191.255
+   4th network: 172.31.192.0         #This is your target network. Its range is from 172.31.192.0 to 172.31.255.255
    ```
 ### 10.10.10.10/14
-1. Working on CIDR/Network Mask to collection below information.
+1. Working on CIDR/Network (14) Mask to collection information.
    - How many bits are used for the *Network portion*? ` 14 `
    - How many bits are used for the *Host portion*? ` 32 - 14 = 18 `
    - What is the *divided-octet*? ` 2th `
    - How many bits are used for the *Network portion* within the *divided-octet*? ` 14 - 8 = 6 `
    - How many bits are used for the *Host portion* within the *divided-octet*? ` 8 - 6 = 2 `
-   - What is the *increment-number* for each subnet? ` 2 ^ 2 = 4 `
-2. Writing down the subnets created by following below rules.
-   - Copying the given IP address;
-   - Setting the *divided-octet* (It's 2nd here) and all afterwards to 0;
-   - Inreasing the *divided-octet* by the *increment-number* (It's 4 here) to get each subnet;
+   - What is the *increment-number*? ` 2 ^ 2 = 4 `
+2. Looking for the given network's range.
+   - Firstly, copying all octets to the *divided-octet*'s left; `10.`
+   - Secondly, setting the *divided-octet* (2nd) and all otects to its right to 0; `10.0.0.0`
+   - Lastly, constinously inreasing the *divided-octet*'s values by the *increment-number* (4) untill found the target network range:
    ```
-   1st subnet: 10.0.0.0           <--- Set the divided-otect (2nd octet) and afterwards (3rd & 4th octets) to 0.
-   2nd subnet: 10.4.0.0
-   3rd subnet: 10.8.0.0           <--- This is your target subnet.
-   4th subnet: 10.12.0.0
-   5th subnet: 10.16.0.0
+   1st network: 10.0.0.0            #10.0.0.0 - 10.3.255.255
+   2nd network: 10.4.0.0            #10.4.0.0 - 10.7.255.255
+   3rd network: 10.8.0.0            #10.8.0.0 - 10.11.255.255 The target network
+   4th network: 10.12.0.0
    ...
-   Last subnet: 10.252.0.0
    ```
 ### 10.10.10.10/21
-- The divided-octet is `3rd`.
-- The increment-number is `8 = 2 ^ 3`.
+- The *divided-octet* is `3rd`.
+- The *increment-number* is `2 ^ 3 = 8`.
 ```
-   1st subnet: 10.10.0.0           <--- Set the divided-otect (3rd octet) and afterwards (4th octet) to 0.
-   2nd subnet: 10.10.8.0           <--- This is your target subnet.
-   3rd subnet: 10.10.16.0
-   4th subnet: 10.10.24.0
+   1st network: 10.10.0.0           #10.10.0.0 - 10.10.7.255
+   2nd network: 10.10.8.0           #10.10.8.0 - 10.10.15.255 The target network
+   3rd network: 10.10.16.0
    ...
-   Last subnet: 10.10.248.0
 ```
 
-## Basic Formulas
+### Other Basic Formulas and Rules
 How many IP addresses totally? ` 2 ^ h ` (h equals to the *Host portion* bits)  
 How many usable/assignable IP addresses/hosts? ` 2 ^ h - 2 ` (h equals to the *Host portion* bits)  
 What is the network IP address? ` The 1st IP address`  
 What is the broadcast IP address? ` The last IP address`  
-How many subnet created? ` 2 ^ n ` (n equals to the *Network portion* bits within the *divided-octet*)  
+
+## Part2 - Subnetting An Given Network 
