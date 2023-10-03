@@ -2,6 +2,7 @@
 \- Limiting broadcast domains in layer2/switched LAN.  
 \- The distinctions between _VLAN_ and _SVI_ is layer2 vs layer3.    
 \- VLAN configuration is locally significant. It means VLAN config on one switch does not have to match another switch connected to it. 
+\- Native VLAN is configured per trunk and is locally significant, which means different trunk link can have different native vlan.
 
 ## 802.1Q
 **802.1Q** is one of two trunking ptotocol, the other one is ISL (Cisco property).
