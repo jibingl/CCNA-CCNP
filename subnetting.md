@@ -4,7 +4,7 @@ First thing first, knowing below glossaries. The last two terms are customed.
 - **CIDR**/**Network Mask**: A number indicates how many bits out of 32-bit are used to present network part.
 - **Network Portion**: All bits used to present network part in a given network.
 - **Host Portion**: All bits used to present host part in a given network.
-- **divided-octet**: The octet is divided into two parts, one belongs to *Network Portion*, and the other belongs to *Host Portion*. 
+- **Divided-octet**: The octet is divided into two parts, one belongs to *Network Portion*, and the other belongs to *Host Portion*. 
 - **Increment-number**: A number used to calculate each network/subnet. 
 
 ## Part1 - Recognizing An Given Network
