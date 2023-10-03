@@ -7,7 +7,7 @@ First thing first, knowing below glossaries. The last two terms are customed.
 - **Divided-octet**: The octet is divided into two parts, one belongs to *Network Portion*, and the other belongs to *Host Portion*. 
 - **Increment-number**: A number used to calculate each network/subnet. 
 
-## Part1 - Recognizing An Given Network
+## 🌑 Recognizing An Given Network
 Below given networks are examples that demonstrate how to recognize them step by step. 
 ### 192.168.100.115/27
 1. Working on ***CIDR***/***Network Mask*** (27 in this case) to collection information.
@@ -83,4 +83,4 @@ How many usable/assignable IP addresses/hosts? ` 2 ^ h - 2 ` (h equals to the *H
 What is the network IP address? ` The 1st IP address`  
 What is the broadcast IP address? ` The last IP address`  
 
-## Part2 - Subnetting An Given Network 
+## 🌑 Subnetting An Given Network 
