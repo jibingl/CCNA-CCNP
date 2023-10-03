@@ -67,6 +67,7 @@ Below given networks are examples that demonstrate how to recognize them step by
    ...
    ```
 ### 10.10.10.10/21
+As long as you master the recognizing procedue, you can simplify it as below.  
 - The ***divided-octet*** is `3rd`.
 - The ***increment-number*** is `2 ^ 3 = 8`.
 ```
