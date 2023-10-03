@@ -117,6 +117,13 @@ SW1(config)#spanning-tree vlan 20 root secondary            //Set switch's BID a
 SW2(config)#spanning-tree vlan 20 root primary
 SW2(config)#spanning-tree vlan 10 root secondary
 ```
+## UplinkFast & BackboneFast
+
+ Features    | Skipped Timers       | Save Time | Implement/Configure practice |
+-------------|----------------------|-----------|------------------------------|
+UplinkFast   | Listening & Learning | 30S       | Only switches with nd ports  |
+BackboneFast | Max Age              | ~20S      | All switches                 |
+
 ## QoA
 **1. What dose the command `spanning-tree vlan 1 root primary` do?**  
      - __primary__ = set priority to 24576, or 4096 lower than the current Root Bridge (if setting the priority to 24576 wouldn't make this switch the Root).  
