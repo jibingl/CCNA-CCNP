@@ -49,7 +49,7 @@ Create VPNs over MPLS infrastructure.
      +---------------+------------+------------------------------------+
 ```
 ## IPSec and TLS VPNs
-IPSec commanly used for site-to-site VPN, while TLS VPN conmmanly used for remote access.
+IPSec commonly is for site-to-site VPN, while TLS VPN conmmanly is for remote access.
 
 ## GRE over IPSec
 IPSec doesn't support multicast and broadcast, so it can't be used on some protocols (like OSPF) to create VPN tunnel.
