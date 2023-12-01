@@ -13,7 +13,7 @@ Form a loop-free switch network (layer 2) by exchanging BPDU messages and block 
 |   1   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   0   |   1   |
 +-------------------------------------------------------------------------------------------------------------------------------+
 ```
-## STP (802.1D)
+## 🌲 STP (802.1D)
 ### _Forming STP_ (3-step)
 1. Elect __ONE__ _root bridge_ which has all interfaces to be _d-port_.
     > Default _bridge priority_ is 32768 on all switches, so the MAC address is used as the tie-breaker (lowest MAC becomes the _root bridge_).
@@ -53,16 +53,22 @@ BPDUs             | recieve  | recieve/forward | send/receive   | send/recieve |
 Data              | drop     | drop            | only learn MAC | send/receive/learn MAC |
 Timer             | N/A      | 15s             | 15s            | N/A |
 
-## PortFast & BPDU Guard
- Names      | Purposes                                                                             | STP function  | When recieve a BPDU,                                           |
-------------|--------------------------------------------------------------------------------------|---------------|----------------------------------------------------------------|
-`portfast`  | Move access ports to _forwarding_ by passing _listening_ and _learning_              | Sending BPDUs | disable PortFast and transfer the port to normal STP operation.|
-`bpduguard` | Protect against unauthorized switches being connected to ports intended to end hosts | Sending BPDUs | disable the port (errdisable).                                 |
-`bpdufilter`| Block ports from sending BPDUs                                                       | Disabled      | ignore recieved BPDU packets. (Only effect on per-port config) |
+## 🌲 PortFast & BPDU Guard
+ Names         | Purposes                                                                             | STP function  | When recieve a BPDU,                                           |
+---------------|--------------------------------------------------------------------------------------|---------------|----------------------------------------------------------------|
+**PortFast**   | Move access ports to _forwarding_ by passing _listening_ and _learning_              | Sending BPDUs | disable PortFast and transfer the port to normal STP operation.|
+**BPDU Guard** | Protect against unauthorized switches being connected to ports intended to end hosts | Sending BPDUs | disable the port (errdisable).                                 |
+**BPDU Filter88| Block ports from sending BPDUs                                                       | Disabled      | ignore recieved BPDU packets. (Only effect on per-port config) |
+### _Configuration combinations table_
+Configration to a port    | Pros | Cons
+--------------------------|------|------
+`portfast`                | - Immediately forwarding data <br> - Auto-transfer to normal STP port if a new switch connected | - Potential STP attack |
+`bpduguard`               | - No impact to existing STP topology if unexpected switches connected | - Cause the port disabled & need to be enabled manually <br> - Wait for 30s to forward data |
+`portfast` + `bpduguard`  | - Immediately forwarding data <br> - No impact to existing STP topology if unexpected switches connected | - Cause the port disabled & need to be enabled manually |
+`portfast` + `bpdufilter` | - Immediately forwarding data <br> - No impact to existing STP topology if unexpected switches connected | - Cannot transfer to normal STP port automatically |
 
-The command `SW(config-if)#spanning-tree portfast` quickly moves access ports to _forwarding_ by passing _listening_ and _learning_. However, it may lead to loop links when a new switch connects to this fast-port. To solve the issue, `SW(config-if)#spanning-tree bpduguard` is used to block BPDU packets coming into the fast-port.
 
-## RSTP (802.1W)
+## 🌲 RSTP (802.1W)
 ### _Forming RSTP_
 Steps and process are the same as STP.
 ```
@@ -103,7 +109,7 @@ Speed | STP Cost | RSTP Cost |
 100 Gbps |X|200|
 1 Tbps |X|20|
 
-## Spanning Tree Load-Balancing
+## 🌲 Spanning Tree Load-Balancing
 PVST/PVST+ stands for Per-Vlan Spanning Tree which can be used to balance layer 2 traffic by implying different STP setting on each VLAN.
 ```
                             PC_vlan10                 root-B     PC_vlan10
@@ -123,7 +129,7 @@ SW1(config)#spanning-tree vlan 20 root secondary            //Set switch's BID a
 SW2(config)#spanning-tree vlan 20 root primary
 SW2(config)#spanning-tree vlan 10 root secondary
 ```
-## UplinkFast & BackboneFast
+## 🌲 UplinkFast & BackboneFast
 
  Features    | Functioning                                                                 | Skipped Timers       | Save Time | Implement/Configure practice |
 -------------|-----------------------------------------------------------------------------|----------------------|-----------|------------------------------|
