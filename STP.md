@@ -53,7 +53,13 @@ BPDUs             | recieve  | recieve/forward | send/receive   | send/recieve |
 Data              | drop     | drop            | only learn MAC | send/receive/learn MAC |
 Timer             | N/A      | 15s             | 15s            | N/A |
 
-### _portfast & bpduguard_
+## PortFast & BPDU Guard
+ Names      | Purposes                                                                             | STP function  | When recieve a BPDU,                                           |
+------------|--------------------------------------------------------------------------------------|---------------|----------------------------------------------------------------|
+`portfast`  | Move access ports to _forwarding_ by passing _listening_ and _learning_              | Sending BPDUs | disable PortFast and transfer the port to normal STP operation.|
+`bpduguard` | Protect against unauthorized switches being connected to ports intended to end hosts | Sending BPDUs | disable the port (errdisable).                                 |
+`bpdufilter`| Block ports from sending BPDUs                                                       | Disabled      | ignore recieved BPDU packets. (Only effect on per-port config) |
+
 The command `SW(config-if)#spanning-tree portfast` quickly moves access ports to _forwarding_ by passing _listening_ and _learning_. However, it may lead to loop links when a new switch connects to this fast-port. To solve the issue, `SW(config-if)#spanning-tree bpduguard` is used to block BPDU packets coming into the fast-port.
 
 ## RSTP (802.1W)
