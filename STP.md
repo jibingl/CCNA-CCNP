@@ -44,8 +44,8 @@ Election (*Lowest*) | 1st | 2nd | 3rd | 4th |
 ### _Interfaces Roles and States_
 Interfaces Roles | Designated      | Root            | Non-Designated |
 -----------------|-----------------|-----------------|----------------|
-BPDUs            | send/forward    | reveive         | receive |
-Data             | receive/forward | receive/forward | drop |
+BPDUs            | send/forward    | reveive         | receive        |
+Data             | receive/forward | receive/forward | drop           |
 
 Interfaces States | blocking | listening       | learning       | forwarding |
 ------------------|----------|-----------------|----------------|------------|
@@ -58,10 +58,10 @@ Timer             | N/A      | 15s             | 15s            | N/A |
 ---------------|--------------------------------------------------------------------------------------|---------------|----------------------------------------------------------------|
 **PortFast**   | Move access ports to _forwarding_ by passing _listening_ and _learning_              | Sending BPDUs | disable PortFast and transfer the port to normal STP operation.|
 **BPDU Guard** | Protect against unauthorized switches being connected to ports intended to end hosts | Sending BPDUs | disable the port (errdisable).                                 |
-**BPDU Filter88| Block ports from sending BPDUs                                                       | Disabled      | ignore recieved BPDU packets. (Only effect on per-port config) |
+**BPDU Filter**| Block ports from sending BPDUs                                                       | Disabled      | ignore recieved BPDU packets. (Only effect on per-port config) |
 ### _Configuration combinations table_
-Configration to a port    | Pros | Cons
---------------------------|------|------
+Configration to a port    | Pros | Cons |
+--------------------------|------|------|
 `portfast`                | - Immediately forward data <br> - Auto-transfer to normal STP port if a new switch connected | - Potential STP attack |
 `bpduguard`               | - No impact to existing STP topology if unexpected switches connected | - Cause the port disabled & need to be enabled manually <br> - Wait for 30s to forward data |
 `portfast` + `bpduguard`  | - Immediately forward data <br> - No impact to existing STP topology if unexpected switches connected | - Cause the port disabled & need to be enabled manually |
