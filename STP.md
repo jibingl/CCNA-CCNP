@@ -62,10 +62,10 @@ Timer             | N/A      | 15s             | 15s            | N/A |
 ### _Configuration combinations table_
 Configration to a port    | Pros | Cons
 --------------------------|------|------
-`portfast`                | - Immediately forwarding data <br> - Auto-transfer to normal STP port if a new switch connected | - Potential STP attack |
+`portfast`                | - Immediately forward data <br> - Auto-transfer to normal STP port if a new switch connected | - Potential STP attack |
 `bpduguard`               | - No impact to existing STP topology if unexpected switches connected | - Cause the port disabled & need to be enabled manually <br> - Wait for 30s to forward data |
-`portfast` + `bpduguard`  | - Immediately forwarding data <br> - No impact to existing STP topology if unexpected switches connected | - Cause the port disabled & need to be enabled manually |
-`portfast` + `bpdufilter` | - Immediately forwarding data <br> - No impact to existing STP topology if unexpected switches connected | - Cannot transfer to normal STP port automatically |
+`portfast` + `bpduguard`  | - Immediately forward data <br> - No impact to existing STP topology if unexpected switches connected | - Cause the port disabled & need to be enabled manually |
+`portfast` + `bpdufilter` | - Immediately forward data <br> - No impact to existing STP topology if unexpected switches connected | - Cannot transfer to normal STP port automatically |
 
 
 ## 🌲 RSTP (802.1W)
