@@ -15,3 +15,10 @@
 - **SPA** - Sender's L2 address.
 - **THA** - Intended receiver's L2 address.
 - **TPA** - Intended reveiver's L3 address.
+
+## Proxy-ARP
+Case #1 - PC1 can ping PC3/PC4 even whitout default gateway configured
+![image](https://github.com/jibingl/CCNA-CCNP/assets/84643474/d878b399-e4b1-4ecb-84d1-204766562aa5)
+
+Case #2 - Configure a directly connected static route 
+![image](https://github.com/jibingl/CCNA-CCNP/assets/84643474/01389521-5d5d-4e46-9025-13715df43392)
