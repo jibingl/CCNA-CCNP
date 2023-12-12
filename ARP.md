@@ -17,8 +17,9 @@
 - **TPA** - Intended reveiver's L3 address.
 
 ## Proxy-ARP
-#### Case #1 - PC1 can ping PC3/PC4 even whitout default gateway configured
-![image](https://github.com/jibingl/CCNA-CCNP/assets/84643474/d878b399-e4b1-4ecb-84d1-204766562aa5)
+#### Case #1 - PC1 can ping PC3/PC4 even whitout default gateway configured (Misconfigured Network Mask)
+![image](https://github.com/jibingl/CCNA-CCNP/assets/84643474/47ab295e-23a3-434a-9e85-3446ac1a6051)
+
 
 #### Case #2 - R1 G0/0 is on behalf of 192.168.34.0/24 to reply corresponding ARP requests
 ![image](https://github.com/jibingl/CCNA-CCNP/assets/84643474/01389521-5d5d-4e46-9025-13715df43392)
