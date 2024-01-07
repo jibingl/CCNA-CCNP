@@ -1,12 +1,12 @@
 # Border Gateway Protocol
 BGP is an exterior gateway protocol designed to exchange routing and reachability information among ASes on the Internet.  
-- IBGP (Internal BGP) - AS to AS
-- EBGP (External BGP) - Within an AS
+- IBGP (Internal BGP) - Within an AS
+- EBGP (External BGP) - AS to AS
 
 Each AS is identified by an ASN that is either public or private. A public ASN is globally unique and can be advertised across the Internet; however, a private ASN is not globally unique and should not be advertised to external networks. Private ASNs range from 64512 to 65534, and from 4,200,000,000 to 4,294,967,294. All other ASNs are public and available for use on the Internet except for a few reserved numbers.  
 
 A public ASN is required only when an AS is originating routes that are visible on the Internet. However, a private ASN should be used when an AS is only exchanging routes via BGP with a single Internet Service Provider (ISP).  
-**E.G.** The AS of the customer is assigned a private A SN (64512) since the customer is connected to one ISP via BGP. The ISP has a public ASN (100) since it originates the routes that are visible on the Internet. 
+**E.G.** The AS of the customer is assigned a private ASN (64512) since the customer is connected to one ISP via BGP. The ISP has a public ASN (100) since it originates the routes that are visible on the Internet. 
 
 Attributes | CLI |
 -----------|----------
