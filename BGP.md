@@ -6,7 +6,7 @@ BGP is an exterior gateway protocol (EGP) designed to exchange routing and reach
 Each AS is identified by an ASN that is either public or private. A public ASN is globally unique and can be advertised across the Internet; however, a private ASN is not globally unique and should not be advertised to external networks. Private ASNs range from 64512 to 65534, and from 4,200,000,000 to 4,294,967,294. All other ASNs are public and available for use on the Internet except for a few reserved numbers.  
 
 A public ASN is required only when an AS is originating routes that are visible on the Internet. However, a private ASN should be used when an AS is only exchanging routes via BGP with a single Internet Service Provider (ISP).  
-**E.G.** The AS of the customer is assigned a private ASN (64512) since the customer is connected to one ISP via BGP. The ISP has a public ASN (100) since it originates the routes that are visible on the Internet. 
+> E.g. The AS of the customer is assigned a private ASN (64512) since the customer is connected to one ISP via BGP. The ISP has a public ASN (100) since it originates the routes that are visible on the Internet.   
 
 Attributes | CLI |
 -----------|----------
@@ -14,7 +14,6 @@ AS_PATH    | `(config)# access-list 10 permit 192.168.2.0 255.255.255.0` <br> `(
 LOCAL_PREF | `(config)# route-map primary_outbound permit 10` <br> `(config-route-map)# set local-preference 150`
 MED        | `(config)# route-map primary_med_inbound permit 10` <br> `(config-route-map)# set metric 50`
 NEXT HOP   | `(config-router)# neighbor 192.168.44.1 next-hop-self`
-AS_PATH    | 
 
 ## AS_PATH
 The AS_PATH attribute is a list of all ASes that a specific route passes through to reach a specified network. When a router is advertising a BGP route, the AS_PATH attribute is first created empty. Each time the route is advertised from one AS to another, the AS_PATH attribute is modified to prepend the ASN of the router that advertised the route.
@@ -70,6 +69,11 @@ AS_PATH prepending is the process of adding one or more AS Number (ASN) to the f
 (config)# router bgp 100
 (config-router)# neighbor 192.168.45.2 route-map prepend_out out
 ```
+
+## Nerghbors Forming
+![image](https://github.com/jibingl/CCNA-CCNP/assets/84643474/0b551eaa-1b90-48cb-be75-27f096dd4499)
+
+
 ## Commands
 ```
 AS100-CBR(config)# ip bgp 100                                                   //ASN is 100
