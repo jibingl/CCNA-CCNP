@@ -46,18 +46,18 @@ All OSPF DR/BDRs                 | 224.0.0.6  | FF02::6    |
 All RIP routers                  | 224.0.0.9  | FF02::9    |
 All EIGRP routers                | 224.0.0.10 | FF02::A    |
 
-📎 Table-5 Network Automation Tools
+📎 Table-5 Routing Protocols
+Abbr. | Names                                      | Based on                 | Encap   | Neighbors Forming          |
+------|--------------------------------------------|--------------------------|---------|----------------------------|
+OSPF  | Open Shortest Path First                   | Link state               | IP 89   | Dynamic - Hello msg        |
+EIGRP | Enhanced Interior Gateway Routing Protocol | Advanced Distance vector | IP 88   |                            |
+RIP   | Routing Information Protocol               | Distance vector          | UDP 520 |                            |
+BGP   | Border Gateway Protocol                    | Path vector              | TCP 179 | Static - explicitly config |
+IS-IS | Intermediate System - Intermediate System  | Link state               | L2      |                            |
+
+📎 Table-6 Network Automation Tools
 Name   | Client-SRV            | Op-Model  |Protocol| Port | By-Lang| Use-Lang       | Key Components                                       |
 -------|-----------------------|-----------|--------|------|--------|----------------|------------------------------------------------------|
 Ansible| agentless             | push model| SSH    | 22   | Python | YAML           | Control Node: Inventory, Template, Variable, Playbook|
 Puppet | agent-based; agentless| pull model| HTTP(s)| 8140 | Ruby   |Declarative lang|Puppet Master: Manifest , Templates                   |
 Chef   | agent-based           | pull model| HTTP(s)| 10002| Ruby   |                | Resources, Recipes, Cookbooks, Run-list              |
-
-📎 Table-6 Routing Protocols
-Abbr. | Names                                      | Based on                 | Encap   |
-------|--------------------------------------------|--------------------------|---------|
-OSPF  | Open Shortest Path First                   | Link state               | IP 89   |
-EIGRP | Enhanced Interior Gateway Routing Protocol | Advanced Distance vector | IP 88   |
-RIP   | Routing Information Protocol               | Distance vector          | UDP 520 |
-BGP   | Border Gateway Protocol                    | Path vector              | TCP 179 |
-IS-IS | Intermediate System - Intermediate System  | Link state               | L2      |
