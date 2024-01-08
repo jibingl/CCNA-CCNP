@@ -79,18 +79,18 @@ Kevin Wallace Training, LLC
 ```
 AS100-CBR(config)# ip bgp 100                                                   //ASN is 100
 AS100-CBR(config-router)# bgp router-id 1.1.1.1
-AS100-CBR(config-router)# neighbor 192.168.12.2 remote-as 200                   //Neighbor ASN is 200
-AS100-CBR(config-router)# network 192.168.1.0/24                                //The netowrks are advertised out via BGP
+AS100-CBR(config-router)# neighbor 192.168.12.2 remote-as 200                   //Explicitly config a neighbor with ASN 200
+AS100-CBR(config-router)# network 192.168.1.0/24                                //The netowrk we want to advertise out via BGP
 
 AS200-CBR(config)# access-list 10 permit 192.168.2.0 255.255.255.0 
 AS200-CBR(config-router)# ip bgp 200
 AS200-CBR(config-router)# bgp router-id 2.2.2.2
 AS200-CBR(config-router)# neighbor 192.168.12.1 remote-as 100
-AS200-CBR(config-router)# neighbor 192.168.23.1 remote-as 200                    //The same ASN refers to IBGP neighbors
+AS200-CBR(config-router)# neighbor 192.168.23.1 remote-as 200                    //The same ASN refers to an iBGP neighbor
 AS200-CBR(config-router)# network 192.168.2.0/24
 AS200-CBR(config-router)# neighbor 192.168.12.1 password cisco                   //BGP peers authentication
-AS200-CBR(config-router)# neighbor 192.168.12.1 distribute-list 1 out            //Filter routing advertisement
-AS200-CBR(config-router)# neighbor 192.168.12.1 default-orginate                 //Advertise default routes out via BGP
+AS200-CBR(config-router)# neighbor 192.168.12.1 distribute-list 10 out            //Filter routing advertisement
+AS200-CBR(config-router)# neighbor 192.168.12.1 default-orginate                 //Advertise default route out via BGP
 
 AS300-ISP-BR1(config)#
 AS300-ISP-BR1(config-router)#
