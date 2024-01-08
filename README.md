@@ -49,7 +49,7 @@ All EIGRP routers                | 224.0.0.10 | FF02::A    |
 📎 Table-5 Routing Protocols
 Abbr. | Names                                      | Based on                 | Encap   | Neighbors Forming          |
 ------|--------------------------------------------|--------------------------|---------|----------------------------|
-OSPF  | Open Shortest Path First                   | Link state               | IP 89   | Dynamic - Hello msg        |
+OSPF  | Open Shortest Path First                   | Link state               | IP 89   | Dynamic dicover - Hello    |
 EIGRP | Enhanced Interior Gateway Routing Protocol | Advanced Distance vector | IP 88   |                            |
 RIP   | Routing Information Protocol               | Distance vector          | UDP 520 |                            |
 BGP   | Border Gateway Protocol                    | Path vector              | TCP 179 | Static - explicitly config |
