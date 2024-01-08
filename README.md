@@ -2,7 +2,7 @@
 
 📢 This is the study notes of my personal CCNA learning. Most of contents retrived from the Youtube channel **[Jeremy's IT Lab](https://www.youtube.com/c/JeremysITLab)**. 
 
-## Common Use Knowledge
+## Common Knowledge
 Router Boost Order:
 ```
  Power on     Load Bootstrap     POST     Load IOS     Load startup configuration     Generate running configuration
@@ -57,7 +57,7 @@ Chef   | agent-based           | pull model| HTTP(s)| 10002| Ruby   |           
 Abbr. | Names                                      | Based on                 | Encap   |
 ------|--------------------------------------------|--------------------------|---------|
 OSPF  | Open Shortest Path First                   | Link state               | IP 89   |
-EIGRP | Enhanced Interior Gateway Routing Protocol | Advanced Distance vector | Ip 88   |
+EIGRP | Enhanced Interior Gateway Routing Protocol | Advanced Distance vector | IP 88   |
 RIP   | Routing Information Protocol               | Distance vector          | UDP 520 |
 BGP   | Border Gateway Protocol                    | Path vector              | TCP 179 |
 IS-IS | Intermediate System - Intermediate System  | Link state               | L2      |
