@@ -14,7 +14,7 @@ Attributes/Params | About Path Selection | Preferred | Routing Direction |
 ------------------|----------------------|-----------|-------------------|
 Weight         | A locally signaficant, Cisco-specific param that a router can set when reveiving updates | Higher | Commanly influence outbound |
 LOCAL_PREF     | A param communicated throughout a single AS. | Higher | Commanly influence outbound |
-Originate      |  | Locally |  |
+Originate      | "If I own connect to the network directly?" | Locally |  |
 AS Path Length | The number of AS in the AS_PATH attribute | Lower | Commonly influence inbound |
 Origin Type    | How the route was injected into BGP: i(`network` cmd), e(EGP), or ?(redistributed). | i > e > ? |
 MED            | Set and Advertised to influence routers selection within another AS. | Lower | Influence another AS |
