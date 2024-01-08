@@ -9,14 +9,17 @@ A public ASN is required only when an AS is originating routes that are visible 
 > E.g. The AS of the customer is assigned a private ASN (64512) since the customer is connected to one ISP via BGP. The ISP has a public ASN (100) since it originates the routes that are visible on the Internet.   
 
 ## Attributes
-![image](https://github.com/jibingl/CCNA-CCNP/assets/84643474/bb998daa-32b9-47e6-a684-a53945a50076)
-
-Attributes | CLI |
------------|----------
-AS_PATH    | `(config)# access-list 10 permit 192.168.2.0 255.255.255.0` <br> `(config)# bgp as-path access-list 1 deny ^100$` <br> `(config)# bgp as-path access-list 1 permit .*` <br> `(config-router)# neighbor 192.168.23.2 remove-private-AS`
-LOCAL_PREF | `(config)# route-map primary_outbound permit 10` <br> `(config-route-map)# set local-preference 150`
-MED        | `(config)# route-map primary_med_inbound permit 10` <br> `(config-route-map)# set metric 50`
-NEXT HOP   | `(config-router)# neighbor 192.168.44.1 next-hop-self`
+There are many attributes used to decide BGP path selection of routers. Below are some.  
+Attributes/Params | About Path Selection | Preferred | Routing Direction |
+------------------|----------------------|-----------|-------------------|
+Weight         | A locally signaficant, Cisco-specific param that a router can set when reveiving updates | Higher | Commanly influence outbound |
+LOCAL_PREF     | A param communicated throughout a single AS. | Higher | Commanly influence outbound |
+Originate      |  | Locally |  |
+AS Path Length | The number of AS in the AS_PATH attribute | Lower | Commonly influence inbound |
+Origin Type    | How the route was injected into BGP: i(`network` cmd), e(EGP), or ?(redistributed). | i > e > ? |
+MED            | Set and Advertised to influence routers selection within another AS. | Lower | Influence another AS |
+Paths          | | eBGP > iBGP | |
+Router ID      | | Lowest | |
 
 ### AS_PATH
 The AS_PATH attribute is a list of all ASes that a specific route passes through to reach a specified network. When a router is advertising a BGP route, the AS_PATH attribute is first created empty. Each time the route is advertised from one AS to another, the AS_PATH attribute is modified to prepend the ASN of the router that advertised the route.
