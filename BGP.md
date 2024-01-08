@@ -104,7 +104,7 @@ AS300-ISP-BR2(config-router)# neighbor 192.168.23.2 filter-list 1 out
 A topology is called full mesh (fully meshed topology) when there is an IBGP peering relationship between any two routers in the AS. All BGP routers within a single AS must be fully meshed so that any external routing information must be re-distributed to all other routers within that AS.
 
 ## BGP Route Reflection
-A BGP route reflector is an IBGP router that repeats routes learned from IBGP peers to some of its other IBGP peers (its clients).
+A BGP route reflector is an IBGP router (R1) that repeats routes learned from IBGP peers (R2 and R3) to some of its other IBGP peers, its clients (R4, R5, and R6).
 ```
 neighbor 192.168.23.1 route-reflector-client
 neighbor 192.168.34.2 route-reflector-client
