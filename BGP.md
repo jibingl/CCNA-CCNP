@@ -1,12 +1,15 @@
 # Border Gateway Protocol
 BGP is an exterior gateway protocol (EGP) designed to exchange routing and reachability information among ASes on the Internet. 
-- IBGP (Internal BGP) - Within an AS
-- EBGP (External BGP) - AS to AS
+- iBGP (Internal BGP) - Within an AS
+- eBGP (External BGP) - AS to AS
 
 Each AS is identified by an ASN that is either public or private. A public ASN is globally unique and can be advertised across the Internet; however, a private ASN is not globally unique and should not be advertised to external networks. Private ASNs range from 64512 to 65534, and from 4,200,000,000 to 4,294,967,294. All other ASNs are public and available for use on the Internet except for a few reserved numbers.  
 
 A public ASN is required only when an AS is originating routes that are visible on the Internet. However, a private ASN should be used when an AS is only exchanging routes via BGP with a single Internet Service Provider (ISP).  
 > E.g. The AS of the customer is assigned a private ASN (64512) since the customer is connected to one ISP via BGP. The ISP has a public ASN (100) since it originates the routes that are visible on the Internet.   
+
+## Attributes
+![image](https://github.com/jibingl/CCNA-CCNP/assets/84643474/bb998daa-32b9-47e6-a684-a53945a50076)
 
 Attributes | CLI |
 -----------|----------
@@ -15,15 +18,15 @@ LOCAL_PREF | `(config)# route-map primary_outbound permit 10` <br> `(config-rout
 MED        | `(config)# route-map primary_med_inbound permit 10` <br> `(config-route-map)# set metric 50`
 NEXT HOP   | `(config-router)# neighbor 192.168.44.1 next-hop-self`
 
-## AS_PATH
+### AS_PATH
 The AS_PATH attribute is a list of all ASes that a specific route passes through to reach a specified network. When a router is advertising a BGP route, the AS_PATH attribute is first created empty. Each time the route is advertised from one AS to another, the AS_PATH attribute is modified to prepend the ASN of the router that advertised the route.
 
 Routers use the AS_PATH attribute to detect and prevent loops. For example, a router drops any route in which its own ASN is part of the AS_PATH attribute.
 
 Private ASNs are not globally unique, hence, they cannot be leaked to the Internet. To achieve this goal, routers must strip the private ASNs from the AS_PATH attribute list before the routes are advertised to the Internet.
 
-## Local Preference (LOCAL_PREF)
-A router sending IBGP update packets will include the LOCAL_PREF attribute. This attribute indicates the degree of preference for one BGP route over the others when an AS has multiple routes to another AS. The LOCAL_PREF attribute is always advertised to IBGP neighbors and never advertised to EBGP peers, hence, it is exchanged only among routers within the same AS. The BGP route with the highest LOCAL_PREF value is preferred.
+### LOCAL_PREF
+A router sending iBGP update packets will include the LOCAL_PREF attribute. This attribute indicates the degree of preference for one BGP route over the others when an AS has multiple routes to another AS. The LOCAL_PREF attribute is always advertised to iBGP neighbors and never advertised to eBGP peers, hence, it is exchanged only among routers within the same AS. The BGP route with the highest LOCAL_PREF value is preferred.
 ```
 (config)# route-map primary_outbound permit 10
 (config-route-map)# set local-preference 150
@@ -38,9 +41,9 @@ A router sending IBGP update packets will include the LOCAL_PREF attribute. This
 (config-router)# neighbor 192.168.13.1 route-map secondary_outbound in
 ```
 
-## Multi Exit Discriminator (MED)
-The MED attribute indicates to external neighbors the preferred path into an AS if there are multiple entry points into the same AS. The BGP route with the lowest MED value is preferred.  
-The MED is sent to EBGP peers; those peer routers propagate the MED attribute within their AS, but do not pass it on to the next AS.
+### MED
+The MED (Multi Exit Discriminator) attribute indicates to external neighbors the preferred path into an AS if there are multiple entry points into the same AS. The BGP route with the lowest MED value is preferred.  
+The MED is sent to eBGP peers; those peer routers propagate the MED attribute within their AS, but do not pass it on to the next AS.
 ```
 (config)# route-map primary_med_inbound permit 10
 (config-route-map)# set metric 50
