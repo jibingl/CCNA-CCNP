@@ -42,7 +42,7 @@ rommon>confreg 0x2142
 rommon>reset
 ```
 
-## `Break` key no work
+## `Break` key not work
 A solution for fixing `Break` key of keyboard not work.
 1. Set terminal session's spped rate to **1200**; (keep other settings as default: *no parity, 8 data-bits, 1 stop bit, no flow control*)
 2. Power cycle the devices and press/hold `Space` key for 10-15 seconds in order to generate a signal similiar to *break* sequence;
