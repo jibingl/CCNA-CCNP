@@ -12,7 +12,7 @@ switch#delete falsh:vlan.dat        //reset vlan configuration
 switch#reload                       //reboot devices
 ```
 
-## Password Recovery - Bypass loading of *start-config*
+## Password Recovery - Bypass loading *start-config*
 ### Approach #1 - Rename *start-config* file
 Using physical button or break-key signal to break normal boot. Then disable the existing configuration file be loaded by boot loader and instead loading factory-default configuration to enter the device's OS. Finally, under global config mode, reload the exsiting configuration file and change those forgotten passwords.
 1. Connect a PC/terminal to console port of a switch/router.
@@ -41,3 +41,10 @@ Using physical button or break-key signal to break normal boot. Then disable the
 rommon>confreg 0x2142
 rommon>reset
 ```
+
+## `Break` key no work
+A solution for fixing `Break` key of keyboard not work.
+1. Set terminal session's spped rate to **1200**; (keep other settings as default: *no parity, 8 data-bits, 1 stop bit, no flow control*)
+2. Power cycle the devices and press/hold `Space` key for 10-15 seconds in order to generate a signal similiar to *break* sequence;
+3. Reconnect terminal session and set speed rate back to **9600**.
+Now, you are in ROM Monitor mode.
