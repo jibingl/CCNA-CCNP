@@ -3,7 +3,7 @@
 _one private IP <--> one public IP_ 
 ```
 192.168.1.10--[=]----------------------------g1/0---(+)---g0/0----------------------{ISP}----8.8.8.8
-                                              .1     R1    .2       122.11.0/30   .1 
+                                              .1     R1    .2      122.11.11.0/30   .1 
                                                 
                                          Translations Table
 .-Pro---Inside global----------Inside local----------|--Outside local--------Outside global------.
@@ -25,7 +25,7 @@ R1(config)#ip nat inside source static 192.168.1.10 122.11.11.2
 _one or more private subnets <--> multiple public IPs_
 ```
 192.168.1.0/24--[=]--------------------------g1/0---(+)---g0/0----------------------{ISP}----{Internet}
-                                              .1     R1    .2       122.11.0/29   .1 
+                                              .1     R1    .2      122.11.11.0/29   .1 
  
                                          Translations Table
 .-Pro---Inside global----------Inside local----------|--Outside local--------Outside global------.
