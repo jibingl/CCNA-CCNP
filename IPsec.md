@@ -14,3 +14,5 @@ To establish an IPsec channel, there are two phrases to go through. The 1st phra
 1. ISAKMP
 2. Interesting List (Communication IPs)
 3. Crypto Map (Encryption IPs)
+
+
