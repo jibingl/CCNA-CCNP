@@ -19,7 +19,7 @@ Type               | ESP | AH |
 Mode | Tunnel | Transport |
 -----|--------|-----------|
 **Encrypting** | (Initial) IP Header & Payload | Payload |
-**Encapsulating** | `new-ip-header`:`ESP`:`init-ip-header`:`Payload`:`ESP-tail` | `ip-header`:`ESP`:`Payload`:`ESP-tail` |
+**Encapsulation Structure** | `new-ip-header`:`ESP`:`init-ip-header`:`Payload`:`ESP-tail` | `ip-header`:`ESP`:`Payload`:`ESP-tail` |
 
 > Notes: Only when `new-ip-header` and `init-ip-header` are the same, ***transport mode*** is avialable.
 
