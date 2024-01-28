@@ -1,4 +1,5 @@
 # IPsec VPN
+
 ### Protocols
 Terms | RFC Doc | Full Names |
 ------|---------|------------|
@@ -18,7 +19,7 @@ Type | ESP | AH |
 Mode | Tunnel | Transport |
 -----|--------|-----------|
 
-
+</p>
 
 ## Site-to-Site VPN
 ### Configuration Points
