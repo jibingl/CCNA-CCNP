@@ -27,10 +27,10 @@ Mode | Tunnel | Transport |
 ### Configuration Sections
 1. IKE/ISAKMP (Encryption, authentication, key-exchange algorithms, respectively)
    ```
-   crypto isakmp policy 10
-    encryption aes
-    authentication pre-share
-    group 15
+   crypto isakmp policy 10                                         //"10" is a policy number that smaller is preferred
+    encryption aes                                                 //Encryption algorithm
+    authentication pre-share                                       //Authentication method
+    group 15                                                       //Key-exchange algorithm
    ```
 2. IPsec mode (Transform Set: ESP or AH mode alongwith encryption & authentication algorithms)
    ```
