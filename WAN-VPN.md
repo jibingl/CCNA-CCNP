@@ -1,5 +1,5 @@
 # WAN and/vs VPN
-
+## WAN
 WAN connection services include leased line, Ethernet, DSL, CATV, Fiber, and WLAN.
 
   Glossary         | Explanation
@@ -48,19 +48,3 @@ Create VPNs over MPLS infrastructure.
      |               |            |+-----------+-----------+----------+|
      +---------------+------------+------------------------------------+
 ```
-## IPSec and TLS VPNs
-IPSec commonly is for site-to-site VPN, while TLS VPN conmmanly is for remote access.
-
-## GRE over IPSec
-IPSec doesn't support multicast and broadcast, so it can't be used on some protocols (like OSPF) to create VPN tunnel.
-GRE creates tunnels like IPSec, but not encryp the original packets. However, it supports multicast/broadcast.
-GRE-over-IPSec combines the GRE's flexibility and IPSec's security.
-```
-     +---------------+------------+---Encrypted---------------------------+
-     |               |            |+-----------+------------+------------+|
-     | New Ip Header |IPSec Header|| IP Header | GRE Header |  IP Packet ||
-     |               |            |+-----------+------------+------------+|
-     +---------------+------------+---------------------------------------+
-```
-## DMVPN (Dynamic Multiple VPN)
-DMVPN is a Cisco invention for dynamically creating a full mesh of IPSec tunnels (_hub-and-spoke_ topologies) with ease, without having to manually configure every single tunnel.
