@@ -47,3 +47,16 @@ Mode | Tunnel | Transport |
    ```
 6. Apply crypto map to interface (If applicable)
 
+## GRE over IPSec
+IPSec doesn't support multicast and broadcast, so it can't be used on some protocols (like OSPF) to create VPN tunnel.
+GRE creates tunnels like IPSec, but not encryp the original packets. However, it supports multicast/broadcast.
+GRE-over-IPSec combines the GRE's flexibility and IPSec's security.
+```
+     +---------------+------------+---Encrypted---------------------------+
+     |               |            |+-----------+------------+------------+|
+     | New Ip Header |IPSec Header|| IP Header | GRE Header |  IP Packet ||
+     |               |            |+-----------+------------+------------+|
+     +---------------+------------+---------------------------------------+
+```
+## DMVPN (Dynamic Multiple VPN)
+DMVPN is a Cisco invention for dynamically creating a full mesh of IPSec tunnels (_hub-and-spoke_ topologies) with ease, without having to manually configure every single tunnel.
