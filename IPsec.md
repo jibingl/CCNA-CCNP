@@ -45,5 +45,5 @@ Mode | Tunnel | Transport |
     match address list VPN
     set peer 10.10.20.1
    ```
-6. Apply crypto map to interface
+6. Apply crypto map to interface (If applicable)
 
