@@ -24,11 +24,26 @@ Mode | Tunnel | Transport |
 > Notes: Only when `new-ip-header` and `init-ip-header` are the same, ***transport mode*** is avialable.
 
 ## Site-to-Site VPN
-### Configuration Points
-1. ISAKMP
-2. Interesting List (Communication IPs)
-3. Crypto Map (Encryption IPs)
+### Configuration Sections
+1. IKE/ISAKMP (Encryption, authentication, key-exchange algorithms, respectively)
+   ```
+   crypto isakmp policy 10
+    encryption aes
+    authentication pre-share
+    group 15
+   ```
+2. IPsec mode (Transform Set: ESP or AH mode alongwith encryption & authentication algorithms)
+   ```
+   crypto ipsec transform VPN-ESP-TS esp-aes 256 esp-sha256-hmac
+   ```
+3. Crypto Map (Mapping isakmp with ipsec, transform set, interresting traffic, and setting peers.)
+   ```
+   access-list VPN permit 192.168.1.0 0.0.0.255 172.31.1.0 0.0.0.255
+   
+   crypto map VPN-MAP isakmp-ipsec
+    set transform VPN-ESP-TS
+    match address list VPN
+    set peer 10.10.20.1
+   ```
+6. Apply crypto map to interface
 
-an ESP encryption transform
-an ESP authentication transform
-an AH transform
