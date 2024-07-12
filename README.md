@@ -19,6 +19,7 @@ VTP  | VLAN Trunking Protocol        | Centralized VLANs management             
 CDP  | CIsco Discovery Protocol      | Exchange device info                       | Layer 2               |
 NTP  | Network Time Protocol         | Syncronize time                            | Defualt stratum 8     |
 NDP  | Neighbor Discovering Protocol | Gather info required for IPv6 communication| 5 ICMPv6 packet types |
+UDLD | Unidirectional Link Detection | Help STP to prevent layer2 loops           | Unidirectional link |
 
 📎 Table-2 **`show mac address-table [dynamic | static | vlan <vlan-id> | interface <int-id>]`**
 Vlan | Mac Address    | Type    | Ports |
