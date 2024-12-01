@@ -1,19 +1,9 @@
 # Network Traffic Forwarding
 
-## Layer 2 Forwarding
-### Source MAC Check
-On the local switch, 
-```
-                                                                      Yes, reset time stamp; send to dest's port
-                                                                    /
-Source MAC ------ Check MAC-Address Table ------ Has the source MAC?
-                                                                    \
-                                                                      No, add an record; flood out
-
-```
-
 ## Layer 3 Forwarding
+
 ### Bitwise Operation
+
 On the source host, the ___Bitwise operation___ determines to where a network package should be forward.
 ```
                   ..-------.
@@ -32,3 +22,17 @@ Dest IP   | 11000000.10101000.00000001.11001000  | 11000000.10101000.00001110.01
 ***XOR*** | 00000000.00000000.00000000.10101100  | 00000000.00000000.00001111.00000000
 Sour Mask | 11111111.11111111.11111111.00000000  | 11111111.11111111.11111111.00000000
 ***AND*** | 00000000.00000000.00000000.00000000  | 00000000.00000000.00001111.00000000
+
+## Layer 2 Forwarding
+
+### Source MAC Check
+
+On the local switch, 
+```
+                                                                      Yes, reset time stamp; send to dest's port
+                                                                    /
+Source MAC ------ Check MAC-Address Table ------ Has the source MAC?
+                                                                    \
+                                                                      No, add an record; flood out
+
+```
