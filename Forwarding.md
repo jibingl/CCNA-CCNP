@@ -4,7 +4,7 @@
 
 ### Bitwise Operation
 
-On the source host, the ___Bitwise operation___ determines to where a network package should be forward.
+On the source host, the ***Bitwise operation*** determines to where a network package should be forward.
 ```
                   ..-------.
      Source IP ----\\       \              .-------.                          Yes, send to destination
@@ -27,7 +27,7 @@ Sour Mask | 11111111.11111111.11111111.00000000  | 11111111.11111111.11111111.00
 
 ### Source MAC Check
 
-On the local switch, 
+On the local switch, MAC-address table is enumerated to look for the source MAC address.
 ```
                                                                       Yes, reset time stamp; send to dest's port
                                                                     /
