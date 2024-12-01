@@ -28,6 +28,9 @@ Longest mactch of prefix
 
 ### Directed Broadcast
 Enable the router connected to the destination subnets to not drop but forward a broadcast package into the destination subnet.
+```
+R1(config-if)# ip directed-broadcast
+```
 
 ## Layer 2 Forwarding
 
