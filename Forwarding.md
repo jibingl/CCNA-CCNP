@@ -31,6 +31,7 @@ Enable the router connected to the destination subnets to not drop but forward a
 ```
 R1(config-if)# ip directed-broadcast
 ```
+Example: `ping` a broadcast IP of a remote subnet
 
 ## Layer 2 Forwarding
 
