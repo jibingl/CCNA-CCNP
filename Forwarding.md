@@ -23,6 +23,12 @@ Dest IP   | 11000000.10101000.00000001.11001000  | 11000000.10101000.00001110.01
 Sour Mask | 11111111.11111111.11111111.00000000  | 11111111.11111111.11111111.00000000
 ***AND*** | 00000000.00000000.00000000.00000000  | 00000000.00000000.00001111.00000000
 
+### Routing Table
+Longest mactch of prefix
+
+### Directed Broadcast
+Enable the router connected to the destination subnets to not drop but forward a broadcast package into the destination subnet.
+
 ## Layer 2 Forwarding
 
 ### Source MAC Check
