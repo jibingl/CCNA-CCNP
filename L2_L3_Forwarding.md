@@ -29,29 +29,20 @@ Hybrid         | Separate                    | CPU           | NP (Network Proce
 
 3. CEF (Cisco Express Forwarding)
 ![image](https://github.com/user-attachments/assets/a9a3aba1-3f99-41ca-8b83-a9a3a82454ee)
-```
-R1# show ip cef
-!
-Prefix               Next Hop
-0.0.0.0/0            no route                                              //Defualt route not configured
-0.0.0.0/8            drop                                                  //Drop this reserved range
-0.0.0.0/32           receive                                               //
-1.1.1.1/32           192.168.12.2    GigabitEthernet0/0
-                     192.168.13.3    GigabitEthernet0/1
-127.0.0.0/8          drop                                                  //Drop this reserved lookback range
-192.168.12.0/24      attached        GigabitEthernet0/0                    //Network directly connected to the router
-192.168.12.0/32      receive         GigabitEthernet0/0
-192.168.12.1/32      receive         GigabitEthernet0/0                    //IP configured on the router's interface
-192.168.12.2/32      attached        GigabitEthernet0/0                    //Network directly connected to the router
-192.168.12.255/32    receive         GigabitEthernet0/0                    //Broadcast
-192.168.13.0/24      attached        GigabitEthernet0/1
-192.168.13.0/32      receive         GigabitEthernet0/1
-192.168.13.1/32      receive         GigabitEthernet0/1                    //IP configured on the router's interface
-192.168.13.3/32      attached        GigabitEthernet0/1
-192.168.13.255/32    receive         GigabitEthernet0/1                    //Broadcast
-192.168.24.0/24      192.168.12.2    GigabitEthernet0/0
-224.0.0.0/4          drop                                                  //Drop this reserved Class D
-224.0.0.0/24         receive
-240.0.0.0/4          drop                                                  //Drop this reserved CLass E
-255.255.255.255/32   receive
-```
+
+
+## CEF
+**Example Network Topolgy**  
+![image](https://github.com/user-attachments/assets/d1095427-14a5-4378-8da6-1dc11f26f36c)
+
+#### 1. FIB(Forwarding Information Base)
+Using `show ip cef` to display **FIB** table information  
+![image](https://github.com/user-attachments/assets/b725ac1d-b3fb-4677-8fdc-898f9f71253a)
+
+`show ip cef 10.10.23.0 detail`  
+![image](https://github.com/user-attachments/assets/adf1ab15-4697-4670-b424-f0f296640171)
+
+#### 2. Adjacency Table
+Using `show adjacency detail` to display the **Adjacency Table** detailed information  
+![image](https://github.com/user-attachments/assets/52be617a-f021-442c-8a16-12dc44300fa4)
+> `AABBCC000200` `AABBCC000100` `0800` represents `DES-MAC` `SRC-MAC` `type`, in our case, it is `R2's E0/0 MAC` `R1's E0/0 MAC` `IPv4`.
