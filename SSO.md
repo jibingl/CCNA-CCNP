@@ -20,3 +20,6 @@ Keep *L3 forwarding*      | No  | Yes       | Yes      | Yes |
 R1(config)# redundancy
 R1(config-red)# mode sso
 ```
+
+## SSO HSRP
+**SSO HSRP** alters the default behavior of HRSP which allows a standby router to take over the active role, instead of a standby RP becoming active.  
