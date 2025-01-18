@@ -31,15 +31,6 @@ All OSPF DR/BDRs                 | 224.0.0.6  | FF02::6    |
 All RIP routers                  | 224.0.0.9  | FF02::9    |
 All EIGRP routers                | 224.0.0.10 | FF02::A    |
 
-📎 Table-5 Routing Protocols
-Abbr. | Names                                      | Based on                 | Encap   | Neighborship             |
-------|--------------------------------------------|--------------------------|---------|--------------------------|
-OSPF  | Open Shortest Path First                   | Link state               | IP 89   | Dynamic dicover - Hello  |
-EIGRP | Enhanced Interior Gateway Routing Protocol | Advanced Distance vector | IP 88   |                          |
-RIP   | Routing Information Protocol               | Distance vector          | UDP 520 |                          |
-BGP   | Border Gateway Protocol                    | Path vector              | TCP 179 | Static config explicitly |
-IS-IS | Intermediate System - Intermediate System  | Link state               | L2      |                          |
-
 📎 Table-3 Network Automation Tools
 Name   | Client-SRV            | Op-Model  |Protocol| Port | By-Lang| Use-Lang       | Key Components                                       |
 -------|-----------------------|-----------|--------|------|--------|----------------|------------------------------------------------------|
