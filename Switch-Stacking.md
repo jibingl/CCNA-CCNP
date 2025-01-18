@@ -1,5 +1,5 @@
 # Switch Stacking
-Benefits: MEC and centrolized management
+Benefits: MEC and centrolized & simplied management
 
 ## MEC (Multi-chassis EtherChannel)
 - It also known as **Multi-chassis Link Aggregation Group (MLAG or MC-LAG)**.  
@@ -9,37 +9,35 @@ Benefits: MEC and centrolized management
 
 ## Teches of Switch Stacking
 
-### VSS (Virtual Switching System)
+Technology \ **Params**   | VSS (Virtual Switching System) | StackWise                     | StackWise Virtual |
+:-------------------------|:------------------------------:|:-----------------------------:|:-----------------:|
+**# of Stacked Switches** | 2                              | Up to 8                       | 2
+**Interface Type**        | Ethernet                       | Stack ports                   | Ethernet
+**Interface Bandwith**    | 10G or 40G                     | Up to terabits                | 10G, 25G, 40G, or 100G
+**# of Interfaces**       | 1-8                            | 2 per switch                  | 1-8
+**Cables**                | Ethernet or fiber              | Stack cable                   | Ethernet or fiber
+**Cable Length**          | Up to kilometers fiber         | 0.5m, 1m, 3m                  | Up to kilometers fiber
+**Link Type**             | VSL (Virtual Switch Link)      | Stacking Link                 | SVL (StackWise Virtual Link)
+**Link Protocols**        | LMP & RRP                      | SDP                           | LMP & SDP
+**Traffic on Links**      | VSS control & data             | Control & data                | SVL control & data
+**Links Topology**        |                                | Ring                          | 
+**Support Switches**      | Catalyst 4500/6500/6800        | Catalyst 3750/3850, 9200/9300 | Catalyst 9400/9500/9600
+**Member Roles**          | Active & Standby               | Active, Standby, & Members    | Active & Standby 
+**Working Mode**          | RPR or NSF/SSO                 |                               | 
 
-![image](https://github.com/user-attachments/assets/044774ea-0ed6-4f02-8699-5fb8c4379bae)
+> RPR - Router-Processor Redundancy  
+> NSF/SSO - Non-Stop Forwarding/Stateful Switchover  
+> LMP - Link Management Protocol  
+> RRP - Role Resolution Protocol  
+> SDP of StackWise- Stack Discovery Protocol  
+> SDP of StackWise Virtual - StackWise Discovery Protocol  
 
-### StackWise
+### Ring Topology
+A ring topology connecting four switches, SW1, SW2, SW3 and SW4, looks like below: 
+```
+ .---> sp1:=SW1=:sp2 ------> sp1:=SW2=:sp2 ----.
+|                                               |
+ `---- sp2:=SW4=:sp1 ------> sp2:=SW3=:sp1 <---`
 
-
-
-### StacWise Virtual
-
-
-
-Technology/***Params***  | VSS (Virtual Switching System) | StackWise                     | StackWise Virtual |
-:------------------------|:------------------------------:|:-----------------------------:|:-----------------:|
-***Stacked Switches #*** | 2                              | Up to 8                       | 2
-***Interface Type***     | Ethernet                       | Stack ports                   |
-***Interface Bandwith*** | 10G - 40G                      | Up to terabits                |
-***Interface #***        | 1-8                            | 2 per switch                  |
-***Link Type***          | VSL (Virtual Switch Link)      |                               | SVL (StackWise Virtual Link)
-***Link Protocols***     | LMP, RRP                       | SDP                           |
-***Link Cables***        | Ethernet or Fiber              | Stack cables                  |
-***Cable Length***       | Up to kilometers by fiber      | 0.5m, 1m, 3m                  |
-***Traffic on Link***    | VSS control & data             | Control & data                |
-***Link Topology***      |                                | Ring connection               |
-***Support Switches***   | Catalyst 4500/6500/6800        | Catalyst 3750/3850, 9200/9300 | Catalyst 9400/9500/9600
-***Work Modes***         | RPR or NSF/SSO                 |                               |
-***Members Roles***      | Active & Standby               | Active, Standby, & Members    |
-
-RPR - Router-Processor Redundancy
-NSF/SSO - Non-Stop Forwarding/Stateful Switchover
-LMP - Link Management Protocol
-RRP - Role Resolution Protocol
-Ring topology - S1 -> S2 -> S3 -> S4 -> S1
-SDP - Stack Discovery Protocol
+sp: Stack Port
+```
