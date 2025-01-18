@@ -1,8 +1,8 @@
 # SSO, NSF, GR and NSR
-- SSO - Stateful Switchover
-- NSF - Non-stop Farwarding
-- GR - Graceful Restart
-- NSR - Non-stop Routing
+- SSO - Stateful Switchover, maintians interfaces and L2 protocol states.
+- NSF - Non-stop Farwarding, checkpoints FIB from active to standby RP to maintain local L3 package forwarding.
+- GR - Graceful Restart, allows neigbours to continue forwarding traffic to the device under an RP failover.
+- NSR - Non-stop Routing, maintains neighbors adjacencies during RP failover.
 
 All above technologies are used to keep the Data Plane working during a failure of the Control Plane.  
 
