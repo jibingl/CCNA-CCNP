@@ -21,23 +21,7 @@ NTP  | Network Time Protocol         | Syncronize time                          
 NDP  | Neighbor Discovering Protocol | Gather info required for IPv6 communication| 5 ICMPv6 packet types |
 UDLD | Unidirectional Link Detection | Help STP to prevent layer2 loops           | Unidirectional link |
 
-📎 Table-2 **`show mac address-table [dynamic | static | vlan <vlan-id> | interface <int-id>]`**
-Vlan | Mac Address    | Type    | Ports |
------|----------------|---------|-------|
-ALL  | 0100-0ccc-cccc | STATIC  | CPU   |
-1    | 0001-1122-aacc | DYNAMIC | Fa0/1 |
-
-Cisco cmds `show mac address-table`, `clear mac address-table dynamic [address <specific-mac> | interface <inter-id>]`.  
-Aging is 5 minutes.
-
-📎 Table-3 **`show arp [vlan <vlan-id>| interface <int-id>]`**
-Internet Address | Age |Phtsical Address   | Type | Interface |
------------------|-----|-------------------|------|-----------|
-169.254.255.255  | -   | ff-ff-ff-ff-ff-ff | ARPA |           |
-192.168.1.1      | -   | 1122.3344.55aa    | ARPA | Vlan1     |
-192.168.1.101    | 3   | 0001.1122.aacc    | ARPA | Vlan1     |
-
-📎 Table-4 Well-know Multicast Addresses
+📎 Table-2 Well-know Multicast Addresses
 Purpose                          |IPv4 Address|IPv6 Address|
 ---------------------------------|------------|------------|
 All nodes/hosts (like broadcast) | 224.0.0.1  | FF02::1    |
@@ -56,7 +40,7 @@ RIP   | Routing Information Protocol               | Distance vector          | 
 BGP   | Border Gateway Protocol                    | Path vector              | TCP 179 | Static config explicitly |
 IS-IS | Intermediate System - Intermediate System  | Link state               | L2      |                          |
 
-📎 Table-6 Network Automation Tools
+📎 Table-3 Network Automation Tools
 Name   | Client-SRV            | Op-Model  |Protocol| Port | By-Lang| Use-Lang       | Key Components                                       |
 -------|-----------------------|-----------|--------|------|--------|----------------|------------------------------------------------------|
 Ansible| agentless             | push model| SSH    | 22   | Python | YAML           | Control Node: Inventory, Template, Variable, Playbook|
