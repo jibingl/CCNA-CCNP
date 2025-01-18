@@ -33,11 +33,11 @@ Technology \ **Params**   | VSS (Virtual Switching System) | StackWise          
 > SDP of StackWise Virtual - StackWise Discovery Protocol  
 
 ### Ring Topology
-A ring topology connecting four switches, SW1, SW2, SW3 and SW4, looks like below: 
+A ring topology connecting four switches, SW1, SW2, SW3 and SW4, logically looks like below: 
 ```
- .---> sp1:=SW1=:sp2 ------> sp1:=SW2=:sp2 ----.
+ .---> sp2:=SW1=:sp1 ------> sp2:=SW2=:sp1 ----.
 |                                               |
- `---- sp2:=SW4=:sp1 ------> sp2:=SW3=:sp1 <---`
+ `---- sp1:=SW4=:sp2 ------> sp1:=SW3=:sp2 <---`
 
 sp: Stack Port
 ```
