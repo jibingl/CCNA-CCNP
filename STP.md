@@ -24,7 +24,7 @@ Election (*Lowest*) | 1st | 2nd | 3rd | 4th |
 1 - Root Bridge /LAN | BID |
 2 - Root Port /Switch| Root Cost | Neighbor BID | Neighbor Port ID | Local Port ID |
 3 - Designated Port /Segment | Root Cost | Local BID | Local Port ID |
-    > Default _bridge priority_ is 32768 on all switches, so the MAC address is used as the tie-breaker to determine the _root bridge_.
+> Default _bridge priority_ is 32768 on all switches, so the MAC address is used as the tie-breaker to determine the _root bridge_.
 
 ```
         root-bridge                       
