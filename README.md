@@ -37,3 +37,8 @@ Name   | Client-SRV            | Op-Model  |Protocol| Port | By-Lang| Use-Lang  
 Ansible| agentless             | push model| SSH    | 22   | Python | YAML           | Control Node: Inventory, Template, Variable, Playbook|
 Puppet | agent-based; agentless| pull model| HTTP(s)| 8140 | Ruby   |Declarative lang|Puppet Master: Manifest , Templates                   |
 Chef   | agent-based           | pull model| HTTP(s)| 10002| Ruby   |                | Resources, Recipes, Cookbooks, Run-list              |
+
+📎 Table-4 Special MAC Addresses
+MAC Address       | Destination for Protocols |
+------------------|---------------------------|
+01:00:0c:cc:cc:cc | CDP, VTP, DTP, PAgP, UDLD |
