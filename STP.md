@@ -113,7 +113,7 @@ Configration on a port    | Pros | Cons |
 ## 🌲 UplinkFast & BackboneFast
  Features    | Functioning                                                                 | Skipped Timers       | Save Time | Implement/Configure practice |
 -------------|-----------------------------------------------------------------------------|----------------------|-----------|------------------------------|
-UplinkFast   | Convert nd-port from block to forward immediately                           | Listening & Learning | 30S       | Only switches with nd ports  |
+UplinkFast   | Convert nd-/al-port from block to forward immediately                       | Listening & Learning | 30S/15S   | Only switches with nd ports  |
 BackboneFast | Send/Receive RLQ Request/Response to Root Bridge for checking inferior BPDU | Max Age              | ~20S      | All switches                 |
 
 ![image](https://github.com/jibingl/CCNA-CCNP/assets/84643474/f39b4313-633f-4700-bee3-067f03514821)
