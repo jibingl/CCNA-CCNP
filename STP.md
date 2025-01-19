@@ -101,8 +101,8 @@ Speed | STP Cost | RSTP Cost |
 **PortFast**   | Move access ports to _forwarding_ by passing _listening_ and _learning_              | Sending BPDUs | disable PortFast and transfer the port to normal STP operation.|
 **BPDU Guard** | Protect against unauthorized switches being connected to ports intended to end hosts | Sending BPDUs | disable the port (errdisable).                                 |
 **BPDU Filter**| Block ports from sending BPDUs                                                       | Disabled      | ignore recieved BPDU packets. (Only effect on per-port config) |
-### _Configuration combinations table_
-Configration to a port    | Pros | Cons |
+### Configuration combinations table
+Configration on a port    | Pros | Cons |
 --------------------------|------|------|
 `portfast`                | - Immediately forward data <br> - Auto-transfer to normal STP port if a new switch connected | - Potential STP attack |
 `bpduguard`               | - No impact to existing STP topology if unexpected switches connected | - Cause the port disabled & need to be enabled manually <br> - Wait for 30s to forward data |
