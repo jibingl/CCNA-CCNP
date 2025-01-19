@@ -21,9 +21,9 @@ Form a loop-free switch network (layer 2) by exchanging BPDU messages and block 
 
 Election (*Lowest*)                 | --> | --> | --> | --> |
 ------------------------------------|-----|-----|-----|-----|
-1 - **Root Bridge** per LAN         | BID |
-2 - **Root Port** per switch        | Root Cost | Neighbor BID | Neighbor Port ID | Local Port ID |
-3 - **Designated Port** per segment | Root Cost | Local BID | Local Port ID |
+1 - A **Root Bridge** per LAN         | BID |
+2 - A **Root Port** per switch        | Root Cost | Neighbor BID | Neighbor Port ID | Local Port ID |
+3 - A **Designated Port** per segment | Root Cost | Local BID | Local Port ID |
 > Default _bridge priority_ is 32768 on all switches, so the MAC address is used as the tie-breaker to determine the _root bridge_.
 
 ```
