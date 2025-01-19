@@ -11,7 +11,7 @@ Form a loop-free switch network (layer 2) by exchanging BPDU messages and block 
      | BP(4-bit) |   Extended System ID (12-bit)     |
      +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 
-     BP - Bridge Priority
+     BP - Bridge Priority (1-65536)
 ```
 ## 🌲 STP (802.1D)
 ### _Forming STP_ (3-step)
