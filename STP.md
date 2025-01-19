@@ -98,9 +98,10 @@ Speed | STP Cost | RSTP Cost |
 ## 🌲 PortFast & BPDU Guard
  Names         | Purposes                                                                             | STP function  | When recieve a BPDU,                                           |
 ---------------|--------------------------------------------------------------------------------------|---------------|----------------------------------------------------------------|
-**PortFast**   | Move access ports to _forwarding_ by passing _listening_ and _learning_              | Sending BPDUs | disable PortFast and transfer the port to normal STP operation.|
-**BPDU Guard** | Protect against unauthorized switches being connected to ports intended to end hosts | Sending BPDUs | disable the port (errdisable).                                 |
-**BPDU Filter**| Block ports from sending BPDUs                                                       | Disabled      | ignore recieved BPDU packets. (Only effect on per-port config) |
+**PortFast**   | Move access ports to _forwarding_ by passing _listening_ and _learning_              | Sending BPDUs | Disable PortFast and transfer the port to normal STP operation.|
+**BPDU Guard** | Protect against unauthorized switches being connected to ports intended to end hosts | Sending BPDUs | Disable the port (error-disabled).                             |
+**BPDU Filter**| Block ports from sending BPDUs                                                       | Disabled      | Ignore recieved BPDU. (Only effect on per-port config)         |
+
 ### Configuration combinations table
 Configration on a port    | Pros | Cons |
 --------------------------|------|------|
