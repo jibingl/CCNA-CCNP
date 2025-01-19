@@ -13,6 +13,7 @@ Form a loop-free switch network (layer 2) by exchanging BPDU messages and block 
 
      BP - Bridge Priority (65536, 32768, 16384, ..., 4, 2, 1)
 ```
+
 ## 🌲 STP (802.1D)
 ### Forming STP (3-step)
 1. Elect __ONE__ ***root bridge*** which has all interfaces to be _d-port_.
@@ -52,21 +53,6 @@ Interfaces States | blocking | listening       | learning       | forwarding |
 BPDUs             | recieve  | recieve/forward | send/receive   | send/recieve | 
 Data              | drop     | drop            | only learn MAC | send/receive/learn MAC |
 Timer             | N/A      | 15s             | 15s            | N/A |
-
-## 🌲 PortFast & BPDU Guard
- Names         | Purposes                                                                             | STP function  | When recieve a BPDU,                                           |
----------------|--------------------------------------------------------------------------------------|---------------|----------------------------------------------------------------|
-**PortFast**   | Move access ports to _forwarding_ by passing _listening_ and _learning_              | Sending BPDUs | disable PortFast and transfer the port to normal STP operation.|
-**BPDU Guard** | Protect against unauthorized switches being connected to ports intended to end hosts | Sending BPDUs | disable the port (errdisable).                                 |
-**BPDU Filter**| Block ports from sending BPDUs                                                       | Disabled      | ignore recieved BPDU packets. (Only effect on per-port config) |
-### _Configuration combinations table_
-Configration to a port    | Pros | Cons |
---------------------------|------|------|
-`portfast`                | - Immediately forward data <br> - Auto-transfer to normal STP port if a new switch connected | - Potential STP attack |
-`bpduguard`               | - No impact to existing STP topology if unexpected switches connected | - Cause the port disabled & need to be enabled manually <br> - Wait for 30s to forward data |
-`portfast` + `bpduguard`  | - Immediately forward data <br> - No impact to existing STP topology if unexpected switches connected | - Cause the port disabled & need to be enabled manually |
-`portfast` + `bpdufilter` | - Immediately forward data <br> - No impact to existing STP topology if unexpected switches connected | - Cannot transfer to normal STP port automatically |
-
 
 ## 🌲 RSTP (802.1W)
 ### Forming RSTP (3-step)
@@ -109,6 +95,28 @@ Speed | STP Cost | RSTP Cost |
 100 Gbps |X|200|
 1 Tbps |X|20|
 
+## 🌲 PortFast & BPDU Guard
+ Names         | Purposes                                                                             | STP function  | When recieve a BPDU,                                           |
+---------------|--------------------------------------------------------------------------------------|---------------|----------------------------------------------------------------|
+**PortFast**   | Move access ports to _forwarding_ by passing _listening_ and _learning_              | Sending BPDUs | disable PortFast and transfer the port to normal STP operation.|
+**BPDU Guard** | Protect against unauthorized switches being connected to ports intended to end hosts | Sending BPDUs | disable the port (errdisable).                                 |
+**BPDU Filter**| Block ports from sending BPDUs                                                       | Disabled      | ignore recieved BPDU packets. (Only effect on per-port config) |
+### _Configuration combinations table_
+Configration to a port    | Pros | Cons |
+--------------------------|------|------|
+`portfast`                | - Immediately forward data <br> - Auto-transfer to normal STP port if a new switch connected | - Potential STP attack |
+`bpduguard`               | - No impact to existing STP topology if unexpected switches connected | - Cause the port disabled & need to be enabled manually <br> - Wait for 30s to forward data |
+`portfast` + `bpduguard`  | - Immediately forward data <br> - No impact to existing STP topology if unexpected switches connected | - Cause the port disabled & need to be enabled manually |
+`portfast` + `bpdufilter` | - Immediately forward data <br> - No impact to existing STP topology if unexpected switches connected | - Cannot transfer to normal STP port automatically |
+
+## 🌲 UplinkFast & BackboneFast
+ Features    | Functioning                                                                 | Skipped Timers       | Save Time | Implement/Configure practice |
+-------------|-----------------------------------------------------------------------------|----------------------|-----------|------------------------------|
+UplinkFast   | Convert nd-port from block to forward immediately                           | Listening & Learning | 30S       | Only switches with nd ports  |
+BackboneFast | Send/Receive RLQ Request/Response to Root Bridge for checking inferior BPDU | Max Age              | ~20S      | All switches                 |
+
+![image](https://github.com/jibingl/CCNA-CCNP/assets/84643474/f39b4313-633f-4700-bee3-067f03514821)
+
 ## 🌲 Spanning Tree Load-Balancing
 PVST/PVST+ stands for Per-Vlan Spanning Tree which can be used to balance layer 2 traffic by implying different STP setting on each VLAN.
 ```
@@ -129,14 +137,6 @@ SW1(config)#spanning-tree vlan 20 root secondary            //Set switch's BID a
 SW2(config)#spanning-tree vlan 20 root primary
 SW2(config)#spanning-tree vlan 10 root secondary
 ```
-## 🌲 UplinkFast & BackboneFast
-
- Features    | Functioning                                                                 | Skipped Timers       | Save Time | Implement/Configure practice |
--------------|-----------------------------------------------------------------------------|----------------------|-----------|------------------------------|
-UplinkFast   | Convert nd-port from block to forward immediately                           | Listening & Learning | 30S       | Only switches with nd ports  |
-BackboneFast | Send/Receive RLQ Request/Response to Root Bridge for checking inferior BPDU | Max Age              | ~20S      | All switches                 |
-
-![image](https://github.com/jibingl/CCNA-CCNP/assets/84643474/f39b4313-633f-4700-bee3-067f03514821)
 
 ## QoA
 **1. What dose the command `spanning-tree vlan 1 root primary` do?**  
