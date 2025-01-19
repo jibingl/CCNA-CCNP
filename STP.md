@@ -14,16 +14,16 @@ Form a loop-free switch network (layer 2) by exchanging BPDU messages and block 
      BP - Bridge Priority (65536, 32768, 16384, ..., 4, 2, 1)
 ```
 ## 🌲 STP (802.1D)
-### _Forming STP_ (3-step)
+### Forming STP (3-step)
 1. Elect __ONE__ ***root bridge*** which has all interfaces to be _d-port_.
 2. Each remaining switch selects __ONE__ of its interfaces to be its ***r-port*** which always connect to _d-port_. 
 3. Each remaining collision domain selects __ONE__ interface to be ***d-port***, then other interfaces are _nd-port_.  
 
-Election (*Lowest*) | 1st | 2nd | 3rd | 4th |
-----------|-----|-----|-----|-----|
-1 - Root Bridge /LAN | BID |
-2 - Root Port /Switch| Root Cost | Neighbor BID | Neighbor Port ID | Local Port ID |
-3 - Designated Port /Segment | Root Cost | Local BID | Local Port ID |
+Election (*Lowest*)                 | --> | --> | --> | --> |
+------------------------------------|-----|-----|-----|-----|
+1 - **Root Bridge** per LAN         | BID |
+2 - **Root Port** per switch        | Root Cost | Neighbor BID | Neighbor Port ID | Local Port ID |
+3 - **Designated Port** per segment | Root Cost | Local BID | Local Port ID |
 > Default _bridge priority_ is 32768 on all switches, so the MAC address is used as the tie-breaker to determine the _root bridge_.
 
 ```
@@ -41,7 +41,7 @@ Election (*Lowest*) | 1st | 2nd | 3rd | 4th |
          MAC_c.c.c                           MAC_d.d.d
 ```
 
-### _Interfaces Roles and States_
+### Interfaces Roles and States
 Interfaces Roles | Designated      | Root            | Non-Designated |
 -----------------|-----------------|-----------------|----------------|
 BPDUs            | send/forward    | reveive         | receive        |
@@ -69,8 +69,8 @@ Configration to a port    | Pros | Cons |
 
 
 ## 🌲 RSTP (802.1W)
-### _Forming RSTP_
-Steps and process are the same as STP.
+### Forming RSTP (3-step)
+Steps and processes are the same as STP.
 ```
         root-bridge (primary)                     (root secondary)
         SW1-BID_24577                             SW2-BID_28673         
@@ -86,7 +86,7 @@ Steps and process are the same as STP.
          SW3-BID_32769
          MAC_c.c.c
 ```
-### _Interfaces States_
+### Interfaces States
 Interfaces States | discarding | learning | forwarding |
 ---|---|---|---|
 BPDUs | recieve | recieve/forward | send/receive | 
@@ -99,7 +99,7 @@ Paras | Hello Originated | Hello Timer | BPDU Age | BPDU des_MAC |
 STP/PVST | Root bridge | 2s | 10\*2s| 0180-c200-0000 |
 RSTP/PVST+ | All switches | 2s | 3\*2s | 0100-0ccc-cccd |
 
-### _Cost Table_
+### Cost Table
 Speed | STP Cost | RSTP Cost |
 ------|----------|-----------|
 10 Mbps |100|2,000,000|
