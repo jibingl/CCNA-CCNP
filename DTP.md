@@ -1,6 +1,9 @@
 # Dynamic Trunking Protocol
-Switch interfaces automatically negotiate/configure their _switchport_ state to be _**access**_ or _**trunk**_, also negotiate the encapsulation method.  
-DTP will not form a _trunk_ with a router, PC, etc. The _switchport_ will be in _access_ mode.
+- Switch interfaces automatically negotiate/configure
+  - the _switchport_ states to be **access** or **trunk**; also
+  - the encapsulation methods to be **ISL** or **802.1Q**.
+- DTP will not form a **trunk** with a router, PC, etc. The _switchport_ will be in **access** mode.
+- `switchport mode access` will disables DTP on the interface.
 
 ## Commands & Syntax
 ```
