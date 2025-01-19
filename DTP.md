@@ -4,7 +4,7 @@
   - the encapsulation methods to be **ISL** or **802.1Q**.
 - DTP will not form a **trunk** with a router, PC, etc. The _switchport_ will be in **access** mode.
 - `switchport mode access` will disables DTP (Negotiation of Trunking) on the interface.
-- To ensure DTP negotiation working, two switches' interfaces must send and receive DTP frames. It means either of interfaces with DTP (Negotiation of Trunking) off won't make DTP work.
+- To ensure DTP negotiation working, two switches' interfaces must send and receive DTP frames. It means either of interfaces with DTP (Negotiation of Trunking) off will result in misconfiguration.
 
 ## DTP Negotiation (Switchport Mode)
 Switchport Modes | access |  auto  | desirable | trunk |
