@@ -15,9 +15,9 @@ Form a loop-free switch network (layer 2) by exchanging BPDU messages and block 
 ```
 ## 🌲 STP (802.1D)
 ### _Forming STP_ (3-step)
-1. Elect __ONE__ _root bridge_ which has all interfaces to be _d-port_.
-2. Each remaining switch selects __ONE__ of its interfaces to be its _r-port_ which always connect to _d-port_. 
-3. Each remaining collision domain selects __ONE__ interface to be _d-port_, then other interfaces are _nd-port_.  
+1. Elect __ONE__ ***root bridge*** which has all interfaces to be _d-port_.
+2. Each remaining switch selects __ONE__ of its interfaces to be its ***r-port*** which always connect to _d-port_. 
+3. Each remaining collision domain selects __ONE__ interface to be ***d-port***, then other interfaces are _nd-port_.  
 
 Election (*Lowest*) | 1st | 2nd | 3rd | 4th |
 ----------|-----|-----|-----|-----|
