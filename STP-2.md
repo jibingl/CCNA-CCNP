@@ -1,10 +1,10 @@
 # Spanning Tree Protocol (Part 2)
 
 ## 🌲 BPDU (Bridge Protocol Data Unit)
-BPDUs contain the root bridge ID, path cost to the root, and sender bridge ID.
+BPDUs contain the root bridge ID, root path cost, and sender bridge ID, etc.   
+Among those feilds, a BPDU is considered better than another due to:
 
-Following below table to consider a BPDU is better than another:
-     (Lower)      | --->               | --->           | --->             |
+(Lower)           | --->               | --->           | --->             |
 ------------------|--------------------|----------------|------------------|
 **Superior BPDU** | The root bridge ID | Root path cost | Sender bridge ID |
 
