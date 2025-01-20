@@ -93,22 +93,6 @@ Speed | STP Cost | RSTP Cost |
 100 Gbps |X|200|
 1 Tbps |X|20|
 
-## 🌲 PortFast, BPDU-Guard, BPDU-Filter, & RootGuard
- Features      | Purposes                                                         | Implementations                                                      | Practically Enable on |
-:-------------:|------------------------------------------------------------------|----------------------------------------------------------------------|-----------------------|
-**PortFast**   | Save convergence time of _listening_ & _learning_ stages         | Start _forwarding_ immediately; if receiving BPDUs, disable PortFast.| Access ports |
-**BPDU-Guard** | Against switches being connected to ports intended to end hosts  | Don't accept BPDUs, otherwise put the port into errdisable.          | Access ports along with PortFast |
-**BPDU-Filter**| Avoid errdisable while achieving BPDU Guard purpose              | Don't receive & send BPDUs, and ignore recieved BPDU.                | Access ports along with PortFast |
-**RootGuard**  | Prevent unwanted switches from becoming root bridge              | If receiving superior BPDUs, put the port into _root inconsistent_.  | Designated ports where root bridge must not appear |
-
-## 🌲 UplinkFast & BackboneFast
- Features        | Purposes                                                 | Implementtations                                   | Practically Enable on |
-:---------------:|----------------------------------------------------------|----------------------------------------------------|-----------------------|
-**UplinkFast**   | Save convergence time of _listening_ & _learning_ stages | Convert nd-/al-ports to _forwarding_ immediately   | Access switches with blocked _uplinks_* |
-**BackboneFast** | Save _max_age_ timer (20S)                               | If receiving inferior BPDUs, age out the _max_age_ | All switches |
-> On a given bridge, _uplinks_ (uplink group) consist of the root port and all blocked ports that are not self-looped, like nd-port & al-port.
-
-
 ## 🌲 Spanning Tree Load-Balancing
 PVST/PVST+ stands for Per-Vlan Spanning Tree which can be used to balance layer 2 traffic by implying different STP setting on each VLAN.
 ```
