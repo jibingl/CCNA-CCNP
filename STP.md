@@ -93,19 +93,20 @@ Speed | STP Cost | RSTP Cost |
 100 Gbps |X|200|
 1 Tbps |X|20|
 
-## 🌲 PortFast, BPDU Guard & Filter, Root Guard
- Featuress     | Purposes                                                         | Implementations                                                     | Enable on  |
----------------|------------------------------------------------------------------|---------------------------------------------------------------------|------------|
-**PortFast**   | Bypass _listening_ & _learning_ and move to _forwarding_ directly| If receiving BPDUs, disable PortFast.                               | Access ports |
-**BPDU Guard** | Against switches being connected to ports intended to end hosts  | Don't accept BPDUs, otherwise put the port into errdisable.         | Access ports along with PortFast |
-**BPDU Filter**| Avoid errdisable while achieving BPDU Guard purpose              | Don't receive & send BPDUs, and ignore recieved BPDU.               | Access ports along with PortFast |
-**Root Guard** | Prevent unwanted switches from becoming root bridge              | If receiving superior BPDUs, put the port into _root inconsistent_. | Designated ports where root bridge must not appear |
+## 🌲 PortFast, BPDU-Guard, BPDU-Filter, & RootGuard
+ Features      | Purposes                                                         | Implementations                                                      | Practically Enable on |
+---------------|------------------------------------------------------------------|----------------------------------------------------------------------|-----------------------|
+**PortFast**   | Save convergence time of _listening_ & _learning_ stages         | Start _forwarding_ immediately; if receiving BPDUs, disable PortFast.| Access ports |
+**BPDU-Guard** | Against switches being connected to ports intended to end hosts  | Don't accept BPDUs, otherwise put the port into errdisable.          | Access ports along with PortFast |
+**BPDU-Filter**| Avoid errdisable while achieving BPDU Guard purpose              | Don't receive & send BPDUs, and ignore recieved BPDU.                | Access ports along with PortFast |
+**RootGuard**  | Prevent unwanted switches from becoming root bridge              | If receiving superior BPDUs, put the port into _root inconsistent_.  | Designated ports where root bridge must not appear |
 
 ## 🌲 UplinkFast & BackboneFast
- Features    | Functioning                                                                 | Skipped Timers       | Save Time | Implement/Configure practice |
--------------|-----------------------------------------------------------------------------|----------------------|-----------|------------------------------|
-UplinkFast   | Convert nd-/al-port from block to forward immediately                       | Listening & Learning | 30S/15S   | Only switches with nd ports  |
-BackboneFast | Send/Receive RLQ Request/Response to Root Bridge for checking inferior BPDU | Max Age              | ~20S      | All switches                 |
+ Features        | Purposes                                                             | Implementtations | Practically Enable on |
+-----------------|----------------------------------------------------------------------|------------------|-----------------------|
+**UplinkFast**   | Save convergence time of _listening_ & _learning_ stages             | Convert nd-/al-ports to _forwarding_ immediately | Access switches with blocked _uplink_* |
+**BackboneFast** | Send/Receive RLQ Request/Response to Root Bridge for checking inferior BPDU | Max Age  | All switches                 |
+> On a given bridge, _uplink_ consist of the root port and all blocked ports that are not self-looped.
 
 ![image](https://github.com/jibingl/CCNA-CCNP/assets/84643474/f39b4313-633f-4700-bee3-067f03514821)
 
