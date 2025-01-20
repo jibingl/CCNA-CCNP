@@ -102,10 +102,10 @@ Speed | STP Cost | RSTP Cost |
 **RootGuard**  | Prevent unwanted switches from becoming root bridge              | If receiving superior BPDUs, put the port into _root inconsistent_.  | Designated ports where root bridge must not appear |
 
 ## 🌲 UplinkFast & BackboneFast
- Features        | Purposes                                                             | Implementtations | Practically Enable on |
-:---------------:|----------------------------------------------------------------------|------------------|-----------------------|
-**UplinkFast**   | Save convergence time of _listening_ & _learning_ stages             | Convert nd-/al-ports to _forwarding_ immediately | Access switches with blocked _uplinks_* |
-**BackboneFast** | Send/Receive RLQ Request/Response to Root Bridge for checking inferior BPDU | Max Age  | All switches                 |
+ Features        | Purposes                                                 | Implementtations                                   | Practically Enable on |
+:---------------:|----------------------------------------------------------|----------------------------------------------------|-----------------------|
+**UplinkFast**   | Save convergence time of _listening_ & _learning_ stages | Convert nd-/al-ports to _forwarding_ immediately   | Access switches with blocked _uplinks_* |
+**BackboneFast** | Save _max_age_ timer (20S)                               | If receiving inferior BPDUs, age out the _max_age_ | All switches |
 > On a given bridge, _uplinks_ (uplink group) consist of the root port and all blocked ports that are not self-looped, like nd-port & al-port.
 
 
