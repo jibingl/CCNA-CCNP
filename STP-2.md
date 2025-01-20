@@ -23,6 +23,7 @@ Among those feilds, a BPDU is considered better than another due to:
  Features        | Purposes                                                 | Implementtations                                   | Practically Enable on |
 :---------------:|----------------------------------------------------------|----------------------------------------------------|-----------------------|
 **UplinkFast**   | Detect a direct link failure ASAP;</br>Save convergence time of _listening_ & _learning_ stages; | Convert nd-/al-ports to _forwarding_ immediately   | Access switches with blocked _uplinks_* |
-**BackboneFast** | Detect an indirect link failure ASAP;</br>Save _max_age_ timer (20S); | If receiving inferior BPDUs, age out _max_age_ after RLQ confirmation | All switches |
+**BackboneFast** | Detect an indirect link failure ASAP;</br>Save _max_age_ timer (20S); | If receiving inferior BPDUs, age out _max_age_ after RLQ* confirmation | All switches |
 
-> On a given bridge, _uplinks_ (uplink group) consist of the root port and all blocked ports that are not self-looped, like non-designated port & alter port.
+> - _uplinks_: (aka. uplink group) On a given bridge, it consists of the root port and all blocked ports that are not self-looped, like non-designated port & alter port.
+> - _RLQ_: Root Link Query.
