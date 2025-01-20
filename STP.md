@@ -1,6 +1,18 @@
 # Spanning Tree Protocol
 Form a loop-free switch network (layer 2) by exchanging BPDU messages and block data traffic on specific interfaces.  
- __BID Format__
+### Forming STP (3-step)
+1. Elect __ONE__ ***root bridge*** which has all interfaces to be _d-port_.
+2. Each remaining switch selects __ONE__ of its interfaces to be its ***r-port*** which always connect to _d-port_. 
+3. Each remaining collision domain selects __ONE__ interface to be ***d-port***, then other interfaces are _nd-port_.  
+
+Election (*Lowest*)                 | --> | --> | --> | --> |
+------------------------------------|-----|-----|-----|-----|
+1 - A **Root Bridge** per LAN         | BID |
+2 - A **Root Port** per switch        | Root Cost | Neighbor BID | Neighbor Port ID | Local Port ID |
+3 - A **Designated Port** per segment | Root Cost | Local BID | Local Port ID |
+> Default _bridge priority_ is 32768 on all switches, so the MAC address is used as the tie-breaker to determine the _root bridge_.
+
+### BID Format
 ```
                     +-------------Bridge ID--------------------------+
                     |  BP (16-bit)  |         MAC (32-bit)           |
@@ -13,17 +25,6 @@ Form a loop-free switch network (layer 2) by exchanging BPDU messages and block 
 ```
 
 ## 🌲 STP (802.1D)
-### Forming STP (3-step)
-1. Elect __ONE__ ***root bridge*** which has all interfaces to be _d-port_.
-2. Each remaining switch selects __ONE__ of its interfaces to be its ***r-port*** which always connect to _d-port_. 
-3. Each remaining collision domain selects __ONE__ interface to be ***d-port***, then other interfaces are _nd-port_.  
-
-Election (*Lowest*)                 | --> | --> | --> | --> |
-------------------------------------|-----|-----|-----|-----|
-1 - A **Root Bridge** per LAN         | BID |
-2 - A **Root Port** per switch        | Root Cost | Neighbor BID | Neighbor Port ID | Local Port ID |
-3 - A **Designated Port** per segment | Root Cost | Local BID | Local Port ID |
-> Default _bridge priority_ is 32768 on all switches, so the MAC address is used as the tie-breaker to determine the _root bridge_.
 
 ```
         root-bridge                       
@@ -53,8 +54,7 @@ Data              | drop     | drop            | only learn MAC | send/receive/l
 Timer             | N/A      | 15s             | 15s            | N/A |
 
 ## 🌲 RSTP (802.1W)
-### Forming RSTP (3-step)
-Steps and processes are the same as STP.
+
 ```
         root-bridge (primary)                     (root secondary)
         SW1-BID_24577                             SW2-BID_28673         
@@ -93,20 +93,19 @@ Speed | STP Cost | RSTP Cost |
 100 Gbps |X|200|
 1 Tbps |X|20|
 
-## 🌲 PortFast & BPDU Guard
- Names         | Purposes                                                                             | STP function  | When recieve a BPDU,                                           |
----------------|--------------------------------------------------------------------------------------|---------------|----------------------------------------------------------------|
-**PortFast**   | Move access ports to _forwarding_ by passing _listening_ and _learning_              | Sending BPDUs | Disable PortFast and transfer the port to normal STP operation.|
-**BPDU Guard** | Protect against unauthorized switches being connected to ports intended to end hosts | Sending BPDUs | Disable the port (error-disabled).                             |
-**BPDU Filter**| Block ports from sending BPDUs                                                       | Disabled      | Ignore recieved BPDU. (Only effect on per-port config)         |
+## 🌲 PortFast, BPDU Guard & Filter, Root Guard
+ Names         | Purposes                                                                | STP function       | What if recieved a BPDU                                        |
+---------------|-------------------------------------------------------------------------|--------------------|----------------------------------------------------------------|
+**PortFast**   | Bypass _listening_ and _learning_ and move access ports to _forwarding_ | Sending BPDUs      | Disable PortFast and transfer the port to normal STP operation.|
+**BPDU Guard** | Against switches being connected to ports intended to end hosts         | Don't accept BPDUs | Disable the port (error-disabled).                             |
+**BPDU Filter**| Avoid error-disabled while achieving BPDU Guard purpose                 | Disable            | Ignore recieved BPDU. (Only effect on per-port config)         |
+**Root Guard** | 
 
-### Configuration combinations table
-Configration on a port    | Pros | Cons |
+### Configuration Combinations
+Configration on A Port    | Pros | Cons |
 --------------------------|------|------|
-`portfast`                | - Immediately forward data <br> - Auto-transfer to normal STP port if a new switch connected | - Potential STP attack |
-`bpduguard`               | - No impact to existing STP topology if unexpected switches connected | - Cause the port disabled & need to be enabled manually <br> - Wait for 30s to forward data |
-`portfast` + `bpduguard`  | - Immediately forward data <br> - No impact to existing STP topology if unexpected switches connected | - Cause the port disabled & need to be enabled manually |
-`portfast` + `bpdufilter` | - Immediately forward data <br> - No impact to existing STP topology if unexpected switches connected | - Cannot transfer to normal STP port automatically |
+`portfast` + `bpduguard`  | - Immediately forward data <br> - No impact to existing STP topology | - Cause the port error-disabled |
+`portfast` + `bpdufilter` | - Immediately forward data <br> - No impact to existing STP topology | 
 
 ## 🌲 UplinkFast & BackboneFast
  Features    | Functioning                                                                 | Skipped Timers       | Save Time | Implement/Configure practice |
