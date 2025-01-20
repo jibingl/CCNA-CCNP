@@ -19,8 +19,8 @@
 BPDUs contain the root bridge ID, path cost to the root, and sender bridge ID.
 
 Following below table to consider a BPDU is better than another:
-Name (Lower)      | ---> | ---> | ---> |
-------------------|------|------|------|
+     (Lower)      | --->               | --->           | --->             |
+------------------|--------------------|----------------|------------------|
 **Superior BPDU** | The root bridge ID | Root path cost | Sender dridge ID |
-> The better a BPDU, the better the access to the best root bridge.  
-> A bridge that receives a BPDU on a port better than the one it sends out, puts this port in blocking mode unless it is its root port.
+> - The better a BPDU, the better the access to the best root bridge.  
+> - A bridge that receives a BPDU on a port better than the one it sends out, puts this port in blocking mode unless it is its root port.
