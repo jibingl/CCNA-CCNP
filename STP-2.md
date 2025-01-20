@@ -22,8 +22,8 @@ Among those feilds, a BPDU is considered better than another due to:
 ## 🌲 UplinkFast & BackboneFast
  Features        | Purposes                                                 | Implementtations                                   | Practically Enable on Switches |
 :---------------:|----------------------------------------------------------|----------------------------------------------------|--------------------------------|
-**UplinkFast**   | Detect a direct link failure ASAP;</br>Save convergence time of _listening_ & _learning_ stages; | Convert nd-/al-ports to _forwarding_ immediately | Access switches with blocked _uplinks_* |
-**BackboneFast** | Detect an indirect link failure ASAP;</br>Save _max_age_ timer (20S); | If receiving inferior BPDUs, age out _max_age_ after _RLQ PDU_* test | All switches |
+[**UplinkFast**](https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10575-51.html) | Detect a direct link failure ASAP;</br>Save convergence time of _listening_ & _learning_ stages; | Convert nd-/al-ports to _forwarding_ immediately | Access switches with blocked _uplinks_* |
+[**BackboneFast**](https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/12014-18.html) | Detect an indirect link failure ASAP;</br>Save _max_age_ timer (20S); | If receiving inferior BPDUs, age out _max_age_ after _RLQ PDU_* test | All switches |
 
 > - _Uplinks_: (aka. uplink group) On a given bridge, it consists of the root port and all blocked ports that are not self-looped, like non-designated port & alter port.
 > - _RLQ PDU_: Root Link Query Protocol Data Unit. RLQ achieves a kind of ping for the root on a non-designated port and allowed to quickly confirm if the BPDU stored on a port is still valid or needs to be discarded.
