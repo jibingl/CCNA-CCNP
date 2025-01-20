@@ -1,5 +1,16 @@
 # Spanning Tree Protocol (Part 2)
 
+## 🌲 BPDU (Bridge Protocol Data Unit)
+BPDUs contain the root bridge ID, path cost to the root, and sender bridge ID.
+
+Following below table to consider a BPDU is better than another:
+     (Lower)      | --->               | --->           | --->             |
+------------------|--------------------|----------------|------------------|
+**Superior BPDU** | The root bridge ID | Root path cost | Sender bridge ID |
+
+> - The better a BPDU, the better the access to the best root bridge.  
+> - A bridge that receives a BPDU on a port better than the one it sends out, puts this port in blocking mode unless it is its root port.
+
 ## 🌲 PortFast, BPDU-Guard, BPDU-Filter, & RootGuard
  Features      | Purposes                                                         | Implementations                                                      | Practically Enable on |
 :-------------:|------------------------------------------------------------------|----------------------------------------------------------------------|-----------------------|
@@ -13,14 +24,6 @@
 :---------------:|----------------------------------------------------------|----------------------------------------------------|-----------------------|
 **UplinkFast**   | Save convergence time of _listening_ & _learning_ stages | Convert nd-/al-ports to _forwarding_ immediately   | Access switches with blocked _uplinks_* |
 **BackboneFast** | Save _max_age_ timer (20S)                               | If receiving inferior BPDUs, age out the _max_age_ | All switches |
+
 > On a given bridge, _uplinks_ (uplink group) consist of the root port and all blocked ports that are not self-looped, like non-designated port & alter port.
 
-## 🌲 BPDU
-BPDUs contain the root bridge ID, path cost to the root, and sender bridge ID.
-
-Following below table to consider a BPDU is better than another:
-     (Lower)      | --->               | --->           | --->             |
-------------------|--------------------|----------------|------------------|
-**Superior BPDU** | The root bridge ID | Root path cost | Sender dridge ID |
-> - The better a BPDU, the better the access to the best root bridge.  
-> - A bridge that receives a BPDU on a port better than the one it sends out, puts this port in blocking mode unless it is its root port.
