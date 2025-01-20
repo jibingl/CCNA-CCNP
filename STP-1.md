@@ -1,4 +1,4 @@
-# Spanning Tree Protocol
+# Spanning Tree Protocol (Part 1)
 Form a loop-free switch network (layer 2) by exchanging BPDU messages and block data traffic on specific interfaces.  
 ### Forming STP (3-step)
 1. Elect __ONE__ ***root bridge*** which has all interfaces to be _d-port_.
