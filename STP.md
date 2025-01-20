@@ -94,7 +94,7 @@ Speed | STP Cost | RSTP Cost |
 1 Tbps |X|20|
 
 ## 🌲 PortFast, BPDU Guard & Filter, Root Guard
- Names         | Purposes                                                         | Implementations                                                     | Enable on  |
+ Featuress     | Purposes                                                         | Implementations                                                     | Enable on  |
 ---------------|------------------------------------------------------------------|---------------------------------------------------------------------|------------|
 **PortFast**   | Bypass _listening_ & _learning_ and move to _forwarding_ directly| If receiving BPDUs, disable PortFast.                               | Access ports |
 **BPDU Guard** | Against switches being connected to ports intended to end hosts  | Don't accept BPDUs, otherwise put the port into errdisable.         | Access ports along with PortFast |
