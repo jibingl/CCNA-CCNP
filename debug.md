@@ -8,6 +8,8 @@
 - It is different between `show debug` and `show debugging`;
 
 ```console
+R1# logging console debugging             //Set the console logging of messages at the debugging level (level 7)
+
 R1# debug [options]                       //Syntax
 R1# show debug                            //Display what debugs are enabled
 R1# show debugging                        //
