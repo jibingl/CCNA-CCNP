@@ -94,18 +94,12 @@ Speed | STP Cost | RSTP Cost |
 1 Tbps |X|20|
 
 ## 🌲 PortFast, BPDU Guard & Filter, Root Guard
- Names         | Purposes                                                                | STP function       | What if recieved a BPDU                                        |
----------------|-------------------------------------------------------------------------|--------------------|----------------------------------------------------------------|
-**PortFast**   | Bypass _listening_ and _learning_ and move access ports to _forwarding_ | Sending BPDUs      | Disable PortFast and transfer the port to normal STP operation.|
-**BPDU Guard** | Against switches being connected to ports intended to end hosts         | Don't accept BPDUs | Disable the port (error-disabled).                             |
-**BPDU Filter**| Avoid error-disabled while achieving BPDU Guard purpose                 | Disable            | Ignore recieved BPDU. (Only effect on per-port config)         |
-**Root Guard** | 
-
-### Configuration Combinations
-Configration on A Port    | Pros | Cons |
---------------------------|------|------|
-`portfast` + `bpduguard`  | - Immediately forward data <br> - No impact to existing STP topology | - Cause the port error-disabled |
-`portfast` + `bpdufilter` | - Immediately forward data <br> - No impact to existing STP topology | 
+ Names         | Purposes                                                         | Implementations                                                     | Enable on  |
+---------------|------------------------------------------------------------------|---------------------------------------------------------------------|------------|
+**PortFast**   | Bypass _listening_ & _learning_ and move to _forwarding_ directly| If receiving BPDUs, disable PortFast.                               | Access ports |
+**BPDU Guard** | Against switches being connected to ports intended to end hosts  | Don't accept BPDUs, otherwise put the port into errdisable.         | Access ports along with PortFast |
+**BPDU Filter**| Avoid errdisable while achieving BPDU Guard purpose              | Don't receive & send BPDUs, and ignore recieved BPDU.               | Access ports along with PortFast |
+**Root Guard** | Prevent unwanted switches from becoming root bridge              | If receiving superior BPDUs, put the port into _root inconsistent_. | Designated ports where root bridge must not appear |
 
 ## 🌲 UplinkFast & BackboneFast
  Features    | Functioning                                                                 | Skipped Timers       | Save Time | Implement/Configure practice |
