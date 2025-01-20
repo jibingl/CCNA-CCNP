@@ -108,7 +108,6 @@ Speed | STP Cost | RSTP Cost |
 **BackboneFast** | Send/Receive RLQ Request/Response to Root Bridge for checking inferior BPDU | Max Age  | All switches                 |
 > On a given bridge, _uplinks_ (uplink group) consist of the root port and all blocked ports that are not self-looped, like nd-port & al-port.
 
-![image](https://github.com/jibingl/CCNA-CCNP/assets/84643474/f39b4313-633f-4700-bee3-067f03514821)
 
 ## 🌲 Spanning Tree Load-Balancing
 PVST/PVST+ stands for Per-Vlan Spanning Tree which can be used to balance layer 2 traffic by implying different STP setting on each VLAN.
