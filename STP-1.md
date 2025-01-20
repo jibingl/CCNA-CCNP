@@ -13,6 +13,7 @@ Election (*Lowest*)                 | --> | --> | --> | --> |
 > Default _bridge priority_ is 32768 on all switches, so the MAC address is used as the tie-breaker to determine the _root bridge_.
 
 ### BID Format
+
 `Bridge ID` = `Bridge Priority (4-bit)` + `Extended System ID (VLAN #) (12-bit)` + `MAC Address (32-bit)`  
 
 Value of BP = [ 32768|0 ] + [ 16384|0 ] + [ 8192|0 ] + [ 4096|0 ]  
@@ -22,7 +23,6 @@ Value of BP = [ 32768|0 ] + [ 16384|0 ] + [ 8192|0 ] + [ 4096|0 ]
 +------+------+------+------+------+------+------+------+------+------+------+------+------+------+------+------+
 |32768 |16384 |8192  |4096  | 2048 | 1024 |  512 |  256 |  128 |  64  |  32  |  16  |   8  |   4  |   2  |   1  |
 ```
-
 
 ## 🌲 STP (802.1D)
 
