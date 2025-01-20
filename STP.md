@@ -14,7 +14,9 @@ Election (*Lowest*)                 | --> | --> | --> | --> |
 
 ### BID Format
 `Bridge ID` = `Bridge Priority (4-bit)` + `Extended System ID (VLAN #) (12-bit)` + `MAC Address (32-bit)`  
+
 Value of BP = [ 32768|0 ] + [ 16384|0 ] + [ 8192|0 ] + [ 4096|0 ]  
+> Example: If BP sets to 1001, value of BP is (32768+0+0+4096).
 ```
        Bridge Priority      |         Extended System ID (VLAN #)
 +------+------+------+------+------+------+------+------+------+------+------+------+------+------+------+------+
