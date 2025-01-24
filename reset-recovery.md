@@ -41,6 +41,7 @@ Using physical button or break-key signal to break normal boot. Then disable the
 rommon>confreg 0x2142
 rommon>reset
 ```
+> Don't forget to set config-register back `0x2102`, the default value, after erasing configuration.
 
 ## `Break` key not work
 A solution for fixing `Break` key of keyboard not work.
