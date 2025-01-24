@@ -9,7 +9,7 @@ Approach: Delete configuration files and VLAN infomation.
 switch#write erase                  //reset configurations (not clear the boot variables, such as config-register and boot system settings)
 switch#dir flash:                   //check vlan.dat file before deletation
 switch#delete falsh:vlan.dat        //reset vlan configuration
-switch#reload                       //reboot devices
+switch#reload                       //reboot devices without save
 ```
 
 ## Password Recovery - Bypass loading *start-config*
