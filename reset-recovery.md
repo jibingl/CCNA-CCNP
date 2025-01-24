@@ -23,11 +23,11 @@ Using physical button or break-key signal to break normal boot. Then disable the
         - Catalyst 2900XL, 2500XL: Release the _mode_ button when the LED above _port1x_ goes out. 
         > Notes: The break methods may differ among different cisco models. Always referring to manuals.
     - Software break-key: The devices boot loader detects a _break-key_ input to stop the automatic boot sequence for the password recovery purposes.
-        - Hyperterminal: Press _Ctrl_ + _Break_ for the break-key.
+        - Hyperterminal: Press _Ctrl_ + _Break_ for the break-key. Terminal apps can send break signal via menus.
         - Unix terminal: Press _Ctrl_ + _C_ for the break-key.
 4. Issue `flash_init` command.
 5. Issue `load_helper` command.
-6. Issue `dir flash:` command to check if the configuration file _config.text_ is there.
+6. Issue `dir flash:` command to check if the configuration file ***config.text*** is there.
 7. Rename the confiuration file by command `rename flash:config.text flash:config.old`.
 8. Issue `boot` command to boot the system.
 9. After the device boots up, enter "n" at the prompt to abort the initial configuration dialog.
