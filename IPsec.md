@@ -24,13 +24,18 @@ Mode | Tunnel | Transport |
 > Notes: Only when `new-ip-header` and `ip-header` are the same, ***transport mode*** is avialable.
 
 ## Site-to-Site IPSec VPN
+![image](https://github.com/user-attachments/assets/17f73dff-d3a1-4697-992f-32e4269f68b1)
+
 ### Configuration Stages
+Configurations on the router Site-A:  
 1. IKE/ISAKMP SA (Encryption, authentication, key-exchange algorithms, respectively)
    ```
    crypto isakmp policy 10                                         //"10" is a policy number that smaller is preferred
     encryption aes                                                 //Encryption algorithm
     authentication pre-share                                       //Authentication method
-    group 15                                                       //Key-exchange algorithm
+    group 16                                                       //Key-exchange algorithm
+
+   crypto key cisco123 address 61.232.0.2
    ```
 2. IPsec SA (Transform Set: ESP or AH mode alongwith encryption & authentication algorithms)
    ```
@@ -38,22 +43,24 @@ Mode | Tunnel | Transport |
    ```
 3. Crypto Map (Mapping isakmp with ipsec, transform set, interresting traffic, and setting peers.)
    ```
-   ip access-list extend VPN permit 192.168.1.0 0.0.0.255 172.31.1.0 0.0.0.255       //The traffic needs VPN
+   ip access-list extend VPN permit ip 172.16.0.0 0.0.0.255 192.168.2.0 0.0.0.255       //The traffic needs VPN
    
-   crypto map VPN-MAP isakmp-ipsec
+   crypto map IPSec-SIteA_to_SiteB isakmp-ipsec
     set transform VPN-ESP-TS
     match address list VPN
-    set peer 10.10.20.1
+    set peer 61.232.0.2
    ```
 4. Apply crypto map to interface (If applicable)
 ### IPSec VPN + NAT
 **Exclude the VPN traffic from the NAT traffic.**  
 As NAT is happened before IPSec, the source IP of the traffic iniated from internal subnet will be translated to the outbound public IP, which causes a mismatch with the configured _match address_ (VPN interested traffic) and no IPSec encryption will happen. 
-```
-ip access-list extend VPN
- deny ip <source-subnet> <destination-subnet>             //Exclude VPN traffic from NAT so that IP translations won't happen
- permit ip <source-subnet> any                            //Other traffic intend to Internet
-```
+
+Exclude VPN traffic from the NAT translation in the router Site-A;
+![image](https://github.com/user-attachments/assets/93ba0e54-f4b7-444d-9a7e-58205ab89f4e)
+
+Also, exclude VPN traffic from the router Site-B;
+![image](https://github.com/user-attachments/assets/16eabbb5-75ec-47c1-86e7-26f21e6279e4)
+
 
 ## GRE over IPSec
 IPSec doesn't support multicast and broadcast, so it can't be used on some protocols (like OSPF) to create VPN tunnel.
