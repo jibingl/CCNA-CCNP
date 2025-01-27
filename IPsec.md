@@ -12,7 +12,7 @@ IKE protocol formerly is referred to as ISAKMP/Oakley. It negotiates IPsec param
 ### Operation Modes
 Type               | ESP | AH |
 -------------------|-----|----|
-**Status**         | Acceptable | Avoid |
+**Best Practice**  | Acceptable | Avoid |
 **Cryptopgrahy**   | Encryption, Integrity, and Authentication | Integrity and Authentication |
 **Hashing Packet** | exclude new IP header | include new IP header (Whole IP packet) |
 
