@@ -35,7 +35,7 @@ Configurations on the router Site-A:
     authentication pre-share                                       //Authentication method
     group 16                                                       //Key-exchange algorithm
 
-   crypto key cisco123 address 61.232.0.2
+   crypto key cisco123 address 61.232.0.2                          //Set the pre-shared key (password)
    ```
 2. IPsec SA (Transform Set: ESP or AH mode alongwith encryption & authentication algorithms)
    ```
@@ -53,12 +53,12 @@ Configurations on the router Site-A:
 4. Apply crypto map to interface (If applicable)
 ### IPSec VPN + NAT
 **Exclude the VPN traffic from the NAT traffic.**  
-As NAT is happened before IPSec, the source IP of the traffic iniated from internal subnet will be translated to the outbound public IP, which causes a mismatch with the configured _match address_ (VPN interested traffic) and no IPSec encryption will happen. 
+- As NAT is happened before IPSec, the source IP of the traffic iniated from internal subnet will be translated to the outbound public IP, which causes a mismatch with the configured _match address_ (VPN interested traffic) and no IPSec encryption will happen. 
 
-Exclude VPN traffic from the NAT translation in the router Site-A;
+- Exclude VPN traffic from the NAT translation in the router Site-A;
 ![image](https://github.com/user-attachments/assets/93ba0e54-f4b7-444d-9a7e-58205ab89f4e)
 
-Also, exclude VPN traffic from the router Site-B;
+- Also, exclude VPN traffic from the router Site-B;
 ![image](https://github.com/user-attachments/assets/16eabbb5-75ec-47c1-86e7-26f21e6279e4)
 
 
