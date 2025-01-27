@@ -35,7 +35,7 @@ Configurations on the router Site-A:
     authentication pre-share                                       //Authentication method
     group 16                                                       //Key-exchange algorithm
 
-   crypto key cisco123 address 61.232.0.2                          //Set the pre-shared key (password)
+   crypto isakmp key cisco123 address 61.232.0.2                          //Set the pre-shared key (password)
    ```
 2. IPsec SA (Transform Set: ESP or AH mode alongwith encryption & authentication algorithms)
    ```
