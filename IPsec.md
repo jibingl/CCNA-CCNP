@@ -47,7 +47,7 @@ Mode | Tunnel | Transport |
    ```
 4. Apply crypto map to interface (If applicable)
 ### IPSec VPN + NAT
-Exclude the VPN traffic from the NAT traffic.  
+**Exclude the VPN traffic from the NAT traffic.**  
 As NAT is happened before IPSec, the source IP of the traffic iniated from internal subnet will be translated to the outbound public IP, which causes a mismatch with the configured _match address_ (VPN interested traffic) and no IPSec encryption will happen. 
 ```
 ip access-list extend VPN
