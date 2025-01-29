@@ -3,7 +3,7 @@
 --------|---------------------|---------------------------|
 Layer 2 | Exact match         | Forwarding                |
 
-## Source MAC Check
+#### Source MAC Check
 
 On the local switch, MAC-address table is enumerated to look for the source MAC address.
 ```
