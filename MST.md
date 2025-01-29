@@ -9,5 +9,5 @@ Terminology | Full Names | IEEE | Explanations |
 ------------|------------|------|--------------|
 CST | Common Spanning Tree | 802.1d | The only one spanning tree instance is for the entire bridged network, regardless of the number of VLANs. |
 MST Region |  | 802.1s | A region is a group of switches placed under a common MST instance. | 
-IST | Internal Spanning Tree | 802.1s | The only one RSTP instance in MST simplely is equivalent to a CST in STP. |
+IST | Internal Spanning Tree | 802.1s | The only one RSTP instance is avaible for the entire bridged network under MST context and simplely equivalent to a CST in STP. |
 MSTIs | Multiple Spanning Tree Instance(s) | 802.1s | RSTP instances only exist in a MST region. |
