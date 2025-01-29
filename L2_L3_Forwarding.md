@@ -1,5 +1,4 @@
-# Forwarding of Layer2 vs Layer 3
-
+# Forwarding of Layer 3
 ## L2 vs L3 Forwarding
  Layers | Match Rules         | What's done at the layer? |
 --------|---------------------|---------------------------|
@@ -9,6 +8,25 @@ Layer 3 | Most specific match | Decrement TTP; recompute IP header checksum; cha
 #### Most Specific Match (Longest-prefix Match)
 ![image](https://github.com/user-attachments/assets/012ee54b-dc89-4bd3-934b-618bd1da5fe1)
 
+#### Bitwise Operation
+On the source host, the ***Bitwise operation*** determines to where a network package should be forward.
+```
+                  ..-------.
+     Source IP ----\\       \              .-------.                          Yes, send to destination
+                    ||  XOR  . ------------|        \                        /
+Destination IP ----//       /              |   AND   | --------- Result zero?    
+                  ``-------`       .-------|        /                        \
+                                   |       `-------`                           No, sned to default gateway
+                        Source IP mask
+```
+Examples  | Same subnet                          | Different subnet
+----------|--------------------------------------|--------------------------------------
+---->     |From `192.168.1.100/24` to `192.168.1.200/24` |From `192.168.1.100/24` to `192.168.14.100/24`
+Sour IP   | 11000000.10101000.00000001.01100100  | 11000000.10101000.00000001.01100100
+Dest IP   | 11000000.10101000.00000001.11001000  | 11000000.10101000.00001110.01100100
+***XOR*** | 00000000.00000000.00000000.10101100  | 00000000.00000000.00001111.00000000
+Sour Mask | 11111111.11111111.11111111.00000000  | 11111111.11111111.11111111.00000000
+***AND*** | 00000000.00000000.00000000.00000000  | 00000000.00000000.00001111.00000000
 
 ## Forwarding Types of Routers
 Type           | Arch of control&data planes | Control plane | Data plane |
@@ -18,6 +36,7 @@ Hardware-based | Separate                    | CPU           | ASIC       |
 Hybrid         | Separate                    | CPU           | NP (Network Processor) |
 
 **ASICs with TCAM memory is used as hardware in routers**
+
 
 ## L3 Forwarding Methods
 
@@ -57,3 +76,11 @@ Using `show adjacency detail` to display the **Adjacency Table** detailed inform
 ![image](https://github.com/user-attachments/assets/9971d610-5632-4a43-9ebe-1aaf5d066719)
 
 > `AABBCC000200` `AABBCC000100` `0800` represents `DES-MAC` `SRC-MAC` `type`, in our case, it is `R2's E0/0 MAC` `R1's E0/0 MAC` `IPv4`.
+
+
+## Directed Broadcast
+Enable the router connected to the destination subnets to not drop but forward a broadcast package into the destination subnet.
+```
+R1(config-if)# ip directed-broadcast
+```
+Example: `ping` a broadcast IP of a remote subnet
