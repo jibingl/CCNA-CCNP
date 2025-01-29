@@ -1,8 +1,6 @@
 # Forwarding of Layer 3
-## L2 vs L3 Forwarding
  Layers | Match Rules         | What's done at the layer? |
 --------|---------------------|---------------------------|
-Layer 2 | Exact match         | Forwarding                |
 Layer 3 | Most specific match | Decrement TTP; recompute IP header checksum; change MACs; recompute ethernet FCS; </br> Forwarding | 
 
 #### Most Specific Match (Longest-prefix Match)
