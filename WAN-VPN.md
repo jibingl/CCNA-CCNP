@@ -1,4 +1,4 @@
-# WAN and/vs VPN
+# WAN and VPN
 ## WAN
 WAN connection services include leased line, Ethernet, DSL, CATV, Fiber, and WLAN.
 
@@ -38,13 +38,4 @@ Create VPNs over MPLS infrastructure.
          ==========|===========================|===========
                     \   L2-MPLS-VPN-tunnel    /
                      `-----------------------`
-```
-
-## VPN Concept
-```
-     +---------------+------------+---Encrypted------------------------+
-     |               |            |+-----------+-----------+----------+|
-     | New L3-header | VPN-header || L3-header | L4-header |   data   ||
-     |               |            |+-----------+-----------+----------+|
-     +---------------+------------+------------------------------------+
 ```
