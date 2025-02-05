@@ -16,7 +16,7 @@ SDN Architecture & Network Automation
                                 | |Controll Plane| |
                                 | `--------------` |
                                 +------------------+
-   Controll Layer                  |     SBI    |                   Controll Plane
+   Controll Layer                  |    SBI     |                   Controll Plane
    --------------------------------|--( API )---|---------------------------------
    Infrastructure Layer           /              \                      Data Plane
                          +---(+)---+            +---(+)---+
@@ -27,8 +27,9 @@ SDN Architecture & Network Automation
                          | `-----` |            | `-----` |
                          +---------+            +---------+
 ```
- > Notes: NBI (Northbound Interface) - controller-to-devices; SBI (Southbound Interface) - human/apps-to-contoller.  
-**SBI** traffics can be OpenFlow, onePK, OpFlex, NETCONF, RESTCONF.
+> NBI (Northbound Interface) - human/apps-to-contoller;
+> SBI (Southbound Interface) - controller-to-devices.  
+> **SBI** traffics can be OpenFlow, onePK, OpFlex, NETCONF, RESTCONF.
 
  Notes | Data Plane | Controll PLane | Management Plane |
 -------|------------|----------------|------------------|
