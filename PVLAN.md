@@ -2,9 +2,9 @@
 **Creating VLANs inside a VLAN**
 
 Also known as **port isolation**. The private-vlan enabled switch ports within a VLAN can only communicate with a given uplink.  
-
 As a result, direct peer-to-peer traffic between peers through the switch is blocked, and any such communication must go through the uplink. While private VLANs provide isolation between peers at the data link layer, communication at higher layers may still be possible depending on further network configuration.
 
+PVLANs allow the isolation at Layer 2 of devices in the same IP subnet.
 
 ### PVLAN Ports
 There are three types of PVLAN ports:
