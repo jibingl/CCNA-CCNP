@@ -10,10 +10,8 @@ FRAME  | Eth-Header |  IP-Header |  TCP-Header |           Data            | Eth
        +------------+------------+-------------+---------------------------+------------+
 BYTES        14           20            20                 1460                  4
 
-
-MSS - Maximum Segment Size
 ```
-### Data Size
+## Data Size
 
 Data           | Minimum Size | Maxmum Size | Reasons
 ---------------|--------------|-------------|----------|
