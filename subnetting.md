@@ -3,7 +3,7 @@
 ## 🥅 Recognization of a Given Network
 One of the trickiest aspects of subnetting is identifying the real network ID/address (i.e., the first IP address of a given network). Sometimes, the starting point of the questioned network is not explicitly given. Mistaking the network address results in all further subnetting calculations incorrect.
 
-Below, we’ll guide you through the process of identifying the real network ID using step-by-step examples.
+Below, we’ll guide you through the process of mathmetically identifying the real network ID using step-by-step examples.
 
 ### Example 1: Network 192.168.100.115/27
 1. Understanding CIDR/Network Mask  
