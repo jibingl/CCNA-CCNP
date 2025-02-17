@@ -1,86 +1,51 @@
 # IPv4 Subnetting
-## Glossary
-First thing first, knowing below glossaries. The last two terms are customed.
-- **CIDR**/**Network Mask**: A number indicates how many bits out of 32-bit are used to present network part.
-- **Network Portion**: All bits used to present network part in a given network.
-- **Host Portion**: All bits used to present host part in a given network.
-- **Divided-octet**: The octet is divided into two parts, one belongs to *Network Portion*, and the other belongs to *Host Portion*. 
-- **Increment-number**: A number used to calculate each network/subnet. 
 
-## 🌑 Recognizing An Given Network
-Below given networks are examples that demonstrate how to recognize them step by step. 
-### 192.168.100.115/27
-1. Working on ***CIDR***/***Network Mask*** (27 in this case) to collection information.
-   - How many bits are used for the ***Network portion***? ` 27 `
-   - How many bits are used for the ***Host portion***? ` 32 - 27 = 5 `
-   - What is the ***divided-octet***? ` 4th `
-   - How many bits are used for the ***Network portion*** within the ***divided-octet***? ` 27 - 24 = 3 `
-   - How many bits are used for the ***Host portion*** within the ***divided-octet***? ` 8 - 3 = 5 `
-   - What is the ***increment-number***? ` 2 ^ 5 = 32 `
-2. Looking for the given network's range by following below steps.
-   - Firstly, copying all octets to the ***divided-octet***'s left; `192.168.100.`
-   - Secondly, setting the ***divided-octet*** (4th octet in this case) and all otects to its right to 0; `192.168.100.0`
-   - Lastly, constinously inreasing the ***divided-octet***'s values by the ***increment-number*** (32 in this case) untill found the target network range:
-   ```
-   1st network: 192.168.100.0        #Set the divided-otect (4th octet) and all otects to its right to 0.
-   2nd network: 192.168.100.32       #From 1st network, increase 32 on the divided-octect to get 2nd network.
-   3rd network: 192.168.100.64       #From 2nd network, increase 32 on the divided-octect to get 3rd network. 
-   4th network: 192.168.100.96       #This is target network. Because the given network IP falls into its range (192.168.100.96 - 192.168.100.127).
-   5th network: 192.168.100.128
-   ...
-   ```
-### 172.31.211.201/18
-1. Working on ***CIDR***/***Network Mask*** (18 here) to collection information.
-   - How many bits are used for the ***Network portion***? ` 18 `
-   - How many bits are used for the ***Host portion***? ` 32 - 18 = 14 `
-   - What is the ***divided-octet***? ` 3th `
-   - How many bits are used for the ***Network portion*** within the ***divided-octet***? ` 18 - 16 = 2 `
-   - How many bits are used for the ***Host portion*** within the ***divided-octet***? ` 8 - 2 = 6 `
-   - What is the ***increment-number***? ` 2 ^ 6 = 64 `
-2. Looking for the given network's range by following below steps.
-   - Firstly, copying all octets to the ***divided-octet***'s left; `172.31.`
-   - Secondly, setting the ***divided-octet*** (3rd octet here) and all otects to its right to 0; `172.31.0.0`
-   - Lastly, constinously inreasing the ***divided-octet***'s values by the ***increment-number*** (64 here) untill found the target network range:
-   ```
-   1st network: 172.31.0.0           #Set the divided-otect (3rd octet) and all otects to its right to 0.
-   2nd network: 172.31.64.0          #Range 172.31.64.0 - 172.31.127.255 
-   3rd network: 172.31.128.0         #Range 172.31.128.0 - 172.31.191.255
-   4th network: 172.31.192.0         #This is your target network. Its range is from 172.31.192.0 to 172.31.255.255
-   ```
-### 10.10.10.10/14
-1. Working on ***CIDR***/***Network Mask*** (14) Mask to collection information.
-   - How many bits are used for the ***Network portion***? ` 14 `
-   - How many bits are used for the ***Host portion***? ` 32 - 14 = 18 `
-   - What is the ***divided-octet***? ` 2th `
-   - How many bits are used for the ***Network portion*** within the ***divided-octet***? ` 14 - 8 = 6 `
-   - How many bits are used for the ***Host portion*** within the ***divided-octet***? ` 8 - 6 = 2 `
-   - What is the ***increment-number***? ` 2 ^ 2 = 4 `
-2. Looking for the given network's range.
-   - Firstly, copying all octets to the ***divided-octet***'s left; `10.`
-   - Secondly, setting the***divided-octet*** (2nd) and all otects to its right to 0; `10.0.0.0`
-   - Lastly, constinously inreasing the ***divided-octet***'s values by the ***increment-number*** (4) untill found the target network range:
-   ```
-   1st network: 10.0.0.0            #10.0.0.0 - 10.3.255.255
-   2nd network: 10.4.0.0            #10.4.0.0 - 10.7.255.255
-   3rd network: 10.8.0.0            #10.8.0.0 - 10.11.255.255 The target network
-   4th network: 10.12.0.0
-   ...
-   ```
-### 10.10.10.10/21
-As long as you master the recognizing procedue, you can simplify it as below.  
-- The ***divided-octet*** is `3rd`.
-- The ***increment-number*** is `2 ^ 3 = 8`.
-```
-   1st network: 10.10.0.0           #10.10.0.0 - 10.10.7.255
-   2nd network: 10.10.8.0           #10.10.8.0 - 10.10.15.255 The target network
-   3rd network: 10.10.16.0
-   ...
-```
+## 🥅 Recognization of a Given Network
+One of the trickiest aspects of subnetting is identifying the real network ID/address (i.e., the first IP address of a given network). Sometimes, the starting point of the questioned network is not explicitly given. Mistaking the network address results in all further subnetting calculations incorrect.
 
-### Other Basic Formulas and Rules
-How many IP addresses totally? ` 2 ^ h ` (h equals to the *Host portion* bits)  
-How many usable/assignable IP addresses/hosts? ` 2 ^ h - 2 ` (h equals to the *Host portion* bits)  
-What is the network IP address? ` The 1st IP address`  
-What is the broadcast IP address? ` The last IP address`  
+Below, we’ll guide you through the process of identifying the real network ID using step-by-step examples.
 
+### Example 1: Network 192.168.100.115/27
+1. Understanding CIDR/Network Mask  
+   The network mask is /27, which provides the following information:
+   - **Network portion**: 27 bits
+   - **Host portion**: 32 - 27 = 5 bits
+     Breakdown of the Host portion represetation in octect format:
+     ```
+     2^5 = 2^0 . 2^0 . 2^0 . 2^5 = 1 . 1 . 1 . 32
+     ```
+  
+2. Calculating the Network ID.  
+   To find the network ID, apply a modulus operation on the given network with the **octec-format** Host portion.  
+   Then, subtract the modulus result from the given network.
+     ```
+           192.168.100.115                  192.168.100.115
+      mod)   1.  1.  1. 32              -)    0.  0.  0. 19
+      ---------------------    --->     -------------------- 
+             0.  0.  0. 19                  192.168.100. 64
+     ```
+   
+3. The Given Network's ID is **192.168.100.64/27** indeed.
+
+### Example 2: Network 10.10.10.10/14
+1. Understanding CIDR/Network Mask  
+   For the network mask /14, we have:
+   - **Network portion**: 14 bits
+   - **Host portion**: 32 - 14 = 18 bits
+   - **Octec-format Host portion**: 2<sup>18</sup> = 2<sup>0</sup> . 2<sup>2</sup> . 2<sup>8</sup> . 2<sup>8</sup> = 1.4.256.256
+
+2. Calculating the Network ID  
+   Apply the modulus and subtraction operations on the given network:
+     ```
+            10. 10. 10. 10                   10. 10. 10. 10
+      mod)   1.  4.256.256              -)    0.  2. 10. 10
+      ---------------------    --->     -------------------- 
+             0.  2. 10. 10                   10.  8.  0.  0
+     ```
+3. **Network ID: 10.8.0.0/14**
+
+### Key Formulas or Rules
+- **Host portion: h = 32 - n** (where h, n are the number of bits in the Host portion and Network portion respectively)
+- **Octect-format Host portion: 2<sup>h1</sup>.2<sup>h2</sup>.2<sup>h3</sup>.2<sup>h4</sup>** (where h1, h2, h3, h4 are the number of host portion bits available in each octect)
+     
 ## 🌑 Subnetting An Given Network 
