@@ -1,6 +1,6 @@
 # IPv4 Subnetting
 
-## Recognization of a Given Network
+## Recognization of Given Network ID/Address
 One of the trickiest aspects of subnetting is identifying the real network ID/address (i.e., the first IP address of a given network). Sometimes, the starting point of the questioned network is not explicitly given. Mistaking the network address results in all further subnetting calculations incorrect.
 
 Below, we’ll guide you through the process of mathmetically identifying the real network ID using step-by-step examples.
@@ -47,5 +47,20 @@ Below, we’ll guide you through the process of mathmetically identifying the re
 ### Key Formulas or Rules
 - **Host portion: h = 32 - n** (where h, n are the number of bits in the Host portion and Network portion respectively)
 - **Octect-format Host portion: 2<sup>h1</sup>.2<sup>h2</sup>.2<sup>h3</sup>.2<sup>h4</sup>** (where h1, h2, h3, h4 are the number of host portion bits available in each octect)
-     
-## Subnetting An Given Network 
+
+
+## Subnetting Given Network 
+
+### Tips
+- Recognize the real network ID/address;
+- Always start from the largest subnet to the smallest one;
+
+### Example 2: Network 10.10.10.10/14
+1. Finding Network ID  
+   Calculate the real network ID by following the *Recognization of Given Network ID/Address* shown above.
+
+2. Calculating Subnet Masks  
+   Magic table
+
+3. Assigning Subnet Addresses  
+   Start from the largest subnet
