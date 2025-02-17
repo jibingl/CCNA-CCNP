@@ -46,21 +46,4 @@ Below, we’ll guide you through the process of mathmetically identifying the re
 
 ### Key Formulas or Rules
 - **Host portion: h = 32 - n** (where h, n are the number of bits in the Host portion and Network portion respectively)
-- **Octect-format Host portion: 2<sup>h1</sup>.2<sup>h2</sup>.2<sup>h3</sup>.2<sup>h4</sup>** (where h1, h2, h3, h4 are the number of host portion bits available in each octect)
-
-
-## Subnetting Given Network 
-
-### Tips
-- Recognize the real network ID/address;
-- Always start from the largest subnet to the smallest one;
-
-### Example 2: Network 10.10.10.10/14
-1. Finding Network ID  
-   Calculate the real network ID by following the *Recognization of Given Network ID/Address* shown above.
-
-2. Calculating Subnet Masks  
-   Magic table
-
-3. Assigning Subnet Addresses  
-   Start from the largest subnet
+- **Octect-format Host portion: 2<sup>h1</sup>.2<sup>h2</sup>.2<sup>h3</sup>.2<sup>h4</sup>** (where h1, h2, h3, h4 are the numbers of host portion bits available in each octect; h=h1+h2+h3+h4)
