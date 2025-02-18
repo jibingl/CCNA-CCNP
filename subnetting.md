@@ -47,4 +47,4 @@ Below, we’ll guide you through the process of mathmetically identifying the re
 
 ### Key Formulas or Rules
 - **Host portion: h = 32 - n** (where h, n are the number of bits in the Host portion and Network portion respectively)
-- **Octect-format Host portion: 2<sup>h1</sup>.2<sup>h2</sup>.2<sup>h3</sup>.2<sup>h4</sup>** (where h1, h2, h3, h4 are the numbers of host portion bits available in each octect; h=h1+h2+h3+h4)
+- **Octect-format Total IPs: 2<sup>h1</sup>.2<sup>h2</sup>.2<sup>h3</sup>.2<sup>h4</sup>** (where h1, h2, h3, h4 are the numbers of host-portion bits available in each octect; h=h1+h2+h3+h4)
