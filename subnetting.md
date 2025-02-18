@@ -10,9 +10,10 @@ Below, we’ll guide you through the process of mathmetically identifying the re
    The network mask is /27, which provides the following information:
    - **Network portion**: 27 bits
    - **Host portion**: 32 - 27 = 5 bits
-     Breakdown of the Host portion represetation in octect format:
+   - **Total IP Addresses**: 2<sup>5</sup> = 32 IPs  
+     Breakdown of the Total IPs in octect format:
      ```
-     2^5 = 2^0 . 2^0 . 2^0 . 2^5 = 1 . 1 . 1 . 32
+     2^5 = 2^0 * 2^0 * 2^0 * 2^5 = 1 * 1 * 1 * 32 --> 1 . 1 . 1 . 32
      ```
   
 2. Calculating the Network ID.  
@@ -32,7 +33,7 @@ Below, we’ll guide you through the process of mathmetically identifying the re
    For the network mask /14, we have:
    - **Network portion**: 14 bits
    - **Host portion**: 32 - 14 = 18 bits
-   - **Octec-format Host portion**: 2<sup>18</sup> = 2<sup>0</sup> . 2<sup>2</sup> . 2<sup>8</sup> . 2<sup>8</sup> = 1.4.256.256
+   - **Octec-format Total IPs**: 2<sup>18</sup> = 2<sup>0</sup> * 2<sup>2</sup> * 2<sup>8</sup> * 2<sup>8</sup> --> 1.4.256.256
 
 2. Calculating the Network ID  
    Apply the modulus and subtraction operations on the given network:
