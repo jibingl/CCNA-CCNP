@@ -1,8 +1,8 @@
 #
 
-## Two Main functions
-1. Inspect DHCP packages for security purpose.
-2. Maintaine a table (comtaining IP, MAC, Port, VLAN, and Lease Info) for further usage.
+## Two Main Protections
+1. Protec from illigal DHCP servers - Dropping DHCP server-side packages recieved on untrusted interfaces. 
+2. Protec from illigal DHCP clients - Maintaine a table comtaining IP, MAC, Port, VLAN, and Lease Info. 
 
 
 ## 
