@@ -57,6 +57,7 @@ To configure R1 (DHCP server) to trust the relay info coming form S1.
 ```
 R1(config)#ip dhcp relay information trust-all            //Global configuration
 ```
+or
 ```
 R1(config-if)#ip dhcp relay information trusted           //Configuration on interface g0/0
 ```
