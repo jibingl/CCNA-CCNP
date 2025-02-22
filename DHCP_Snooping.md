@@ -6,7 +6,7 @@
 
 
 ## 
-Referening to Peter Paluch's detailed [explanation](https://community.cisco.com/t5/switching/dhcp-snooping/td-p/1622877) posting on Cisco Community, it is been answered clearly why DHCP clients can not get ip addresses as long as enabling **ip dhcp snooping**.  
+Referening to Peter Paluch's detailed [explanation](https://community.cisco.com/t5/switching/dhcp-snooping/td-p/1622877) posting on Cisco Community, it is been answered clearly why DHCP clients can not get ip addresses once enabling **ip dhcp snooping** in some particular scenarios.  
 Below is a summary based on an example network.
 ### Topology
 ```
