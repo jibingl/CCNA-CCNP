@@ -10,9 +10,10 @@ Referening to Peter Paluch's detailed [explanation](https://community.cisco.com/
 Below is a summary based on an example network.
 ### Topology
 ```
-    R1                             S1    
-   (+)--g0/0----------------f0/1--[=]--f0/5----------------PC1
-DHCP Server                 ip dhcp snooping            DHCP Client
+DHCP Server                    ip dhcp snooping                   DHCP Client
+   R1                                 S1    
+  (+)--g0/0--------------------f0/1--[=]--f0/5-----------------------PC1
+                             trusted
 ```
 ### Sympotoms
 1. As long as *ip dhcp snooping* enalbed on S1, PC1 can not get an IP address by DHCP.
