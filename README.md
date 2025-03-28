@@ -7,7 +7,7 @@
 
 
 
-Physical vs Logical Topology
+#### Physical vs Logical Topology
 Elements | Physical Topology | Logical Topology |
 :-------:|-------------------|------------------|
 **Hardware** | Tangible network devices, servers, and racks; <br> Device models & hostnames | Virtual network devices and servers; <br> Hostnames and device types |
