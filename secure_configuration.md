@@ -1,4 +1,4 @@
-# Secure Configurations to Cisco Devices
+# Secure Configurations to Cisco Switches/Routers
 - Warning banners
 - Set encrypted passwords
 - Enable passwords check when login
