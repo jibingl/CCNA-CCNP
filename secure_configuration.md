@@ -17,11 +17,11 @@ config t
 banner # Authorized Access Only! #
 service password-encryption
 service time-stamps                           //Add time stamps to logs.
-security password min-length 10               //Value range 1-16. Some devices don't support.
-enable secret ciscoenpass
+security password min-length 12               //Value range 1-16. Some devices don't support.
+enable secret CiscoEnablePass
 
 line console 0
-password ciscoconpass
+password CiscoConsolePass
 login
 exit
 ```
@@ -29,11 +29,11 @@ exit
 ## Secure Login SSH
 ```
 config t
-enable secret ciscoenpass
+enable secret CiscoEnablePass
 hostname <name>
 ip domain-name <mydomain>
 ip ssh version 2
-access-list 99 permit host 192.168.1.99
+access-list 22 permit host 192.168.1.99
 username admin secret ciscoadminpass
 crypto key generate rsa modulus 4096
 
@@ -41,7 +41,7 @@ line vty 0 15
 login local
 exec-timeout 5 0
 transport input ssh
-access-class 99 in
+access-class 22 in
 end
 ```
 
