@@ -40,6 +40,7 @@ The most elegant, automated way to achieve this is by using a feature called OSP
 - Using a syslog message to trigger EEM
 - Using an IP SLA Tracking Object to trigger EEM
 
+---
 
 ## Example Configuration
 
