@@ -3,42 +3,30 @@
 There are concerns when configuring OSPF along with HSRP.
 
 ### Asymmetrical Routing between OSPF and HSRP  
-Upstream OSPF routers may load-balance or prefer the physical interface of the HSRP standby router, causing triangular routing
+1. Upstream OSPF routers may load-balance or prefer the physical interface of the HSRP standby router, causing triangular routing.
+2. **Upstream Link Failure**: If an active HSRP router loses its internet/WAN uplink but its local LAN interface stays up, it remains the HSRP active router. Clients keep sending traffic to it, but it cannot forward the traffic because OSPF hasn't failed over the upstream path fast enough or cleanly.
+3. **L2 Link Down**: If the Layer 2 (L2) access link on the Active router goes down, the local clients lose connection to that router. However, if the Active router's upstream OSPF link is still up, the upstream core routers will still try to send return traffic to the Active router. Because the Active router no longer has a path down to the clients, it will drop the packets.
 
-Solution:  
-Adjust OSPF Cost for Symmetrical Routing (Traffic Alignment)
+#### Solution 1: Synchronizing HSRP with OSPF
+- HSRP IP Route Tracking or HSRP Object/Interface Tracking - For upstream link failure
+- HSRP Preemption and Delay - For upstream link failure
+- HSRP MAC Tracking / Interface Tracking - For L2 link down
+- Deploy a physical Inter-Switch "Transit" Link (The Safety Net) between HSRP gateways - For L2 link down
+
+#### Solution 2: Synchronizing OSPF with HSRP (Not recommend)
+Adjust OSPF cost to align with active HSRP gateway
 - Hardcode main OSPF route and HSRP active router
-- Dynamically adjust OSPF main route to align with HSRP active router accordingly
+- Dynamically adjust OSPF main route to align with HSRP active router accordingly via EEM.
+- Using a syslog message to trigger EEM
+- Using an IP SLA Tracking Object to trigger EEM
 
-
-### Synchronizing Between OSPF and HSRP  
-**Upstream Link Failure**: If an active HSRP router loses its internet/WAN uplink but its local LAN interface stays up, it remains the HSRP active router. Clients keep sending traffic to it, but it cannot forward the traffic because OSPF hasn't failed over the upstream path fast enough or cleanly.
-
-Solution:  
-Synchronizing HSRP with OSPF
-- HSRP IP Route Tracking or HSRP Object/Interface Tracking
-- Configure HSRP Preemption and Delay
-
-**L2 Link Down**: If the Layer 2 (L2) access link on the Active router goes down, the local clients lose connection to that router. However, if the Active router's upstream OSPF link is still up, the upstream core routers will still try to send return traffic to the Active router. Because the Active router no longer has a path down to the clients, it will drop the packets.
-
-Solution: 
-- Use HSRP MAC Tracking / Interface Tracking
-- Deploy an Inter-Switch "Transit" Link (The Safety Net)
-
-
+ 
 ### Configuring OSPF and HSRP on Same Interface
 A common design flaw is deploying OSPF, HSRP, and a Layer 2 clustering technology like Cisco's vPC (Virtual Port-Channel) or Arista's MLAG on the same transit VLAN connecting upstream routers.
 
-Solution:  
-Separate Transit Links From Access Layers
+#### Solution: Separate Transit Links From Access Layers
 - OSPF Passive interface
 
-
-### Synchronizing OSPF with HSRP (Not recommend)
-synchronize OSPF with HSRP so that whichever router is the HSRP Active gateway automatically becomes the preferred OSPF path for return traffic.
-The most elegant, automated way to achieve this is by using a feature called OSPF Cost Customization via Object Tracking. Instead of hardcoding a high OSPF cost on Router B, you make the OSPF cost dynamic.
-- Using a syslog message to trigger EEM
-- Using an IP SLA Tracking Object to trigger EEM
 
 ---
 
