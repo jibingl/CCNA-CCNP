@@ -2,7 +2,7 @@
 
 There are concerns when configuring OSPF along with HSRP.
 
-#### Asymmetrical Routing between OSPF and HSRP  
+### Asymmetrical Routing between OSPF and HSRP  
 Upstream OSPF routers may load-balance or prefer the physical interface of the HSRP standby router, causing triangular routing
 
 Solution:  
@@ -11,7 +11,7 @@ Adjust OSPF Cost for Symmetrical Routing (Traffic Alignment)
 - Dynamically adjust OSPF main route to align with HSRP active router accordingly
 
 
-#### Synchronizing Between OSPF and HSRP  
+### Synchronizing Between OSPF and HSRP  
 **Upstream Link Failure**: If an active HSRP router loses its internet/WAN uplink but its local LAN interface stays up, it remains the HSRP active router. Clients keep sending traffic to it, but it cannot forward the traffic because OSPF hasn't failed over the upstream path fast enough or cleanly.
 
 Solution:  
@@ -26,7 +26,7 @@ Solution:
 - Deploy an Inter-Switch "Transit" Link (The Safety Net)
 
 
-#### Configuring OSPF and HSRP on Same Interface
+### Configuring OSPF and HSRP on Same Interface
 A common design flaw is deploying OSPF, HSRP, and a Layer 2 clustering technology like Cisco's vPC (Virtual Port-Channel) or Arista's MLAG on the same transit VLAN connecting upstream routers.
 
 Solution:  
@@ -34,8 +34,7 @@ Separate Transit Links From Access Layers
 - OSPF Passive interface
 
 
-#### Synchronizing OSPF with HSRP (Not recommend)
-----------------------------
+### Synchronizing OSPF with HSRP (Not recommend)
 synchronize OSPF with HSRP so that whichever router is the HSRP Active gateway automatically becomes the preferred OSPF path for return traffic.
 The most elegant, automated way to achieve this is by using a feature called OSPF Cost Customization via Object Tracking. Instead of hardcoding a high OSPF cost on Router B, you make the OSPF cost dynamic.
 - Using a syslog message to trigger EEM
